@@ -119,7 +119,7 @@ When there are no lifes left
 6. _Console log the home _center_ position when clicking it_
 7. If you click the ball and then a position, _console log _"The ball is moving to ${position}, it's ${colorHome} home"_ _
 8. Make a function that will move the ball to the Home position
-9. _Console log "Sir, the Ball is in the Zone"_
+9. If the ball gets home _Console log "Sir, the Ball is in the Zone"_
 10. Remove the ball when coliding with home
 11. Add 1 point when coliding with home
 
