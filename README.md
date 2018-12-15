@@ -54,7 +54,7 @@ __The game is over__ once too many balls cross the canvas or have reached the wr
   * Will grow every time gets a ball of it's colur
 
 
-### The ultimate Backlog
+## The ultimate Backlog
   * The Game theme will be related to the reproductive sistem, Main Balls will be Sperm and Homes Ovules. 
   
 * * *
@@ -104,21 +104,38 @@ When there are no lifes left
 
 * * *
 
-## Task Order
+## Task Order for MVP
 
-1. Create the Documents we will be using first: index.html, main.js, game.js and ball.js
+### 1. Ball to home movement:
+1. Create the Documents we will be using first: **index.html, main.js, game.js and ball.js**
 2. Create the canvas
-3. Create a Ball class a moving ball
-4. Console log the position of the ball when clicking it 
-5. Create a Home class
-6. Console log the home _center_ position when clicking it
-7. If you click the ball and then a position, console log _"The ball is moving to ${position}, it's ${colorHome} home"_
+3. Create a Ball class a moving ball. Should include:
+   * Propieties: Color, size, position, direction
+   * Methods: Move, changeDirection
+4. Create the **player.js** and _Console log the position of the ball when clicking it_
+5. Create the document **home.js** and create a Home class. Should include:
+   * Propieties: Color, size, position
+   * Methods: Move, changeDirection
+6. _Console log the home _center_ position when clicking it_
+7. If you click the ball and then a position, _console log _"The ball is moving to ${position}, it's ${colorHome} home"_ _
 8. Make a function that will move the ball to the Home position
-9. Console log "Sir, the Ball is in the Zone" 
-10. Remove the ball when coliding with home 
-10. Add 1 point when coliding with home
-11. 
+9. _Console log "Sir, the Ball is in the Zone"_
+10. Remove the ball when coliding with home
+11. Add 1 point when coliding with home
 
+### 2. Create more balls and homes:
+1. Create a new Ball every X interval
+2. Create 3 homes instead of one
+3. Every home should have a color
+4. Every ball should have one of the home colors
+5. There should only be a +1 point if the ball gets to a Home of the same color 
+5. Create a life vaiable with x lifes
+6. A life should be removed if it gets into the wrong home or it leaves the canvas
+
+### 3. Integrate the DOM
+1. There should be a panel with the points and the lifes of the player
+2. There should be a game over screen once there are no lifes left
+3. There should be a intro before playing the game
 
 
 ## Links
@@ -129,30 +146,15 @@ When there are no lifes left
 
 
 ### Git
-URls for the project repo and deploy
+URls for the project: repo and deploy
+
 [Repository Link](https://github.com/InesCV/WhatTheColor)
-[Link Deploy](http://github.com)
+
+[Deploy Link](http://github.com)
 
 
 ### Slides
 URls for the project presentation (slides)
-[Link Slides.com](http://slides.com)
+[Link Slides.com](https://slides.com/inescv/deck)
 
-
-
-Contraer 
-Entrada de mensaje
-
-Enviar mensaje a webptbcn1118
-
-Acerca de
-webptbcn1118
-
-
-Información del canal
- 
-Lo más destacado
- 
-24 chinchetas
- 
-30 miembros
+Made by Ines Castelltort
