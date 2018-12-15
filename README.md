@@ -109,7 +109,7 @@ When there are no lifes left
 ### 1. Ball to home movement:
 1. Create the Documents we will be using first: **index.html, main.js, game.js and ball.js**
 2. Create the canvas
-3. Create a Ball class a moving ball. Should include:
+3. Create a Ball class of a moving ball. Should include:
    * Propieties: Color, size, position, direction
    * Methods: Move, changeDirection
 4. Create the **player.js** and _Console log the position of the ball when clicking it_
