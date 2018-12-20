@@ -1,26 +1,31 @@
 class Ball {
-  constructor(maxRows, maxColumns) {
+  constructor() {
     this.direction = 'right';
-    this.intervalId = undefined;
+    // this.intervalId = undefined;
     this.position = {
       x: 0,
-      y: 0
+      y: 200
     };
+    this.speed = 1;
+  // constructor(positionX, positionY, ballDirection) {
+  //   this.direction = ballDirection;
+  //   // this.intervalId = undefined;
+  //   this.position = {
+  //     x: positionX,
+  //     y: positionY
+  //   };
+  //   this.speed = 10;
   }
 
-  start () {
-    console.log('start');
-    this.move();
-  }
+  // start () {
+  //   console.log('start');
+  //   this.move();
+  // }
 
-  move () {
-    if (!this.intervalId) {
-      this.intervalId = setInterval(this._moveForward.bind(this), 70);
-    }
-  }
 
-  _moveForward () {
-    this.position.x = this.position.x +1;
-    console.log(this.position.x)
-  }
+
+  // _moveForward () {
+  //   this.position.x = this.position.x +1;
+  //   console.log(this.position.x)
+  // }
 }
