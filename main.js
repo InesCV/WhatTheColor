@@ -1,16 +1,16 @@
+
 document.onload = function() {
-  const canvas = document.getElementById('WhatTheColor');
-  const ctx = canvas.getContext('2d');
+    const canvas = document.getElementById('WhatTheColor');
+    canvas.width = document.body.clientWidth -20;
+    canvas.height = document.body.clientHeight - 100;
+
+    const ctx = canvas.getContext('2d');
 
   const game = new Game({
-    // scene = {
-    //   width: canvas.width,
-    //   height: canvas.width
-    // },
-    // ball: new Ball(0, canvas.height / 2, 'right'),
+    width: canvas.width,
+    height: canvas.height,
     ctx: ctx
   });
-
   game.startGame();
 }();
 

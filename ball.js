@@ -1,20 +1,14 @@
 class Ball {
-  constructor() {
+  constructor(whith, height) {
     this.direction = 'right';
-    // this.intervalId = undefined;
     this.position = {
-      x: 0,
-      y: 200
+      x: -10,
+      y: (height / 2)
     };
     this.speed = 1;
-  // constructor(positionX, positionY, ballDirection) {
-  //   this.direction = ballDirection;
-  //   // this.intervalId = undefined;
-  //   this.position = {
-  //     x: positionX,
-  //     y: positionY
-  //   };
-  //   this.speed = 10;
+    this.color = "blue";
+    this._moveBall();
+    // this._selectColor();
   }
 
   // start () {
@@ -22,6 +16,22 @@ class Ball {
   //   this.move();
   // }
 
+  _moveBall () {
+        // if (!this.intervalId) {
+    //   this.intervalId = setInterval(this._moveForward.bind(this), 70);
+    setInterval(function () {
+      this.position.x += this.speed;
+    }.bind(this), 10);
+
+    // if (this.direction === 'right') {
+    //   setInterval(this.position.x += this.speed, 10);
+    // }
+    console.log('ball moving')
+
+    // if (!this.intervalId) {
+    //   this.intervalId = setInterval(this._moveForward.bind(this), 70);
+    // }
+  }
 
 
   // _moveForward () {

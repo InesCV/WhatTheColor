@@ -1,20 +1,17 @@
 class Game {
-  constructor(options) {
-    this.ball = new Ball 
-    // (0, canvas.height/2, 'right');
-    // this.scene = {
-    //   x: canvas.width,
-    //   y: canvas.height
-    // }
-    // this.scene = undefined;
-    this.ctx = options.ctx;
+  constructor(options){ 
+    this.scene = options.scene;
+    this.width = options.width;
+    this.height = options.height;
+    this.ctx = options.ctx
+    this.ball = new Ball(this.width, this.height);
   }
 
   startGame() {
     this._update();
     // this.ball.start();
     // Set interval irá aquí
-    this.intervalGame = window.requestAnimationFrame(this._update.bind(this));
+    // this.intervalGame = window.requestAnimationFrame(this._update.bind(this));
   }
   
   _drawBoard() {
@@ -22,33 +19,22 @@ class Game {
     // this.ctx.fillRect(0,0, this.ball.position.x, this.ball.position.y);
   }
 
-  _drawBall() {
+  _drawBalls() {
+    // Hacer un loop ForEach cuando tengas más de una bola (hacer un array de bolas)
     this.ctx.beginPath();
     this.ctx.arc(this.ball.position.x,this.ball.position.y,30,0,2*Math.PI);
-    this.ctx.fillStyle = 'blue';
+    this.ctx.arc.fillStyle = 'blue';
     this.ctx.stroke();
-    // this.ctx.fillRect(position.column * 10, position.row * 10, 8, 8);
   }
 
-  _moveBall () {
-    if (this.ball.direction === 'right') {
-      this.ball.position.x += this.ball.speed;
-    }
-    // if (!this.intervalId) {
-    //   this.intervalId = setInterval(this._moveForward.bind(this), 70);
-    // }
-  }
-
-  clear() {
-    this.ctx.clearRect(0, 0, 800, 400);
+  _clear() {
+    // console.log(`the canvas width is ${this.width} and height is ${height}`)
+    this.ctx.clearRect(0, 0, this.width, this.height);
   }
   _update() {
-    this.clear();
+    this._clear();
     this._drawBoard();
-    this._drawBall();
-    this._moveBall();
-    if (this.intervalGame !== undefined) {
-      this.intervalGame = window.requestAnimationFrame(this._update.bind(this));
-    } 
+    this._drawBalls();
+    this.intervalGame = window.requestAnimationFrame(this._update.bind(this));
   }
 }
