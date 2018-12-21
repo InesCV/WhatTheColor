@@ -16,21 +16,16 @@ class Ball {
   //   this.move();
   // }
 
-  _moveBall () {
+  _moveBall() {
         // if (!this.intervalId) {
     //   this.intervalId = setInterval(this._moveForward.bind(this), 70);
     setInterval(function () {
       this.position.x += this.speed;
     }.bind(this), 10);
-
     // if (this.direction === 'right') {
     //   setInterval(this.position.x += this.speed, 10);
     // }
-    console.log('ball moving')
 
-    // if (!this.intervalId) {
-    //   this.intervalId = setInterval(this._moveForward.bind(this), 70);
-    // }
   }
 
 
