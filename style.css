@@ -1,10 +1,14 @@
 * {
   font-family: Arial, Helvetica, sans-serif;
 }
-h1{
+
+h1 {
   text-align: center;
 }
 
+span {
+  color: #19FFFC;
+}
 body {
   min-width: 100vh;
   min-height: 100vh;

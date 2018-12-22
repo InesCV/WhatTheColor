@@ -3,7 +3,8 @@ class Game {
     this.scene = options.scene;
     this.width = options.width;
     this.height = options.height;
-    this.ctx = options.ctx
+    this.ctx = options.ctx;
+    this.canvas = options.canvas;
     this.ball = new Ball(this.width, this.height);
   }
 
@@ -31,8 +32,8 @@ class Game {
   _drawHomes() {
     // Hacer un loop ForEach cuando tengas más de una bola (hacer un array de casas)
     this.ctx.beginPath();
-    this.ctx.arc(this.width,0,200,0,2*Math.PI);
-    this.ctx.arc(0,this.height,200,0,2*Math.PI);
+    this.ctx.arc(this.width,0,250,0,2*Math.PI);
+    this.ctx.arc(0,this.height,250,0,2*Math.PI);
     this.ctx.fillStyle = '#19FFFC';
     // this.ctx.fillStyle = '#19FF2E';
     this.ctx.fill();
@@ -44,15 +45,51 @@ class Game {
     this.ctx.clearRect(0, 0, this.width, this.height);
   }
 
-  // _sayLocation() {
-    // Tryout fot SourceTree
-  // }
+  _sayLocation() {
+    //Create elem
+    let elem = this.canvas;
+    let elemLeft = elem.offsetLeft; // devuelve el número de píxeles a la izquierda del elemento actual con respecto al nodo HTMLElement.offsetParent
+    let elemTop = elem.offsetTop; // retorna la distancia del elemento actual respecto al borde superior del nodo offsetParent
+    let context = this.ctx;
+    let elements = [];
+
+    // Add event listener for 'Click' events
+    elem.addEventListener('click', function (event) {
+      let x = event.pageX - elemLeft;
+      let y = event.pageY - elemTop;
+      console.log (`I clicked exactly x:${x} y:${y}`)
+
+      // Collision detection between clicked offset and element
+      elements.forEach(function(element) {
+        if (y > element.top && y < element.top + element.height && x > element.left && x < element.left + element.width) {
+          alert('clicked an element');
+          console.log(`I clicked a FUCKING ELEMENT x:${x} y:${y}`)
+        }
+      });
+    }, false);
+
+    // Add element in the array of elements
+    elements.push({
+      color: '#05EFFF',
+      width: 150,
+      height: 100,
+      top: 20,
+      left: 15
+    });
+
+    // // Render elements
+    // elements.forEach(function(element) {
+    //   context.fillStyle = element.color;
+    //   context.fillRect = (element.left, element.top, element.width, element.height)
+    // })
+  }
 
   _update() {
     this._clear();
     this._drawBoard();
     this._drawBalls();
     this._drawHomes();
+    this._sayLocation();
     this.intervalGame = window.requestAnimationFrame(this._update.bind(this));
   }
 }

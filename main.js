@@ -9,7 +9,8 @@ document.onload = function() {
   const game = new Game({
     width: canvas.width,
     height: canvas.height,
-    ctx: ctx
+    ctx: ctx,
+    canvas: canvas
   });
   game.startGame();
 }();
