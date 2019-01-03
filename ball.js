@@ -1,6 +1,5 @@
 class Ball {
   constructor(options) {
-    console.log(options)
     this.direction = 'right';
     this.position = {
       x: -10,
@@ -22,13 +21,13 @@ class Ball {
      this.elem.addEventListener('click', function (event) {
       this.x = event.pageX - this.elemLeft;
       this.y = event.pageY - this.elemTop;
-      console.log (`I clicked exactly x:${this.x} y:${this.y}`)
+      console.log (`BALL: I clicked exactly x:${this.x} y:${this.y}`)
       this.a = this.position.x - this.x;
       this.b = this.position.y - this.y;
-      console.log(`distances a ${this.a} and b ${this.b}`)
+      console.log(`BALL: distances a ${this.a} and b ${this.b}`)
       // Check if the ball is clicked
       if (this._clickedBall(this.a, this.b)) {
-        console.log(`I clicked a FUCKING ball in x:${this.x} y:${this.y}`);
+        console.log(`BALL: I clicked a FUCKING ball in x:${this.x} y:${this.y}`);
         console.log(this.speed)
         if (this.speed === 0) {
           this._moveBall();
@@ -59,7 +58,7 @@ class Ball {
 
   _clickedBall(a,b) {
     this.h = Math.sqrt(Math.pow(a,2) + Math.pow(b,2))
-    console.log(`La hipotenusa es ${this.h}`)
+    console.log(`BALL: La hipotenusa es ${this.h}`)
     if (this.h <= this.radius + 10) {
       return true
     }

@@ -5,7 +5,10 @@ class Game {
     this.ctx = options.ctx;
     this.canvas = options.canvas;
     this.balls = [];
+    this.homes = []
     this.generateBalls();
+    this.generateHomes();
+    this._startBallCreation();
     // this.ball = new Ball({
     //   width: this.width, 
     //   height: this.height, 
@@ -21,19 +24,36 @@ class Game {
     // this.intervalGame = window.requestAnimationFrame(this._update.bind(this));
   }
 
-    ////// GENERATE BALLS ///////
+    ////// GENERATE BALLS & HOMES ///////
+
+  _startBallCreation() {
+    setInterval(function() {
+      this.generateBalls();
+    }.bind(this), 5000);
+  }
 
   generateBalls() {
     this.balls.push(new Ball({
       width: this.width, 
       height: this.height, 
       canvas: this.canvas,
-      ctx: this.ctx
+      ctx: this.ctx,
+      homes: this.homes
     }));
-    
   }
 
-    ////// DRAW STUFF ///////
+  generateHomes() {
+    this.homes.push(new Home({
+      width: this.width, 
+      height: this.height, 
+      canvas: this.canvas,
+      ctx: this.ctx,
+      balls: this.balls
+    }));
+  }
+  
+
+   ////// DRAW STUFF ///////
 
   
   _drawBoard() {
@@ -42,18 +62,21 @@ class Game {
   }
 
   _drawBalls() {
+    this.balls.forEach(function(ball) {
+      this.ctx.beginPath();
+      this.ctx.arc(ball.position.x,ball.position.y,ball.radius,0,2*Math.PI);
+      this.ctx.fillStyle = '#19FFFC';
+      this.ctx.fill();
+    }.bind(this))
     // Hacer un loop ForEach cuando tengas más de una bola (hacer un array de bolas)
-    this.ctx.beginPath();
-    this.ctx.arc(this.balls[0].position.x,this.balls[0].position.y,this.balls[0].radius,0,2*Math.PI);
-    this.ctx.fillStyle = '#19FFFC';
-    this.ctx.fill();
+    
     // this.ctx.stroke();
   }
 
   _drawHomes() {
     // Hacer un loop ForEach cuando tengas más de una bola (hacer un array de casas)
     this.ctx.beginPath();
-    this.ctx.arc(this.width,0,this.height/4,0,2*Math.PI);
+    this.ctx.arc(this.homes[0].position.x,this.homes[0].position.y,this.homes[0].radius,0,2*Math.PI);
     this.ctx.arc(0,this.height,this.height/4,0,2*Math.PI);
     this.ctx.fillStyle = '#19FFFC';
     // this.ctx.fillStyle = '#19FF2E';
@@ -64,6 +87,10 @@ class Game {
   _clear() {
     // console.log(`the canvas width is ${this.width} and height is ${height}`)
     this.ctx.clearRect(0, 0, this.width, this.height);
+  }
+
+  getRandomNumber(items) {
+    Math.floor(Math.random()*items)
   }
 
 
