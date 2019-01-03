@@ -1,11 +1,17 @@
 class Game {
   constructor(options){ 
-    this.scene = options.scene;
     this.width = options.width;
     this.height = options.height;
     this.ctx = options.ctx;
     this.canvas = options.canvas;
-    this.ball = new Ball(this.width, this.height);
+    this.balls = [];
+    this.generateBalls();
+    // this.ball = new Ball({
+    //   width: this.width, 
+    //   height: this.height, 
+    //   canvas: this.canvas,
+    //   ctx: this.ctx
+    // });
   }
 
   startGame() {
@@ -14,6 +20,21 @@ class Game {
     // Set interval irá aquí
     // this.intervalGame = window.requestAnimationFrame(this._update.bind(this));
   }
+
+    ////// GENERATE BALLS ///////
+
+  generateBalls() {
+    this.balls.push(new Ball({
+      width: this.width, 
+      height: this.height, 
+      canvas: this.canvas,
+      ctx: this.ctx
+    }));
+    
+  }
+
+    ////// DRAW STUFF ///////
+
   
   _drawBoard() {
     this.ctx.fillStyle = "#FBFFF8";
@@ -23,7 +44,7 @@ class Game {
   _drawBalls() {
     // Hacer un loop ForEach cuando tengas más de una bola (hacer un array de bolas)
     this.ctx.beginPath();
-    this.ctx.arc(this.ball.position.x,this.ball.position.y,30,0,2*Math.PI);
+    this.ctx.arc(this.balls[0].position.x,this.balls[0].position.y,this.balls[0].radius,0,2*Math.PI);
     this.ctx.fillStyle = '#19FFFC';
     this.ctx.fill();
     // this.ctx.stroke();
@@ -32,8 +53,8 @@ class Game {
   _drawHomes() {
     // Hacer un loop ForEach cuando tengas más de una bola (hacer un array de casas)
     this.ctx.beginPath();
-    this.ctx.arc(this.width,0,250,0,2*Math.PI);
-    this.ctx.arc(0,this.height,250,0,2*Math.PI);
+    this.ctx.arc(this.width,0,this.height/4,0,2*Math.PI);
+    this.ctx.arc(0,this.height,this.height/4,0,2*Math.PI);
     this.ctx.fillStyle = '#19FFFC';
     // this.ctx.fillStyle = '#19FF2E';
     this.ctx.fill();
@@ -45,51 +66,57 @@ class Game {
     this.ctx.clearRect(0, 0, this.width, this.height);
   }
 
-  _sayLocation() {
-    //Create elem
-    let elem = this.canvas;
-    let elemLeft = elem.offsetLeft; // devuelve el número de píxeles a la izquierda del elemento actual con respecto al nodo HTMLElement.offsetParent
-    let elemTop = elem.offsetTop; // retorna la distancia del elemento actual respecto al borde superior del nodo offsetParent
-    let context = this.ctx;
-    let elements = [];
 
-    // Add event listener for 'Click' events
-    elem.addEventListener('click', function (event) {
-      let x = event.pageX - elemLeft;
-      let y = event.pageY - elemTop;
-      console.log (`I clicked exactly x:${x} y:${y}`)
 
-      // Collision detection between clicked offset and element
-      elements.forEach(function(element) {
-        if (y > element.top && y < element.top + element.height && x > element.left && x < element.left + element.width) {
-          alert('clicked an element');
-          console.log(`I clicked a FUCKING ELEMENT x:${x} y:${y}`)
-        }
-      });
-    }, false);
+  // _sayLocation() {
+  //   //Create elem
+  //   let elem = this.canvas;
+  //   let elemLeft = elem.offsetLeft; // devuelve el número de píxeles a la izquierda del elemento actual con respecto al nodo HTMLElement.offsetParent
+  //   let elemTop = elem.offsetTop; // retorna la distancia del elemento actual respecto al borde superior del nodo offsetParent
+  //   let context = this.ctx;
+  //   let elements = [];
 
-    // Add element in the array of elements
-    elements.push({
-      color: '#05EFFF',
-      width: 150,
-      height: 100,
-      top: 20,
-      left: 15
-    });
+  //   // Add event listener for 'Click' events
+  //   elem.addEventListener('click', function (event) {
+  //     let x = event.pageX - elemLeft;
+  //     let y = event.pageY - elemTop;
+  //     console.log (`I clicked exactly x:${x} y:${y}`)
 
-    // // Render elements
-    // elements.forEach(function(element) {
-    //   context.fillStyle = element.color;
-    //   context.fillRect = (element.left, element.top, element.width, element.height)
-    // })
-  }
+  //     // Collision detection between clicked offset and element
+  //     elements.forEach(function(element) {
+  //       if (y > element.top && y < element.top + element.height && x > element.left && x < element.left + element.width) {
+  //         alert('clicked an element');
+  //         console.log(`I clicked a FUCKING ELEMENT x:${x} y:${y}`)
+  //       }
+  //     });
+  //   }, false);
+
+  //   // Add element in the array of elements
+  //   elements.push({
+  //     color: '#05EFFF',
+  //     width: 150,
+  //     height: 100,
+  //     top: 20,
+  //     left: 15
+  //   });
+
+  // //   // // Render elements
+  // //   // elements.forEach(function(element) {
+  // //   //   context.fillStyle = element.color;
+  // //   //   context.fillRect = (element.left, element.top, element.width, element.height)
+  // //   // })
+  // }
+
+
+
+
 
   _update() {
     this._clear();
     this._drawBoard();
     this._drawBalls();
     this._drawHomes();
-    this._sayLocation();
+    // this._sayLocation();
     this.intervalGame = window.requestAnimationFrame(this._update.bind(this));
   }
 }

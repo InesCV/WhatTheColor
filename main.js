@@ -5,6 +5,8 @@ document.onload = function() {
     canvas.height = document.body.clientHeight - 100;
 
     const ctx = canvas.getContext('2d');
+    // canvas.addEventListener('click', function() { }, false);
+
 
   const game = new Game({
     width: canvas.width,
