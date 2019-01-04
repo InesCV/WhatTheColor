@@ -16,6 +16,7 @@
 
 # System Files
 .DS_Store
+unusedCode.js
 .AppleDouble
 .LSOverride
 Icon

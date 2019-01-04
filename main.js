@@ -12,7 +12,8 @@ document.onload = function() {
     width: canvas.width,
     height: canvas.height,
     ctx: ctx,
-    canvas: canvas
+    canvas: canvas,
+    possibleColors: ['#19FFFC', '#19FF2E', '#FE12FB']
   });
   game.startGame();
 }();

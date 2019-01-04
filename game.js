@@ -5,16 +5,12 @@ class Game {
     this.ctx = options.ctx;
     this.canvas = options.canvas;
     this.balls = [];
-    this.homes = []
+    this.homes = [];
+    this.possibleColors = options.possibleColors;
+    // this.ballToHome = changeDirection();
     this.generateBalls();
     this.generateHomes();
-    this._startBallCreation();
-    // this.ball = new Ball({
-    //   width: this.width, 
-    //   height: this.height, 
-    //   canvas: this.canvas,
-    //   ctx: this.ctx
-    // });
+    this.startBallCreation();
   }
 
   startGame() {
@@ -24,12 +20,33 @@ class Game {
     // this.intervalGame = window.requestAnimationFrame(this._update.bind(this));
   }
 
-    ////// GENERATE BALLS & HOMES ///////
+    ////// GAME MECHANICS ///////
 
-  _startBallCreation() {
+  // ballToHome() {
+  //   if (Home.clickedHome(this.a))
+  // }
+
+  // changeDirection() {
+  //   console.log('Direction changed')
+  // }
+
+    ////// GAME OPERATIONS ///////
+  
+  getRandomColor() {
+    return this.possibleColors[this.getRandomNumber(3)]
+  };
+
+  getRandomNumber(items) {
+    console.log(Math.floor(Math.random()*items)+1);
+    return Math.floor(Math.random()*items)
+  };
+
+  ////// GENERATE BALLS & HOMES ///////
+
+  startBallCreation() {
     setInterval(function() {
       this.generateBalls();
-    }.bind(this), 5000);
+    }.bind(this), 3000);
   }
 
   generateBalls() {
@@ -38,7 +55,9 @@ class Game {
       height: this.height, 
       canvas: this.canvas,
       ctx: this.ctx,
-      homes: this.homes
+      homes: this.homes,
+      color: this.getRandomColor()
+      // ballToHome: this.ballToHome
     }));
   }
 
@@ -48,11 +67,11 @@ class Game {
       height: this.height, 
       canvas: this.canvas,
       ctx: this.ctx,
-      balls: this.balls
+      balls: this.balls,
+      ballToHome: this.ballToHome
     }));
   }
-  
-
+ 
    ////// DRAW STUFF ///////
 
   
@@ -62,13 +81,13 @@ class Game {
   }
 
   _drawBalls() {
+   // Hacer un loop ForEach cuando tengas más de una bola (hacer un array de bolas)
     this.balls.forEach(function(ball) {
       this.ctx.beginPath();
       this.ctx.arc(ball.position.x,ball.position.y,ball.radius,0,2*Math.PI);
-      this.ctx.fillStyle = '#19FFFC';
+      this.ctx.fillStyle = ball.color;
       this.ctx.fill();
     }.bind(this))
-    // Hacer un loop ForEach cuando tengas más de una bola (hacer un array de bolas)
     
     // this.ctx.stroke();
   }
@@ -88,55 +107,6 @@ class Game {
     // console.log(`the canvas width is ${this.width} and height is ${height}`)
     this.ctx.clearRect(0, 0, this.width, this.height);
   }
-
-  getRandomNumber(items) {
-    Math.floor(Math.random()*items)
-  }
-
-
-
-  // _sayLocation() {
-  //   //Create elem
-  //   let elem = this.canvas;
-  //   let elemLeft = elem.offsetLeft; // devuelve el número de píxeles a la izquierda del elemento actual con respecto al nodo HTMLElement.offsetParent
-  //   let elemTop = elem.offsetTop; // retorna la distancia del elemento actual respecto al borde superior del nodo offsetParent
-  //   let context = this.ctx;
-  //   let elements = [];
-
-  //   // Add event listener for 'Click' events
-  //   elem.addEventListener('click', function (event) {
-  //     let x = event.pageX - elemLeft;
-  //     let y = event.pageY - elemTop;
-  //     console.log (`I clicked exactly x:${x} y:${y}`)
-
-  //     // Collision detection between clicked offset and element
-  //     elements.forEach(function(element) {
-  //       if (y > element.top && y < element.top + element.height && x > element.left && x < element.left + element.width) {
-  //         alert('clicked an element');
-  //         console.log(`I clicked a FUCKING ELEMENT x:${x} y:${y}`)
-  //       }
-  //     });
-  //   }, false);
-
-  //   // Add element in the array of elements
-  //   elements.push({
-  //     color: '#05EFFF',
-  //     width: 150,
-  //     height: 100,
-  //     top: 20,
-  //     left: 15
-  //   });
-
-  // //   // // Render elements
-  // //   // elements.forEach(function(element) {
-  // //   //   context.fillStyle = element.color;
-  // //   //   context.fillRect = (element.left, element.top, element.width, element.height)
-  // //   // })
-  // }
-
-
-
-
 
   _update() {
     this._clear();
