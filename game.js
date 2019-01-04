@@ -33,12 +33,12 @@ class Game {
     ////// GAME OPERATIONS ///////
   
   getRandomColor() {
+    console.log()
     return this.possibleColors[this.getRandomNumber(3)]
   };
 
   getRandomNumber(items) {
-    console.log(Math.floor(Math.random()*items)+1);
-    return Math.floor(Math.random()*items)
+    return Math.floor(Math.random() * items)
   };
 
   ////// GENERATE BALLS & HOMES ///////
