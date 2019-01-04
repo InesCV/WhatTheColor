@@ -60,8 +60,30 @@ class Ball {
     this.speed = 0;
   }
 
-  changeDirection() {
+  changeDirection(homeX, homeY) {
     console.log('Direction changed')
+    // Say the ball is moving
+    this.speed = 1;
+    // Calculate the distance to move
+    this.ballToHomeX = homeX - this.position.x;
+    this.ballToHomeY = homeY - this.position.y;
+    this.ballToHomeH = Math.sqrt(Math.pow(this.ballToHomeX,2) + Math.pow(this.ballToHomeY,2));
+    console.log(`So,the ball should be moving in direction: ${this.ballToHomeX} y:${this.ballToHomeY} so, hipotenusa:${this.ballToHomeH}`);
+    this.speedX = this.ballToHomeX/this.ballToHomeH;
+    this.speedY = this.ballToHomeY/this.ballToHomeH;
+    console.log(`speedX= ${this.speedX} speedY= ${this.speedY}`)
+    // this.ballToHome = {
+    //   x: homeX - this.position.x,
+    //   y: homeY - this.position.y,
+    //   h: Math.sqrt(Math.pow(this.x,2) + Math.pow(this.y,2))
+    // };
+    // Move to that position
+    console.log(this.position.x += (this.ballToHomeX/this.ballToHomeH));
+
+    setInterval(function () {
+      this.position.x += this.speedX;
+      this.position.y += this.speedY;
+    }.bind(this))
   }
 
   _consoleLogPosition() {

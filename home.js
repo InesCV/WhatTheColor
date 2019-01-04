@@ -8,6 +8,7 @@ class Home {
       x: this.position.x - (this.radius / 2),
       y: this.position.y + (this.radius / 2)
     }
+    console.log(`Go to position x:${this.goToPosition.x} y: ${this.goToPosition.y}`)
     // this.color = options.color;
     this.radius = options.height/4;
     this.elem = options.canvas;
@@ -29,7 +30,7 @@ class Home {
         console.log(`HOME: clicked a FUCKING home in x:${this.x} y:${this.y}`);
         this.balls.forEach(function(ball) {
           if (ball.speed === 0) {
-            this.changeDirection();
+            ball.changeDirection(this.position.x, this.position.y);
           }
         }.bind(this))
       }}.bind(this), false);

@@ -23,7 +23,11 @@ class Game {
     ////// GAME MECHANICS ///////
 
   // ballToHome() {
-  //   if (Home.clickedHome(this.a))
+  //   this.homes.forEach(function(home) {
+  //     if (home.clickedHome(home.a, home.b)) {
+  //       console.log('The ball should go home')
+  //     }
+  //   }
   // }
 
   // changeDirection() {
@@ -33,7 +37,6 @@ class Game {
     ////// GAME OPERATIONS ///////
   
   getRandomColor() {
-    console.log()
     return this.possibleColors[this.getRandomNumber(3)]
   };
 
@@ -88,7 +91,6 @@ class Game {
       this.ctx.fillStyle = ball.color;
       this.ctx.fill();
     }.bind(this))
-    
     // this.ctx.stroke();
   }
 
