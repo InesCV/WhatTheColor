@@ -27,7 +27,7 @@ class Ball {
 
       // Check if the ball is clicked
       if (this.clickedBall(this.a, this.b)) {
-        console.log(`BALL: I clicked a FUCKING ball in x:${this.x} y:${this.y}`);
+        // console.log(`BALL: I clicked a FUCKING ball in x:${this.x} y:${this.y}`);
         if (this.speed === 0) {
           this.moveBall();
         } else {
@@ -65,18 +65,19 @@ class Ball {
     // Say the ball is moving
     this.speed = 1;
     // Calculate the distance to move
+
     this.ballToHomeX = homeX - this.position.x;
     this.ballToHomeY = homeY - this.position.y;
     this.ballToHomeH = Math.sqrt(Math.pow(this.ballToHomeX,2) + Math.pow(this.ballToHomeY,2));
-    console.log(`So,the ball should be moving in direction: ${this.ballToHomeX} y:${this.ballToHomeY} so, hipotenusa:${this.ballToHomeH}`);
+    console.log(`Sir, the ball should be moving to direction: ${this.ballToHomeX} y:${this.ballToHomeY} route should be equal to hipotenusa:${this.ballToHomeH}`);
     this.speedX = this.ballToHomeX/this.ballToHomeH;
     this.speedY = this.ballToHomeY/this.ballToHomeH;
     console.log(`speedX= ${this.speedX} speedY= ${this.speedY}`)
-    // this.ballToHome = {
-    //   x: homeX - this.position.x,
-    //   y: homeY - this.position.y,
-    //   h: Math.sqrt(Math.pow(this.x,2) + Math.pow(this.y,2))
-    // };
+    this.ballToHome = {
+      x: homeX - this.position.x,
+      y: homeY - this.position.y,
+      h: Math.sqrt(Math.pow(this.x,2) + Math.pow(this.y,2))
+    };
     // Move to that position
     console.log(this.position.x += (this.ballToHomeX/this.ballToHomeH));
 
@@ -84,6 +85,25 @@ class Ball {
       this.position.x += this.speedX;
       this.position.y += this.speedY;
     }.bind(this))
+
+
+    // this.ballDestination = {
+    //   goToX: homeX - this.position.x,
+    //   goToY: homeY - this.position.y,
+    //   goToPath: Math.sqrt(Math.pow(this.ballDestination.goToX,2) + Math.pow(this.ballDestination.goToY,2))
+    // }
+    // console.log(`Sir, the ball should be moving to direction: x:${this.ballDestination.goToX} y:${this.ballDestination.goToY} route should be equal to hipotenusa:${this.ballDestination.goToPath}`);
+    // this.speedToDestination = {
+    //   speedX: this.ballDestination.goToX/this.ballDestination.goToPath,
+    //   speedY: this.ballDestination.goToY/this.ballDestination.goToPath
+    // }
+    // console.log(`speedX= ${this.speedToDestination.speedX} speedY= ${this.speedToDestination.speedY}`);
+    // console.log(this.position.x += (this.ballDestination.goToX/this.ballDestination.goToPath));
+    // setInterval(function () {
+    //   this.position.x += this.speedToDestination.speedX;
+    //   this.position.y += this.speedToDestination.speedY;
+    // }.bind(this))
+
   }
 
   _consoleLogPosition() {

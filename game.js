@@ -7,7 +7,7 @@ class Game {
     this.balls = [];
     this.homes = [];
     this.possibleColors = options.possibleColors;
-    // this.ballToHome = changeDirection();
+    this.possiblePositions = options.possiblePositions;
     this.generateBalls();
     this.generateHomes();
     this.startBallCreation();
@@ -44,12 +44,25 @@ class Game {
     return Math.floor(Math.random() * items)
   };
 
+  // getHomePosition() {
+  //   console.log(this.possiblePositions[0]);
+  //   return this.possiblePositions[this.homes.length]; 
+  // }
+
+  // getColorHome() {
+  //   if (this.homes.length === 0) {
+  //     getRandomColor();
+  //   } else {
+
+  //   }
+  // }
+
   ////// GENERATE BALLS & HOMES ///////
 
   startBallCreation() {
     setInterval(function() {
       this.generateBalls();
-    }.bind(this), 3000);
+    }.bind(this), 10000);
   }
 
   generateBalls() {
@@ -64,15 +77,30 @@ class Game {
     }));
   }
 
+  // generateHomes() {
+  //     this.homes.push(new Home({
+  //       width: this.width, 
+  //       height: this.height, 
+  //       canvas: this.canvas,
+  //       ctx: this.ctx,
+  //       balls: this.balls,
+  //       // position: this.possiblePositions[0+i],
+  //       // color: this.possibleColors[0+i]
+  //     }));
+  // }
+
   generateHomes() {
-    this.homes.push(new Home({
-      width: this.width, 
-      height: this.height, 
-      canvas: this.canvas,
-      ctx: this.ctx,
-      balls: this.balls,
-      ballToHome: this.ballToHome
-    }));
+    for (let i = 0; i < 3; i++) {
+      this.homes.push(new Home({
+        width: this.width, 
+        height: this.height, 
+        canvas: this.canvas,
+        ctx: this.ctx,
+        balls: this.balls,
+        position: this.possiblePositions[0+i],
+        color: this.possibleColors[0+i]
+      }));
+    }
   }
  
    ////// DRAW STUFF ///////
@@ -95,13 +123,14 @@ class Game {
   }
 
   _drawHomes() {
+    this.homes.forEach(function(home){
+      this.ctx.beginPath();
+      this.ctx.arc(home.position.x,home.position.y,home.radius,0,2*Math.PI);
+      this.ctx.fillStyle = home.color;
+      this.ctx.fill();
+    }.bind(this))
     // Hacer un loop ForEach cuando tengas más de una bola (hacer un array de casas)
-    this.ctx.beginPath();
-    this.ctx.arc(this.homes[0].position.x,this.homes[0].position.y,this.homes[0].radius,0,2*Math.PI);
-    this.ctx.arc(0,this.height,this.height/4,0,2*Math.PI);
-    this.ctx.fillStyle = '#19FFFC';
-    // this.ctx.fillStyle = '#19FF2E';
-    this.ctx.fill();
+    
     // this.ctx.stroke();
   }
 

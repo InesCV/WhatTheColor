@@ -1,15 +1,13 @@
 class Home {
   constructor(options) {
-    this.position = {
-      x: options.width,
-      y: 0
-    };
-    this.goToPosition = {
-      x: this.position.x - (this.radius / 2),
-      y: this.position.y + (this.radius / 2)
-    }
-    console.log(`Go to position x:${this.goToPosition.x} y: ${this.goToPosition.y}`)
-    // this.color = options.color;
+    this.position = options.position;
+    // Destination position of the home (to make it easier)
+    // this.goToPosition = {
+    //   x: goToPosition(this.position.x, this.radius),
+    //   y: goToPosition(this.position.y, this.radius)
+    // }
+    // console.log(`Go to position x:${this.goToPosition.x} y: ${this.goToPosition.y}`)
+    this.color = options.color;
     this.radius = options.height/4;
     this.elem = options.canvas;
     this.elemLeft = this.elem.offsetLeft;
@@ -34,6 +32,14 @@ class Home {
           }
         }.bind(this))
       }}.bind(this), false);
+  }
+
+  goToPosition(center, radius) {
+    if (center === 0) {
+      return center + (radius/2)
+    } else {
+      return center - (radius/2)
+    }
   }
 
   // Check if Hipotenusa of the click to the center is equal to the radius
