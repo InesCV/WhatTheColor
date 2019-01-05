@@ -8,17 +8,15 @@ class Ball {
     this.speed = 1;
     this.color = options.color;
     this.radius = 30;
-    // this._selectColor();
     this.moveBall();
-    this._consoleLogPosition();
-    // this.clickedBall();
+    // this._consoleLogPosition();
     this.elem = options.canvas;
     this.elemLeft = this.elem.offsetLeft;
     this.elemTop = this.elem.offsetTop;
     this.ctx = options.ctx;
     
      // Add event listener for 'Click' events
-     this.elem.addEventListener('click', function (event) {
+    this.elem.addEventListener('click', function (event) {
       this.x = event.pageX - this.elemLeft;
       this.y = event.pageY - this.elemTop;
       // console.log (`BALL: I clicked exactly x:${this.x} y:${this.y}`)
@@ -33,9 +31,9 @@ class Ball {
         } else {
           this.pauseBall();
         }
-      }}.bind(this), false);
-
-}
+      }
+    }.bind(this));
+  }
 
   clickedBall(a,b) {
     this.h = Math.sqrt(Math.pow(a,2) + Math.pow(b,2))
@@ -58,6 +56,8 @@ class Ball {
 
   pauseBall() {
     this.speed = 0;
+    // this.speedX = 0;
+    // this.speedY = 0;
   }
 
   changeDirection(homeX, homeY) {
@@ -69,21 +69,19 @@ class Ball {
     this.ballToHomeX = homeX - this.position.x;
     this.ballToHomeY = homeY - this.position.y;
     this.ballToHomeH = Math.sqrt(Math.pow(this.ballToHomeX,2) + Math.pow(this.ballToHomeY,2));
-    console.log(`Sir, the ball should be moving to direction: ${this.ballToHomeX} y:${this.ballToHomeY} route should be equal to hipotenusa:${this.ballToHomeH}`);
+    // console.log(`Sir, the ball should be moving to direction: ${this.ballToHomeX} y:${this.ballToHomeY} route should be equal to hipotenusa:${this.ballToHomeH}`);
     this.speedX = this.ballToHomeX/this.ballToHomeH;
     this.speedY = this.ballToHomeY/this.ballToHomeH;
-    console.log(`speedX= ${this.speedX} speedY= ${this.speedY}`)
+    // console.log(`speedX= ${this.speedX} speedY= ${this.speedY}`)
     this.ballToHome = {
       x: homeX - this.position.x,
       y: homeY - this.position.y,
       h: Math.sqrt(Math.pow(this.x,2) + Math.pow(this.y,2))
     };
     // Move to that position
-    console.log(this.position.x += (this.ballToHomeX/this.ballToHomeH));
-
     setInterval(function () {
-      this.position.x += this.speedX;
-      this.position.y += this.speedY;
+      this.position.x += (this.speedX);
+      this.position.y += (this.speedY);
     }.bind(this))
 
 

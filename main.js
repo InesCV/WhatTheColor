@@ -13,7 +13,7 @@ document.onload = function() {
     height: canvas.height,
     ctx: ctx,
     canvas: canvas,
-    possibleColors: ['#19FFFC', '#19FF2E', '#FE12FB'],
+    possibleColors: ['#19FFFC', '#19FF2E', '#7800FF'],
     possiblePositions: [
       {x:canvas.width, y:0}, 
       {x:canvas.width, y: canvas.height}, 

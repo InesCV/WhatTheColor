@@ -112,7 +112,6 @@ class Game {
   }
 
   _drawBalls() {
-   // Hacer un loop ForEach cuando tengas más de una bola (hacer un array de bolas)
     this.balls.forEach(function(ball) {
       this.ctx.beginPath();
       this.ctx.arc(ball.position.x,ball.position.y,ball.radius,0,2*Math.PI);
@@ -128,9 +127,7 @@ class Game {
       this.ctx.arc(home.position.x,home.position.y,home.radius,0,2*Math.PI);
       this.ctx.fillStyle = home.color;
       this.ctx.fill();
-    }.bind(this))
-    // Hacer un loop ForEach cuando tengas más de una bola (hacer un array de casas)
-    
+    }.bind(this))    
     // this.ctx.stroke();
   }
 
@@ -139,11 +136,41 @@ class Game {
     this.ctx.clearRect(0, 0, this.width, this.height);
   }
 
+   ////// COLLISIONS ///////
+
+  _checkBallHomecollision() {
+    this.balls.forEach(function (ball) {
+     this.homes.forEach(function (home) {
+       this.a = home.position.x - ball.position.x;
+       this.b = home.position.y - ball.position.y;
+       this.h = Math.sqrt(Math.pow(this.a,2) + Math.pow(this.b,2));
+       // console.log(`home radius is ${home.radius} and ball radius ${ball.radius}`);
+       if (home.radius + ball.radius >= this.h) {
+         console.log(`Sir, a ball went to a home`)
+         this.checkSameColor(ball, home)
+         return true
+       }
+     }.bind(this))
+   }.bind(this))
+ }
+
+  checkSameColor(item1, item2) {
+    if (item1.color === item2.color) {
+      console.log(`Sir, the ball went to the CORRECT Home`)
+      return true 
+    } else {
+      console.log(`MAYDAY MAYDAY WROOOOOONG BALLLL!`)
+      return false
+    }
+  }
+  
+
   _update() {
     this._clear();
     this._drawBoard();
     this._drawBalls();
     this._drawHomes();
+    this._checkBallHomecollision();
     // this._sayLocation();
     this.intervalGame = window.requestAnimationFrame(this._update.bind(this));
   }
