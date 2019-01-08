@@ -4,7 +4,6 @@ class Ball {
       x: -10,
       y: (options.height / 2)
     };
-    this.speed = 1;
     this.color = options.color;
     this.radius = 30;
     this.moveBall();
@@ -13,7 +12,7 @@ class Ball {
     this.elemLeft = this.elem.offsetLeft;
     this.elemTop = this.elem.offsetTop;
     this.ctx = options.ctx;
-    
+
      // Add event listener for 'Click' events
     this.elem.addEventListener('click', function (event) {
       this.x = event.pageX - this.elemLeft;
@@ -43,9 +42,9 @@ class Ball {
 
   moveBall() {
     this.speed = 1;
-        // if (!this.intervalId) {
-    //   this.intervalId = setInterval(this._moveForward.bind(this), 70);
-    setInterval(function () {
+    // PONER EN UNA VARIABLE QUE SE PUEDA LLAMAR Y LIMPIAR
+
+    this.ballMovement = setInterval(function () {
       this.position.x += this.speed;
     }.bind(this), 20);
     // if (this.direction === 'right') {
@@ -57,11 +56,10 @@ class Ball {
     this.speed = 0;
     this.speedX = 0;
     this.speedY = 0;
+    clearInterval(this.ballMovement);
   }
 
   changeDirection(homeX, homeY) {
-    console.log('Direction changed')
-    // Say the ball is moving
     this.speed = 1;
     // Calculate the distance to move
 

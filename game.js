@@ -7,10 +7,11 @@ class Game {
     this.balls = [];
     this.fecundedBalls = [];
     this.homes = [];
-    this.zygots = 0;
+    this.zygotes = 0;
     this.possibleColors = options.possibleColors;
     this.wrongColor = '#FF0000';
     this.possiblePositions = options.possiblePositions;
+    this.gamePaused = false;
     this.generateBalls();
     this.generateHomes();
     this.startBallCreation();
@@ -23,36 +24,22 @@ class Game {
     // this.intervalGame = window.requestAnimationFrame(this._update.bind(this));
   }
 
-    ////// GAME MECHANICS ///////
-
-  // ballToHome() {
-  //   this.homes.forEach(function(home) {
-  //     if (home.clickedHome(home.a, home.b)) {
-  //       console.log('The ball should go home')
-  //     }
-  //   }
-  // }
-
-  // changeDirection() {
-  //   console.log('Direction changed')
-  // }
-
     ////// GAME OPERATIONS ///////
   
   getRandomColor() {
-    return this.possibleColors[this.getRandomNumber(3)]
+    return this.possibleColors[Math.floor(Math.random() * 3)]
   };
 
   // getRandomPosition() {
-    
+  //   this.x 
   // }
 
   // getRandomDirection() {
     
   // }
 
-  getRandomNumber(items) {
-    return Math.floor(Math.random() * items)
+  getRandomNumber(max, min) {
+    return Math.random() * (max - min) + min;
   };
 
   // getHomePosition() {
@@ -71,9 +58,11 @@ class Game {
   ////// GENERATE BALLS & HOMES ///////
 
   startBallCreation() {
-    setInterval(function() {
+    this.intervalCreationBall = setInterval(function() {
       this.generateBalls();
     }.bind(this), 3000);
+
+    // clearInterval(this.intervalCreationBall)
   }
 
   generateBalls() {
@@ -112,6 +101,44 @@ class Game {
         color: this.possibleColors[0+i]
       }));
     }
+  }
+
+    ////// GAME MECHANICS ///////
+
+  _assignControlsToKeys () {
+    document.onkeydown = (e) => {
+      switch (e.keyCode) {
+        case 13: //Enter
+          if (this.gamePaused === false) {
+            this.gamePaused = true;
+            console.log('pause game')
+            this.pauseGame();
+          } else {
+            this.gamePaused = false;
+            console.log('play game')
+            this.playGame();
+          }
+          break;
+        case 8: //Delete
+          console.log('If (zygots are more than X) this.balls = [] again');
+          break;
+      }
+    };
+  }
+
+  pauseGame() {
+    clearInterval(this.intervalCreationBall);
+    this.balls.forEach(function (ball) {
+      ball.pauseBall();
+    });
+  }
+
+  playGame() {
+    this.startBallCreation();
+    this.balls.forEach(function (ball) {
+      ball.moveBall();
+    });
+    
   }
  
    ////// DRAW STUFF ///////
@@ -170,7 +197,7 @@ class Game {
          console.log(`Sir, a ball went to a home`)
          this.checkSameColor(ball, home);
          this.fecundedBalls.push(this.balls[index]);
-         console.log(`You got ${this.zygots} zygots`)
+         console.log(`You got ${this.zygotes} zygotes`)
          this.balls.splice(index, 1)
          return true
        }
@@ -180,7 +207,7 @@ class Game {
 
   checkSameColor(item1, item2) {
     if (item1.color === item2.color) {
-      this.zygots += 1;
+      this.zygotes += 1;
       console.log(`Sir, the ball went to the CORRECT Home`)
       item1.pauseBall();
       return true 
@@ -201,6 +228,7 @@ class Game {
     this._drawFecundedBalls();
     this._drawHomes();
     this._checkBallHomecollision();
+    this._assignControlsToKeys ()
     // this._sayLocation();
     this.intervalGame = window.requestAnimationFrame(this._update.bind(this));
   }
