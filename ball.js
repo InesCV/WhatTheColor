@@ -1,6 +1,5 @@
 class Ball {
   constructor(options) {
-    this.direction = 'right';
     this.position = {
       x: -10,
       y: (options.height / 2)
@@ -56,8 +55,8 @@ class Ball {
 
   pauseBall() {
     this.speed = 0;
-    // this.speedX = 0;
-    // this.speedY = 0;
+    this.speedX = 0;
+    this.speedY = 0;
   }
 
   changeDirection(homeX, homeY) {

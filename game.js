@@ -5,8 +5,11 @@ class Game {
     this.ctx = options.ctx;
     this.canvas = options.canvas;
     this.balls = [];
+    this.fecundedBalls = [];
     this.homes = [];
+    this.zygots = 0;
     this.possibleColors = options.possibleColors;
+    this.wrongColor = '#FF0000';
     this.possiblePositions = options.possiblePositions;
     this.generateBalls();
     this.generateHomes();
@@ -40,6 +43,14 @@ class Game {
     return this.possibleColors[this.getRandomNumber(3)]
   };
 
+  // getRandomPosition() {
+    
+  // }
+
+  // getRandomDirection() {
+    
+  // }
+
   getRandomNumber(items) {
     return Math.floor(Math.random() * items)
   };
@@ -62,7 +73,7 @@ class Game {
   startBallCreation() {
     setInterval(function() {
       this.generateBalls();
-    }.bind(this), 10000);
+    }.bind(this), 3000);
   }
 
   generateBalls() {
@@ -121,6 +132,16 @@ class Game {
     // this.ctx.stroke();
   }
 
+  _drawFecundedBalls() {
+    this.fecundedBalls.forEach(function(ball) {
+      this.ctx.beginPath();
+      this.ctx.arc(ball.position.x,ball.position.y,ball.radius,0,2*Math.PI);
+      this.ctx.fillStyle = ball.color;
+      this.ctx.fill();
+    }.bind(this))
+    // this.ctx.stroke();
+  }
+
   _drawHomes() {
     this.homes.forEach(function(home){
       this.ctx.beginPath();
@@ -139,7 +160,7 @@ class Game {
    ////// COLLISIONS ///////
 
   _checkBallHomecollision() {
-    this.balls.forEach(function (ball) {
+    this.balls.forEach(function (ball, index) {
      this.homes.forEach(function (home) {
        this.a = home.position.x - ball.position.x;
        this.b = home.position.y - ball.position.y;
@@ -147,7 +168,10 @@ class Game {
        // console.log(`home radius is ${home.radius} and ball radius ${ball.radius}`);
        if (home.radius + ball.radius >= this.h) {
          console.log(`Sir, a ball went to a home`)
-         this.checkSameColor(ball, home)
+         this.checkSameColor(ball, home);
+         this.fecundedBalls.push(this.balls[index]);
+         console.log(`You got ${this.zygots} zygots`)
+         this.balls.splice(index, 1)
          return true
        }
      }.bind(this))
@@ -156,10 +180,15 @@ class Game {
 
   checkSameColor(item1, item2) {
     if (item1.color === item2.color) {
+      this.zygots += 1;
       console.log(`Sir, the ball went to the CORRECT Home`)
+      item1.pauseBall();
       return true 
     } else {
       console.log(`MAYDAY MAYDAY WROOOOOONG BALLLL!`)
+      item1.pauseBall();
+      item1.color = '#FF0000';
+      item2.color = '#FF0000';
       return false
     }
   }
@@ -169,6 +198,7 @@ class Game {
     this._clear();
     this._drawBoard();
     this._drawBalls();
+    this._drawFecundedBalls();
     this._drawHomes();
     this._checkBallHomecollision();
     // this._sayLocation();
