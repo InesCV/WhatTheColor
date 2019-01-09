@@ -10,16 +10,16 @@
 </head>
 <body>
   <h1>WhatThe<span>Color</span></h1>
-  <div id="startGame" style="display: none">
-    <h2>Press start to play</h2>
-    <button>Start</button>
+  <div id="startScreen">
+    <h2>Press <span>start</span> to play</h2>
+    <button id="startGame" class="btn-startGame">Start</button>
   </div>
-  <canvas id="WhatTheColor"></canvas>
+  <canvas id="WhatTheColor" style="display: none"></canvas>
   <!-- <div class="pause-screen disable">- P A U S E -</div> -->
   <div id="gameover" style="display: none" class="flex-container">
       <h2>GAME OVER</h2>
       <p>You got <span id="result"></span> ovules fecundated</p>
-      <button id="startagain" class="btn"> Abort and Start Again</button>
+      <button id="startagain" class="btn-gameOver"> Abort and Start Again</button>
     </div>
   <script src="ball.js"></script>
   <script src="home.js"></script>

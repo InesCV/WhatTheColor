@@ -35,7 +35,28 @@ p {
   align-self: center;
 } */
 
-.btn {
+.btn-startGame {
+	background-color: #7800FF;
+	color: white;
+	font-family: Quicksand;
+	font-size: 1.5em;
+	font-weight: bolder;
+	text-align: center;
+	text-transform: uppercase;
+  text-decoration: none;
+  margin: 1.5em auto 0 auto;
+	padding: 70px 50px;
+  max-width: 600px;
+  border: none;
+  border-radius: 50%;
+}
+
+.btn-startGame:hover {
+  background-color: #19FFFC;
+  color: #7800FF;
+}
+
+.btn-gameOver {
 	background-color: #7800FF;
 	color: white;
 	font-family: Quicksand;
@@ -50,7 +71,7 @@ p {
   border: none;
 }
 
-.btn:hover {
+.btn-gameOver:hover {
   background-color: #19FFFC;
   color: #7800FF;
 }
@@ -59,6 +80,7 @@ p {
 span {
   color: #7800FF;
 }
+
 body {
   min-width: 100vh;
   min-height: 100vh;
