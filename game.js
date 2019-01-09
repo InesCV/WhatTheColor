@@ -55,6 +55,13 @@ class Game {
   //   }
   // }
 
+  gameOverWait(item) {
+    this.waitingSecond = setTimeout(function() {
+      console.log('waiting a second')
+      item();
+    }, 500)
+  }
+
   ////// GENERATE BALLS & HOMES ///////
 
   startBallCreation() {
@@ -215,7 +222,8 @@ class Game {
       item1.pauseBall();
       item1.color = '#FF0000';
       item2.color = '#FF0000';
-      return this.onGameOver();
+      this.pauseGame();
+      return this.gameOverWait(this.onGameOver);
     }
   }
   

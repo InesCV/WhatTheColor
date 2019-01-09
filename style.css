@@ -6,6 +6,18 @@ h1 {
   text-align: center;
 }
 
+h2 {
+  text-align: center;
+}
+
+p {
+  text-align: center;
+}
+
+button {
+ text-align: center;
+}
+
 span {
   color: #19FFFC;
 }
