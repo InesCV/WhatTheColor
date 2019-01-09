@@ -216,6 +216,9 @@ class Game {
     if (item1.color === item2.color) {
       console.log(`Sir, the ball went to the CORRECT Home`)
       item1.pauseBall();
+      // Try to modify DOM to write the number of Zygotes
+      // this.zygotesScreen = document.getElementById('zygotes'); 
+      // this.zygotesScreen.innerText = this.zygotes;
       return this.zygotes += 1;
     } else {
       console.log(`MAYDAY MAYDAY WROOOOOONG BALLLL!`)

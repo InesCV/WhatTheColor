@@ -10,16 +10,20 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 <body>
-  <h1>WhatThe<span>Color</span></h1>
   <div id="startScreen">
-    <h2>Press <span>start</span> to play</h2>
+    <h2>WhatThe<span>Color</span></h2>
+    <h3>Press <span>start</span> to play</h3>
     <button id="startGame" class="btn-startGame">Start</button>
   </div>
-  <canvas id="WhatTheColor" style="display: none"></canvas>
+  <div id="playScreen" style="display: none">
+      <h1>WhatThe<span>Color</span></h1>
+      <p>Zygots: <span id="zygots">0</span></p>
+  </div>
+  <canvas id="canvas" style="display: none"></canvas>
   <!-- <div class="pause-screen disable">- P A U S E -</div> -->
   <div id="gameover" style="display: none" class="flex-container">
       <h2>GAME OVER</h2>
-      <p>You got <span id="result"></span> ovules fecundated</p>
+      <h3>You got <span id="result"></span> ovules fecundated</h3>
       <button id="startagain" class="btn-gameOver"> Abort and Start Again</button>
     </div>
   <script src="ball.js"></script>

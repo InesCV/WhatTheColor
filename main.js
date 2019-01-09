@@ -3,10 +3,12 @@ document.onload = function() {
   let startGame = document.getElementById('startGame');
   startGame.addEventListener("click", function() {
     startScreen.style = 'display: none';
-    const canvas = document.getElementById('WhatTheColor');
-    canvas.width = document.body.clientWidth -20;
-    canvas.height = document.body.clientHeight - 100;
+    const canvas = document.getElementById('canvas');
+    canvas.width = document.body.clientWidth -5;
+    canvas.height = document.body.clientHeight -5;
     const ctx = canvas.getContext('2d');
+    let playScreen = document.getElementById('playScreen');
+    playScreen.style = 'display: block';
     canvas.style = 'display: block';
 
     function startAgain() {
@@ -27,6 +29,7 @@ document.onload = function() {
       game.onGameOver = () => {
         let gameOver = document.getElementById('gameover');
         canvas.style = 'display: none';
+        playScreen.style = 'display: none';
         gameOver.style = 'display: block';
         let result = document.getElementById('result');
         result.innerHTML = game.zygotes;

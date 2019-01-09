@@ -9,7 +9,11 @@
 
 h1 {
   font-weight: bolder;
-  font-size: 2em;
+  font-size: 2.3em;
+  position: fixed;
+  top: 15px;
+  left: 50px;
+
 }
 
 h2 {
@@ -18,10 +22,20 @@ h2 {
   font-size: 5em;
 }
 
-p {
+
+h3 {
   text-align: center;
   font-size: 2em;
   margin: 0.25em auto 1em;
+}
+
+p {
+  text-align: center;
+  font-size: 1.5em;
+  position: fixed;
+  top: 70px;
+  left: 80px;
+  font-weight: bold;
 }
 
 .container {
@@ -44,7 +58,7 @@ p {
 	text-align: center;
 	text-transform: uppercase;
   text-decoration: none;
-  margin: 1.5em auto 0 auto;
+  margin: 1em auto 0 auto;
 	padding: 70px 50px;
   max-width: 600px;
   border: none;
