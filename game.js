@@ -76,7 +76,7 @@ class Game {
       // ballToHome: this.ballToHome
     }));
   }
-
+  // IN CASE WE WANT RANDOM HOME POSITIONS AND COLORS
   // generateHomes() {
   //     this.homes.push(new Home({
   //       width: this.width, 
@@ -207,16 +207,15 @@ class Game {
 
   checkSameColor(item1, item2) {
     if (item1.color === item2.color) {
-      this.zygotes += 1;
       console.log(`Sir, the ball went to the CORRECT Home`)
       item1.pauseBall();
-      return true 
+      return this.zygotes += 1;
     } else {
       console.log(`MAYDAY MAYDAY WROOOOOONG BALLLL!`)
       item1.pauseBall();
       item1.color = '#FF0000';
       item2.color = '#FF0000';
-      return false
+      return this.onGameOver();
     }
   }
   

@@ -4,6 +4,10 @@ class Ball {
       x: -10,
       y: (options.height / 2)
     };
+    // this.speed = {
+    //   x: whatever,
+    //   y: whatever
+    // }
     this.color = options.color;
     this.radius = 30;
     this.moveBall();
