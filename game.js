@@ -14,6 +14,7 @@ class Game {
     this.homeRadius = this.height/3.5;
     this.ballRadius = this.height/23;
     this.gamePaused = false;
+    this.marginExit = 20;
     this.generateBalls();
     this.generateHomes();
     this.startBallCreation();
@@ -76,19 +77,10 @@ class Game {
   }
 
   getPositionBinary(heightOrWidth) {
-    this.possibleBinaryExit = [-10, heightOrWidth - 20];
+    this.possibleBinaryExit = [- this.marginExit, heightOrWidth + this.marginExit];
     this.binaryExit = this.possibleBinaryExit[this.getRandomIntegerNumber(2,0)];
-    // if (this.binaryExit === this.possibleBinaryExit[0]) {
-    //   getRandomDirection()
-    // } else {
-    //   getRandomDirection()
-    // }
+    console.log(this.binaryExit)
     return this.binaryExit
-  }
-
-
-  getRandomDirection() {
-    
   }
 
 
@@ -130,6 +122,7 @@ class Game {
       ctx: this.ctx,
       homes: this.homes,
       radius: this.ballRadius,
+      marginExit: this.marginExit,
       color: this.getRandomColor(),
       position: this.getRandomPosition()
       // ballToHome: this.ballToHome
