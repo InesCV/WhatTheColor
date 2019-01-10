@@ -22,6 +22,19 @@ class Game {
     this._update();
   }
 
+  restartGame () {
+    this.balls = [];
+    this.fecundedBalls = [];
+    this.homes = [];
+    this.zygotes = 0;
+    this.addZygotesDOM();
+    clearInterval(this.intervalCreationBall);
+    this.generateBalls();
+    this.generateHomes();
+    this.startBallCreation();
+    this._update();
+  }
+
     ////// GAME OPERATIONS ///////
   
   getRandomNumber(max, min) {
@@ -41,11 +54,13 @@ class Game {
   getRandomPosition() {
     this.exitAxis = this.getRandomIntegerNumber(2,0);
     if (this.exitAxis === 0) {
+      // Cuando la vola sale de uno de los ejes Y
       return this.position = {
         x: this.getPositionRange(this.width),
         y: this.getPositionBinary(this.height)
       }
     } else {
+      // Cuando la vola sale de uno de los ejes X
       return this.position = {
         x: this.getPositionBinary(this.width),
         y: this.getPositionRange(this.height)
@@ -60,13 +75,20 @@ class Game {
   }
 
   getPositionBinary(heightOrWidth) {
-    this.binaryExit = [-10, heightOrWidth - 20];
-    return this.binaryExit[this.getRandomIntegerNumber(2,0)]
+    this.possibleBinaryExit = [-10, heightOrWidth - 20];
+    this.binaryExit = this.possibleBinaryExit[this.getRandomIntegerNumber(2,0)];
+    // if (this.binaryExit === this.possibleBinaryExit[0]) {
+    //   getRandomDirection()
+    // } else {
+    //   getRandomDirection()
+    // }
+    return this.binaryExit
   }
 
-  // getRandomDirection() {
+
+  getRandomDirection() {
     
-  // }
+  }
 
 
   // getHomePosition() {
@@ -244,8 +266,9 @@ class Game {
     if (item1.color === item2.color) {
       console.log(`Sir, the ball went to the CORRECT Home`)
       item1.pauseBall();
-      // return this.addZygotesDOM();
-      return this.zygotes += 1;
+      this.zygotes += 1;
+      return this.addZygotesDOM();
+      // return this.zygotes += 1;
     } else {
       console.log(`MAYDAY MAYDAY WROOOOOONG BALLLL!`)
       item1.pauseBall();
@@ -256,11 +279,11 @@ class Game {
     }
   }
 
-  // addZygotesDOM () {
-  //   this.zygotes += 1;
-  //   let zygotesScreen = document.getElementById('zygotes'); 
-  //   zygotesScreen.innerText = this.zygotes;
-  // }
+  addZygotesDOM () {
+    let zygotesScreen = document.getElementById('zygots'); 
+    zygotesScreen.innerHTML = this.zygotes;
+    return zygotesScreen;
+  }
   
 
   _update() {
