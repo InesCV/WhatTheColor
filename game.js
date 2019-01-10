@@ -12,6 +12,7 @@ class Game {
     this.wrongColor = '#FF0000';
     this.possiblePositions = options.possiblePositions;
     this.homeRadius = this.height/3.5;
+    this.ballRadius = this.height/23;
     this.gamePaused = false;
     this.generateBalls();
     this.generateHomes();
@@ -128,6 +129,7 @@ class Game {
       canvas: this.canvas,
       ctx: this.ctx,
       homes: this.homes,
+      radius: this.ballRadius,
       color: this.getRandomColor(),
       position: this.getRandomPosition()
       // ballToHome: this.ballToHome

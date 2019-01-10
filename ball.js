@@ -12,7 +12,7 @@ class Ball {
     // }
     this.color = options.color;
     this.moving = true;
-    this.radius = 30;
+    this.radius = options.radius;
     this.moveBall();
     // this._consoleLogPosition();
     this.elem = options.canvas;
