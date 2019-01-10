@@ -11,6 +11,7 @@ class Game {
     this.possibleColors = options.possibleColors;
     this.wrongColor = '#FF0000';
     this.possiblePositions = options.possiblePositions;
+    this.homeRadius = this.height/3.5;
     this.gamePaused = false;
     this.generateBalls();
     this.generateHomes();
@@ -19,28 +20,54 @@ class Game {
 
   startGame() {
     this._update();
-    // this.ball.start();
-    // Set interval irá aquí
-    // this.intervalGame = window.requestAnimationFrame(this._update.bind(this));
   }
 
     ////// GAME OPERATIONS ///////
   
-  getRandomColor() {
-    return this.possibleColors[Math.floor(Math.random() * 3)]
+  getRandomNumber(max, min) {
+    return Math.random() * (max - min) + min;
   };
 
-  // getRandomPosition() {
-  //   this.x 
-  // }
+  getRandomIntegerNumber(max, min) {
+    return Math.floor(Math.random() * (max - min) + min);
+  };
+  
+  getRandomColor() {
+    return this.possibleColors[this.getRandomIntegerNumber(3,0)]
+  };
+
+    ////// RANDOM BALL EXIT ///////
+
+  getRandomPosition() {
+    this.exitAxis = this.getRandomIntegerNumber(2,0);
+    if (this.exitAxis === 0) {
+      return this.position = {
+        x: this.getPositionRange(this.width),
+        y: this.getPositionBinary(this.height)
+      }
+    } else {
+      return this.position = {
+        x: this.getPositionBinary(this.width),
+        y: this.getPositionRange(this.height)
+      }
+    }
+  }
+
+  getPositionRange(heightOrWidth) {
+    this.minExitPoint = this.homeRadius + 50;
+    this.maxExitPoint = heightOrWidth - this.homeRadius -50;
+    return this.getRandomNumber(this.minExitPoint, this.maxExitPoint)
+  }
+
+  getPositionBinary(heightOrWidth) {
+    this.binaryExit = [-10, heightOrWidth - 20];
+    return this.binaryExit[this.getRandomIntegerNumber(2,0)]
+  }
 
   // getRandomDirection() {
     
   // }
 
-  getRandomNumber(max, min) {
-    return Math.random() * (max - min) + min;
-  };
 
   // getHomePosition() {
   //   console.log(this.possiblePositions[0]);
@@ -79,7 +106,8 @@ class Game {
       canvas: this.canvas,
       ctx: this.ctx,
       homes: this.homes,
-      color: this.getRandomColor()
+      color: this.getRandomColor(),
+      position: this.getRandomPosition()
       // ballToHome: this.ballToHome
     }));
   }
@@ -104,6 +132,7 @@ class Game {
         canvas: this.canvas,
         ctx: this.ctx,
         balls: this.balls,
+        radius: this.homeRadius,
         position: this.possiblePositions[0+i],
         color: this.possibleColors[0+i]
       }));
@@ -145,7 +174,6 @@ class Game {
     this.balls.forEach(function (ball) {
       ball.moveBall();
     });
-    
   }
  
    ////// DRAW STUFF ///////
@@ -216,9 +244,7 @@ class Game {
     if (item1.color === item2.color) {
       console.log(`Sir, the ball went to the CORRECT Home`)
       item1.pauseBall();
-      // Try to modify DOM to write the number of Zygotes
-      // this.zygotesScreen = document.getElementById('zygotes'); 
-      // this.zygotesScreen.innerText = this.zygotes;
+      // return this.addZygotesDOM();
       return this.zygotes += 1;
     } else {
       console.log(`MAYDAY MAYDAY WROOOOOONG BALLLL!`)
@@ -229,6 +255,12 @@ class Game {
       return this.gameOverWait(this.onGameOver);
     }
   }
+
+  // addZygotesDOM () {
+  //   this.zygotes += 1;
+  //   let zygotesScreen = document.getElementById('zygotes'); 
+  //   zygotesScreen.innerText = this.zygotes;
+  // }
   
 
   _update() {

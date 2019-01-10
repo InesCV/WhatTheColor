@@ -8,7 +8,8 @@ class Home {
     // }
     // console.log(`Go to position x:${this.goToPosition.x} y: ${this.goToPosition.y}`)
     this.color = options.color;
-    this.radius = options.height/3.5;
+    this.radius = options.radius;
+    // this.radius = options.height/3.5;
     this.elem = options.canvas;
     this.elemLeft = this.elem.offsetLeft;
     this.elemTop = this.elem.offsetTop;
@@ -27,7 +28,7 @@ class Home {
       if (this.clickedHome(this.a, this.b)) {
         // console.log(`HOME: clicked a FUCKING home in x:${this.x} y:${this.y}`);
         this.balls.forEach(function(ball) {
-          if (ball.speed === 0) {
+          if (ball.moving === false) {
             ball.changeDirection(this.position.x, this.position.y);
           }
         }.bind(this))

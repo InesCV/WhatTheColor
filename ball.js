@@ -1,14 +1,17 @@
 class Ball {
   constructor(options) {
-    this.position = {
-      x: -10,
-      y: (options.height / 2)
-    };
+    this.position = options.position;
+    console.log(this.position)
+    // this.position = {
+    //   x: -10,
+    //   y: (options.height / 2)
+    // };
     // this.speed = {
     //   x: whatever,
     //   y: whatever
     // }
     this.color = options.color;
+    this.moving = true;
     this.radius = 30;
     this.moveBall();
     // this._consoleLogPosition();
@@ -60,11 +63,15 @@ class Ball {
     this.speed = 0;
     this.speedX = 0;
     this.speedY = 0;
+    this.moving = false;
+    console.log(`ball is moving? ${this.moving}`)
     clearInterval(this.ballMovement);
   }
 
   changeDirection(homeX, homeY) {
-    this.speed = 1;
+    // this.speed = 1;
+    this.moving = true;
+    console.log(`ball is moving? ${this.moving}`)
     // Calculate the distance to move
 
     this.ballToHomeX = homeX - this.position.x;
