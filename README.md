@@ -140,9 +140,6 @@ When there are no lifes left
 
 ## Links
 
-### Deploy
-[Play the game](https://inescv.github.io/WhatTheColor/)
-
 ### Trello
 [Trello url link](https://trello.com/b/PXDvTRtn/whatthecolor)
 
@@ -152,7 +149,7 @@ URls for the project: repo and deploy
 
 [Repository Link](https://github.com/InesCV/WhatTheColor)
 
-[Deploy Link](http://github.com)
+[Deploy Link](https://inescv.github.io/WhatTheColor/)
 
 
 ### Slides
