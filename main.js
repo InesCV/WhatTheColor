@@ -9,8 +9,6 @@ document.onload = function() {
     const ctx = canvas.getContext('2d');
     let playScreen = document.getElementById('playScreen');
     playScreen.style = 'display: block';
-    canvas.style = 'display: block';
-
 
     let game = new Game({
       width: canvas.width,
@@ -26,6 +24,17 @@ document.onload = function() {
     });
 
     game.startGame();
+
+    game.onPause = () => {
+      let pauseScreen = document.getElementById('pauseScreen');
+      if (game.gamePaused === true) {
+        console.log('game pause should appear')
+        return pauseScreen.style = 'display: block';
+      } else if (game.gamePaused === false) {
+        console.log('game pause should dissappear')
+        return pauseScreen.style = 'display: none';
+      }
+    }
   
     game.onGameOver = () => {
       let gameOver = document.getElementById('gameover');

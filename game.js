@@ -148,10 +148,12 @@ class Game {
             this.gamePaused = true;
             console.log('pause game')
             this.pauseGame();
+            this.onPause();
           } else {
             this.gamePaused = false;
             console.log('play game')
             this.playGame();
+            this.onPause();
           }
           break;
         case 8: //Delete
