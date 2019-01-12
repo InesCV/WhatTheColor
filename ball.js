@@ -8,12 +8,10 @@ class Ball {
     this.height = options.height;
     this.position = options.position;
     this.marginExit = options.marginExit;
-    console.log(this.position)
     this.direction = {
       x: this.getDirection(this.position.x, this.width),
       y: this.getDirection(this.position.y, this.height)
     }
-    console.log(this.direction);
     this.color = options.color;
     this.moving = true;
     this.radius = options.radius;
@@ -29,7 +27,7 @@ class Ball {
 
       // Check if the ball is clicked
       if (this.clickedBall(this.a, this.b)) {
-        if (this.speed === 0) {
+        if (this.moving === false) {
           this.moveBall();
         } else {
           this.pauseBall();
