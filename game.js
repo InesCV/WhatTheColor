@@ -16,6 +16,7 @@ class Game {
     this.ballRadius = this.height/23;
     this.gamePaused = false;
     this.marginExit = 20;
+    this.carefulDistance = this.height * 0.1;
     this.level = 1;
     this._generateBalls();
     this._generateHomes();
@@ -280,7 +281,6 @@ class Game {
   }
 
   _checkBallLeftCanvas() {
-    this.carefulDistance = 75;
     this.balls.forEach(function (ball, index) {
       if ((ball.direction.x > 0 && ball.position.x > (canvas.width + this.marginExit)) || (ball.direction.x < 0 && ball.position.x < (0 - this.marginExit)) || (ball.direction.y > 0 && ball.position.y > (canvas.height + this.marginExit)) || (ball.direction.y < 0 && ball.position.y < (0 - this.marginExit))) {
         console.log('GAME OVER');
