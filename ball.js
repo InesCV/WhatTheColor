@@ -13,9 +13,11 @@ class Ball {
       y: this.getDirection(this.position.y, this.height)
     }
     this.color = options.color;
+    this.colorOriginal = options.color;
     this.moving = true;
     this.radius = options.radius;
-    this.speed = 20;
+    this.speed = 1;
+    this.carefulColor = 0;
     this.moveBall(this.speed);
 
      // Add event listener for 'Click' events
@@ -102,6 +104,7 @@ class Ball {
 
   changeDirection(homeX, homeY) {
     this.moving = true;
+    this.color = this.colorOriginal;
     // Calculate the new direction
     this.ballToHomeX = homeX - this.position.x;
     this.ballToHomeY = homeY - this.position.y;
@@ -120,6 +123,20 @@ class Ball {
     // Move to that position
     this.moveBall(this.changeDirectionSpeed);
   }
+
+  // dangerColor () {
+  //   setInterval()
+  //   this.dangerColors = ['#FF0000', ball.colorOriginal]
+  //     if (ball.position.y ) {
+  //       ball.carefulColor += 1;
+  //       console.log('white');
+  //       ball.color = this.carefulColors[ball.carefulColor]
+  //     } else if (ball.carefulColor === 1) {
+  //       ball.carefulColor -= 1;
+  //       console.log('red');
+  //       ball.color = this.carefulColors[ball.carefulColor]
+  //     }
+  // }
 
   // _consoleLogPosition() {
   //   setInterval(function() {

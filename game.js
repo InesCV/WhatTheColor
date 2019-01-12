@@ -16,6 +16,7 @@ class Game {
     this.ballRadius = this.height/23;
     this.gamePaused = false;
     this.marginExit = 20;
+    this.level = 1;
     this.generateBalls();
     this.generateHomes();
     this.startBallCreation();
@@ -84,6 +85,8 @@ class Game {
     return this.binaryExit
   }
 
+    ////// RANDOM HOME APPEARANCE ///////
+
   // getHomePosition() {
   //   console.log(this.possiblePositions[0]);
   //   return this.possiblePositions[this.homes.length]; 
@@ -93,7 +96,6 @@ class Game {
   //   if (this.homes.length === 0) {
   //     getRandomColor();
   //   } else {
-
   //   }
   // }
 
@@ -121,6 +123,7 @@ class Game {
       // ballToHome: this.ballToHome
     }));
   }
+
   // IN CASE WE WANT RANDOM HOME POSITIONS AND COLORS
   // generateHomes() {
   //     this.homes.push(new Home({
@@ -187,6 +190,8 @@ class Game {
   }
 
   gameOverWait(item) {
+    window.cancelAnimationFrame(this.intervalGame);
+    this.pauseGame();
     this.waitingSecond = setTimeout(function() {
       // console.log('waiting a second')
       item();
@@ -215,7 +220,7 @@ class Game {
     this.fecundedBalls.forEach(function(ball) {
       this.ctx.beginPath();
       this.ctx.arc(ball.position.x,ball.position.y,ball.radius,0,2*Math.PI);
-      this.ctx.fillStyle = ball.color;
+      this.ctx.fillStyle = ball.colorOriginal;
       this.ctx.fill();
     }.bind(this))
     // this.ctx.stroke();
@@ -258,7 +263,7 @@ class Game {
  }
 
   checkSameColor(item1, item2) {
-    if (item1.color === item2.color) {
+    if (item1.colorOriginal === item2.color) {
       console.log(`Sir, the ball went to the CORRECT Home`)
       item1.fecundedBall();
       this.zygotes += 1;
@@ -269,7 +274,6 @@ class Game {
       item1.fecundedBall();
       item1.color = '#FF0000';
       item2.color = '#FF0000';
-      this.pauseGame();
       return this.gameOverWait(this.onGameOver);
     }
   }
@@ -278,6 +282,23 @@ class Game {
     let zygotesScreen = document.getElementById('zygots'); 
     zygotesScreen.innerHTML = this.zygotes;
     return zygotesScreen;
+  }
+
+  ballLeftCanvas() {
+    this.carefulDistance = 100;
+    this.balls.forEach(function (ball, index) {
+      if ((ball.direction.x > 0 && ball.position.x > (canvas.width + this.marginExit)) || (ball.direction.x < 0 && ball.position.x < (0 - this.marginExit)) || (ball.direction.y > 0 && ball.position.y > (canvas.height + this.marginExit)) || (ball.direction.y < 0 && ball.position.y < (0 - this.marginExit))) {
+        console.log('GAME OVER');
+        ball.color = '#FF0000';
+        this.balls.splice(index, 1);
+        ball.pauseBall();
+        return this.gameOverWait(this.onGameOver)
+      } else if ((ball.direction.x > 0 && ball.position.x > (canvas.width - this.carefulDistance)) || (ball.direction.x < 0 && ball.position.x < (0 + this.carefulDistance)) || (ball.direction.y > 0 && ball.position.y > (canvas.height - this.carefulDistance)) || (ball.direction.y < 0 && ball.position.y < (0 + this.carefulDistance))) {
+        console.log('CAREFUL!!!!!!!!');
+        ball.color = '#FF0000';
+        // ball.dangerColor()
+      }
+    }.bind(this))
   }
   
 
@@ -288,6 +309,7 @@ class Game {
     this._drawFecundedBalls();
     this._drawHomes();
     this._checkBallHomecollision();
+    this.ballLeftCanvas();
     this._assignControlsToKeys ()
     // this._sayLocation();
     this.intervalGame = window.requestAnimationFrame(this._update.bind(this));
