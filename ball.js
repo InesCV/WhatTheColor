@@ -15,7 +15,8 @@ class Ball {
     this.color = options.color;
     this.moving = true;
     this.radius = options.radius;
-    this.moveBall();
+    this.speed = 20;
+    this.moveBall(this.speed);
 
      // Add event listener for 'Click' events
     this.elem.addEventListener('click', function (event) {
@@ -28,7 +29,7 @@ class Ball {
       // Check if the ball is clicked
       if (this.clickedBall(this.a, this.b)) {
         if (this.moving === false) {
-          this.moveBall();
+          this.moveBall(this.speed);
         } else {
           this.pauseBall();
         }
@@ -77,12 +78,12 @@ class Ball {
     }
   }
 
-  moveBall() {
+  moveBall(speed) {
     this.moving = true;
     this.ballMovement = setInterval(function () {
       this.position.x += (this.direction.x);
       this.position.y += (this.direction.y)
-    }.bind(this), 20);
+    }.bind(this), speed);
 
   }
 
@@ -100,7 +101,7 @@ class Ball {
   }
 
   changeDirection(homeX, homeY) {
-    this.moving = true;    
+    this.moving = true;
     // Calculate the new direction
     this.ballToHomeX = homeX - this.position.x;
     this.ballToHomeY = homeY - this.position.y;
@@ -114,16 +115,15 @@ class Ball {
       y: homeY - this.position.y,
       h: Math.sqrt(Math.pow(this.x,2) + Math.pow(this.y,2))
     };
+    // Make the ball go home faster
+    this.changeDirectionSpeed = this.speed / 3;
     // Move to that position
-    setInterval(function () {
-      this.position.x += (this.direction.x);
-      this.position.y += (this.direction.y);
-    }.bind(this))
+    this.moveBall(this.changeDirectionSpeed);
   }
 
-  _consoleLogPosition() {
-    setInterval(function() {
-      console.log(`The ball is in x:${this.position.x} y:${this.position.y}`);
-    }.bind(this), 5000);
-  }
+  // _consoleLogPosition() {
+  //   setInterval(function() {
+  //     console.log(`The ball is in x:${this.position.x} y:${this.position.y}`);
+  //   }.bind(this), 5000);
+  // }
 }

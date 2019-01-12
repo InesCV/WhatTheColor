@@ -84,7 +84,6 @@ class Game {
     return this.binaryExit
   }
 
-
   // getHomePosition() {
   //   console.log(this.possiblePositions[0]);
   //   return this.possiblePositions[this.homes.length]; 
@@ -97,13 +96,6 @@ class Game {
 
   //   }
   // }
-
-  gameOverWait(item) {
-    this.waitingSecond = setTimeout(function() {
-      // console.log('waiting a second')
-      item();
-    }, 500)
-  }
 
   ////// GENERATE BALLS & HOMES ///////
 
@@ -190,8 +182,15 @@ class Game {
   playGame() {
     this.startBallCreation();
     this.balls.forEach(function (ball) {
-      ball.moveBall();
+      ball.moveBall(ball.speed);
     });
+  }
+
+  gameOverWait(item) {
+    this.waitingSecond = setTimeout(function() {
+      // console.log('waiting a second')
+      item();
+    }, 500)
   }
  
    ////// DRAW STUFF ///////
