@@ -16,7 +16,7 @@ class Ball {
     this.colorOriginal = options.color;
     this.moving = true;
     this.radius = options.radius;
-    this.speed = 1;
+    this.speed = 8;
     this.carefulColor = 0;
     this.moveBall(this.speed);
 

@@ -17,9 +17,9 @@ class Game {
     this.gamePaused = false;
     this.marginExit = 20;
     this.level = 1;
-    this.generateBalls();
-    this.generateHomes();
-    this.startBallCreation();
+    this._generateBalls();
+    this._generateHomes();
+    this._startBallCreation();
   }
 
   startGame() {
@@ -32,11 +32,11 @@ class Game {
     // this.pausedBalls = [];
     this.homes = [];
     this.zygotes = 0;
-    this.addZygotesDOM();
+    this._addZygotesDOM();
     clearInterval(this.intervalCreationBall);
-    this.generateBalls();
-    this.generateHomes();
-    this.startBallCreation();
+    this._generateBalls();
+    this._generateHomes();
+    this._startBallCreation();
     this._update();
   }
 
@@ -85,31 +85,16 @@ class Game {
     return this.binaryExit
   }
 
-    ////// RANDOM HOME APPEARANCE ///////
-
-  // getHomePosition() {
-  //   console.log(this.possiblePositions[0]);
-  //   return this.possiblePositions[this.homes.length]; 
-  // }
-
-  // getColorHome() {
-  //   if (this.homes.length === 0) {
-  //     getRandomColor();
-  //   } else {
-  //   }
-  // }
-
   ////// GENERATE BALLS & HOMES ///////
 
-  startBallCreation() {
+  _startBallCreation() {
     this.intervalCreationBall = setInterval(function() {
-      this.generateBalls();
-    }.bind(this), 3000);
-
+      this._generateBalls();
+    }.bind(this), 2000);
     // clearInterval(this.intervalCreationBall)
   }
 
-  generateBalls() {
+  _generateBalls() {
     this.balls.push(new Ball({
       width: this.width, 
       height: this.height, 
@@ -125,7 +110,7 @@ class Game {
   }
 
   // IN CASE WE WANT RANDOM HOME POSITIONS AND COLORS
-  // generateHomes() {
+  // _generateHomes() {
   //     this.homes.push(new Home({
   //       width: this.width, 
   //       height: this.height, 
@@ -137,7 +122,7 @@ class Game {
   //     }));
   // }
 
-  generateHomes() {
+  _generateHomes() {
     for (let i = 0; i < 3; i++) {
       this.homes.push(new Home({
         width: this.width, 
@@ -183,13 +168,13 @@ class Game {
   }
 
   playGame() {
-    this.startBallCreation();
+    this._startBallCreation();
     this.balls.forEach(function (ball) {
       ball.moveBall(ball.speed);
     });
   }
 
-  gameOverWait(item) {
+  _gameOverWait(item) {
     window.cancelAnimationFrame(this.intervalGame);
     this.pauseGame();
     this.waitingSecond = setTimeout(function() {
@@ -252,7 +237,7 @@ class Game {
        // console.log(`home radius is ${home.radius} and ball radius ${ball.radius}`);
        if (home.radius + ball.radius >= this.h) {
          console.log(`Sir, a ball went to a home`)
-         this.checkSameColor(ball, home);
+         this._checkSameColor(ball, home);
          this.fecundedBalls.push(this.balls[index]);
          console.log(`You got ${this.zygotes} zygotes`)
          this.balls.splice(index, 1)
@@ -262,37 +247,37 @@ class Game {
    }.bind(this))
  }
 
-  checkSameColor(item1, item2) {
+  _checkSameColor(item1, item2) {
     if (item1.colorOriginal === item2.color) {
       console.log(`Sir, the ball went to the CORRECT Home`)
       item1.fecundedBall();
       this.zygotes += 1;
-      return this.addZygotesDOM();
+      return this._addZygotesDOM();
       // return this.zygotes += 1;
     } else {
       console.log(`MAYDAY MAYDAY WROOOOOONG BALLLL!`)
       item1.fecundedBall();
       item1.color = '#FF0000';
       item2.color = '#FF0000';
-      return this.gameOverWait(this.onGameOver);
+      return this._gameOverWait(this.onGameOver);
     }
   }
 
-  addZygotesDOM () {
+  _addZygotesDOM () {
     let zygotesScreen = document.getElementById('zygots'); 
     zygotesScreen.innerHTML = this.zygotes;
     return zygotesScreen;
   }
 
-  ballLeftCanvas() {
-    this.carefulDistance = 100;
+  _checkBallLeftCanvas() {
+    this.carefulDistance = 75;
     this.balls.forEach(function (ball, index) {
       if ((ball.direction.x > 0 && ball.position.x > (canvas.width + this.marginExit)) || (ball.direction.x < 0 && ball.position.x < (0 - this.marginExit)) || (ball.direction.y > 0 && ball.position.y > (canvas.height + this.marginExit)) || (ball.direction.y < 0 && ball.position.y < (0 - this.marginExit))) {
         console.log('GAME OVER');
         ball.color = '#FF0000';
         this.balls.splice(index, 1);
         ball.pauseBall();
-        return this.gameOverWait(this.onGameOver)
+        return this._gameOverWait(this.onGameOver)
       } else if ((ball.direction.x > 0 && ball.position.x > (canvas.width - this.carefulDistance)) || (ball.direction.x < 0 && ball.position.x < (0 + this.carefulDistance)) || (ball.direction.y > 0 && ball.position.y > (canvas.height - this.carefulDistance)) || (ball.direction.y < 0 && ball.position.y < (0 + this.carefulDistance))) {
         console.log('CAREFUL!!!!!!!!');
         ball.color = '#FF0000';
@@ -301,6 +286,7 @@ class Game {
     }.bind(this))
   }
   
+   ////// UPDATE GAME REQUEST ///////
 
   _update() {
     this._clear();
@@ -309,7 +295,7 @@ class Game {
     this._drawFecundedBalls();
     this._drawHomes();
     this._checkBallHomecollision();
-    this.ballLeftCanvas();
+    this._checkBallLeftCanvas();
     this._assignControlsToKeys ()
     // this._sayLocation();
     this.intervalGame = window.requestAnimationFrame(this._update.bind(this));
