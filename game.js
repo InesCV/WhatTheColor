@@ -221,6 +221,16 @@ class Game {
     // this.ctx.stroke();
   }
 
+  // _drawTail() {
+  //   this.balls.forEach(function(ball) {
+  //     this.ctx.beginPath();
+  //     this.ctx.arc(ball.position.x + ball.radius,ball.position.y + ball.radius,ball.radius,0.5,Math.PI);
+  //     this.ctx.fillStyle = ball.color;
+  //     ctx.stroke();
+  //     this.ctx.fill();
+  //   }.bind(this))
+  // }
+
   _clear() {
     // console.log(`the canvas width is ${this.width} and height is ${height}`)
     this.ctx.clearRect(0, 0, this.width, this.height);
@@ -292,6 +302,7 @@ class Game {
     this._clear();
     this._drawBoard();
     this._drawBalls();
+    // this._drawTail();
     this._drawFecundedBalls();
     this._drawHomes();
     this._checkBallHomecollision();
