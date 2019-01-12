@@ -6,6 +6,7 @@ class Game {
     this.canvas = options.canvas;
     this.balls = [];
     this.fecundedBalls = [];
+    // this.pausedBalls = []
     this.homes = [];
     this.zygotes = 0;
     this.possibleColors = options.possibleColors;
@@ -27,6 +28,7 @@ class Game {
   restartGame () {
     this.balls = [];
     this.fecundedBalls = [];
+    // this.pausedBalls = [];
     this.homes = [];
     this.zygotes = 0;
     this.addZygotesDOM();
@@ -79,7 +81,6 @@ class Game {
   getPositionBinary(heightOrWidth) {
     this.possibleBinaryExit = [- this.marginExit, heightOrWidth + this.marginExit];
     this.binaryExit = this.possibleBinaryExit[this.getRandomIntegerNumber(2,0)];
-    console.log(this.binaryExit)
     return this.binaryExit
   }
 
@@ -99,7 +100,7 @@ class Game {
 
   gameOverWait(item) {
     this.waitingSecond = setTimeout(function() {
-      console.log('waiting a second')
+      // console.log('waiting a second')
       item();
     }, 500)
   }
@@ -260,13 +261,13 @@ class Game {
   checkSameColor(item1, item2) {
     if (item1.color === item2.color) {
       console.log(`Sir, the ball went to the CORRECT Home`)
-      item1.pauseBall();
+      item1.fecundedBall();
       this.zygotes += 1;
       return this.addZygotesDOM();
       // return this.zygotes += 1;
     } else {
       console.log(`MAYDAY MAYDAY WROOOOOONG BALLLL!`)
-      item1.pauseBall();
+      item1.fecundedBall();
       item1.color = '#FF0000';
       item2.color = '#FF0000';
       this.pauseGame();

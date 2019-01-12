@@ -78,40 +78,37 @@ class Ball {
   }
 
   moveBall() {
-    // this.speed = 1;
-    // PONER EN UNA VARIABLE QUE SE PUEDA LLAMAR Y LIMPIAR
-
+    this.moving = true;
     this.ballMovement = setInterval(function () {
       this.position.x += (this.direction.x);
       this.position.y += (this.direction.y)
     }.bind(this), 20);
-    // if (this.direction === 'right') {
-    //   setInterval(this.position.x += this.speed, 10);
-    // }
+
   }
 
   pauseBall() {
-    this.speed = 0;
+    this.moving = false;
+    clearInterval(this.ballMovement);
+  }
+
+  fecundedBall() {
+    this.pauseBall();
     this.direction.x = 0;
     this.direction.y = 0;
-    this.moving = false;
-    console.log(`ball is moving? ${this.moving}`)
+    // console.log(`ball is moving? ${this.moving}`)
     clearInterval(this.ballMovement);
   }
 
   changeDirection(homeX, homeY) {
-    // this.speed = 1;
-    this.moving = true;
-    console.log(`ball is moving? ${this.moving}`)
-    // Calculate the distance to move
-
+    this.moving = true;    
+    // Calculate the new direction
     this.ballToHomeX = homeX - this.position.x;
     this.ballToHomeY = homeY - this.position.y;
     this.ballToHomeH = Math.sqrt(Math.pow(this.ballToHomeX,2) + Math.pow(this.ballToHomeY,2));
     // console.log(`Sir, the ball should be moving to direction: ${this.ballToHomeX} y:${this.ballToHomeY} route should be equal to hipotenusa:${this.ballToHomeH}`);
     this.direction.x = this.ballToHomeX/this.ballToHomeH;
     this.direction.y = this.ballToHomeY/this.ballToHomeH;
-    console.log(`direction.x= ${this.direction.x} direction.y= ${this.direction.y}`)
+    // console.log(`direction.x= ${this.direction.x} direction.y= ${this.direction.y}`)
     this.ballToHome = {
       x: homeX - this.position.x,
       y: homeY - this.position.y,
@@ -122,25 +119,6 @@ class Ball {
       this.position.x += (this.direction.x);
       this.position.y += (this.direction.y);
     }.bind(this))
-
-
-    // this.ballDestination = {
-    //   goToX: homeX - this.position.x,
-    //   goToY: homeY - this.position.y,
-    //   goToPath: Math.sqrt(Math.pow(this.ballDestination.goToX,2) + Math.pow(this.ballDestination.goToY,2))
-    // }
-    // console.log(`Sir, the ball should be moving to direction: x:${this.ballDestination.goToX} y:${this.ballDestination.goToY} route should be equal to hipotenusa:${this.ballDestination.goToPath}`);
-    // this.speedToDestination = {
-    //   speedX: this.ballDestination.goToX/this.ballDestination.goToPath,
-    //   speedY: this.ballDestination.goToY/this.ballDestination.goToPath
-    // }
-    // console.log(`speedX= ${this.speedToDestination.speedX} speedY= ${this.speedToDestination.speedY}`);
-    // console.log(this.position.x += (this.ballDestination.goToX/this.ballDestination.goToPath));
-    // setInterval(function () {
-    //   this.position.x += this.speedToDestination.speedX;
-    //   this.position.y += this.speedToDestination.speedY;
-    // }.bind(this))
-
   }
 
   _consoleLogPosition() {
@@ -148,13 +126,4 @@ class Ball {
       console.log(`The ball is in x:${this.position.x} y:${this.position.y}`);
     }.bind(this), 5000);
   }
-
-  // _moveForward () {
-  //   this.position.x = this.position.x +1;
-  //   console.log(this.position.x)
-  // }
-
-  // _sayLocation() {
-
-  // }
 }
