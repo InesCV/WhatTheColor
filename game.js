@@ -148,7 +148,7 @@ class Game {
             this.gamePaused = true;
             console.log('pause game')
             this.pauseGame();
-            this.onPause();
+
           } else {
             this.gamePaused = false;
             console.log('play game')
@@ -234,6 +234,13 @@ class Game {
   //   }.bind(this))
   // }
 
+  _drawMyName() {
+    this.ctx.font = "1em Quicksand";
+    this.ctx.fillStyle = "#7800FF"
+    this.ctx.textAlign = "center";
+    this.ctx.fillText("IronHack Game made by © Ines Castelltort", canvas.width/2, canvas.height - 10);
+  }
+
   _clear() {
     // console.log(`the canvas width is ${this.width} and height is ${height}`)
     this.ctx.clearRect(0, 0, this.width, this.height);
@@ -307,6 +314,7 @@ class Game {
     // this._drawTail();
     this._drawFecundedBalls();
     this._drawHomes();
+    this._drawMyName();
     this._checkBallHomecollision();
     this._checkBallLeftCanvas();
     this._assignControlsToKeys ()
