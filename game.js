@@ -6,7 +6,6 @@ class Game {
     this.canvas = options.canvas;
     this.balls = [];
     this.fecundedBalls = [];
-    // this.pausedBalls = []
     this.homes = [];
     this.zygotes = 0;
     this.possibleColors = options.possibleColors;
@@ -30,7 +29,6 @@ class Game {
   restartGame () {
     this.balls = [];
     this.fecundedBalls = [];
-    // this.pausedBalls = [];
     this.homes = [];
     this.zygotes = 0;
     this._addZygotesDOM();
@@ -148,7 +146,7 @@ class Game {
             this.gamePaused = true;
             console.log('pause game')
             this.pauseGame();
-
+            this.onPause();
           } else {
             this.gamePaused = false;
             console.log('play game')

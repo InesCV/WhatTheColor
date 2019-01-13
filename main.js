@@ -29,7 +29,7 @@ document.onload = function() {
       let pauseScreen = document.getElementById('pauseScreen');
       if (game.gamePaused === true) {
         console.log('game pause should appear')
-        return pauseScreen.style = 'display: block';
+        return pauseScreen.style = 'display: flex';
       } else if (game.gamePaused === false) {
         console.log('game pause should dissappear')
         return pauseScreen.style = 'display: none';
