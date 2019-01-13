@@ -206,7 +206,7 @@ class Game {
     this.fecundedBalls.forEach(function(ball) {
       this.ctx.beginPath();
       this.ctx.arc(ball.position.x,ball.position.y,ball.radius,0,2*Math.PI);
-      this.ctx.fillStyle = ball.colorOriginal;
+      this.ctx.fillStyle = ball.color;
       this.ctx.fill();
     }.bind(this))
     // this.ctx.stroke();
@@ -268,13 +268,13 @@ class Game {
   _checkSameColor(item1, item2) {
     if (item1.colorOriginal === item2.color) {
       console.log(`Sir, the ball went to the CORRECT Home`)
-      item1.fecundedBall();
+      item1.fecundedBall(item1.colorOriginal);
       this.zygotes += 1;
       return this._addZygotesDOM();
       // return this.zygotes += 1;
     } else {
       console.log(`MAYDAY MAYDAY WROOOOOONG BALLLL!`)
-      item1.fecundedBall();
+      item1.fecundedBall('#FF0000');
       item1.color = '#FF0000';
       item2.color = '#FF0000';
       return this._gameOverWait(this.onGameOver);

@@ -94,10 +94,11 @@ class Ball {
     clearInterval(this.ballMovement);
   }
 
-  fecundedBall() {
+  fecundedBall(color) {
     this.pauseBall();
     this.direction.x = 0;
     this.direction.y = 0;
+    this.color = color
     // console.log(`ball is moving? ${this.moving}`)
     clearInterval(this.ballMovement);
   }
