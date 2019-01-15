@@ -295,13 +295,13 @@ class Game {
 
   _checkBallLeftCanvas() {
     this.balls.forEach(function (ball, index) {
-      if ((ball.direction.x > 0 && ball.position.x > (canvas.width + this.marginExit)) || (ball.direction.x < 0 && ball.position.x < (0 - this.marginExit)) || (ball.direction.y > 0 && ball.position.y > (canvas.height + this.marginExit)) || (ball.direction.y < 0 && ball.position.y < (0 - this.marginExit))) {
+      if ((ball.direction.x === 1 && ball.position.x > (canvas.width + this.marginExit)) || (ball.direction.x === -1 && ball.position.x < (0 - this.marginExit)) || (ball.direction.y === 1 && ball.position.y > (canvas.height + this.marginExit)) || (ball.direction.y === -1 && ball.position.y < (0 - this.marginExit))) {
         console.log('GAME OVER');
         ball.color = '#FF0000';
         this.balls.splice(index, 1);
         ball.pauseBall();
         return this._gameOverWait(this.onGameOver)
-      } else if ((ball.direction.x > 0 && ball.position.x > (canvas.width - this.carefulDistance)) || (ball.direction.x < 0 && ball.position.x < (0 + this.carefulDistance)) || (ball.direction.y > 0 && ball.position.y > (canvas.height - this.carefulDistance)) || (ball.direction.y < 0 && ball.position.y < (0 + this.carefulDistance))) {
+      } else if ((ball.direction.x === 1 && ball.position.x > (canvas.width - this.carefulDistance)) || (ball.direction.x === -1 && ball.position.x < (0 + this.carefulDistance)) || (ball.direction.y === 1 && ball.position.y > (canvas.height - this.carefulDistance)) || (ball.direction.y === -1 && ball.position.y < (0 + this.carefulDistance))) {
         console.log('CAREFUL!!!!!!!!');
         ball.color = '#FF0000';
         // ball.dangerColor()
