@@ -33,6 +33,7 @@ class Game {
     this.fecundedBalls = [];
     this.homes = [];
     this.zygotes = 0;
+    this.ballCreationTimer = 2000;
     this._addZygotesDOM();
     clearInterval(this.intervalIDCreationBall);
     this._generateBalls();
