@@ -16,7 +16,9 @@ class Game {
     this.gamePaused = false;
     this.marginExit = 20;
     this.carefulDistance = this.height * 0.1;
-    this.level = 1;
+    this.ballCreationTimer = 2000;
+    // this.ballCreationTimer = this._levelUp();
+    // this.level = 1;
     this._generateBalls();
     this._generateHomes();
     this._startBallCreation();
@@ -32,7 +34,7 @@ class Game {
     this.homes = [];
     this.zygotes = 0;
     this._addZygotesDOM();
-    clearInterval(this.intervalCreationBall);
+    clearInterval(this.intervalIDCreationBall);
     this._generateBalls();
     this._generateHomes();
     this._startBallCreation();
@@ -87,10 +89,10 @@ class Game {
   ////// GENERATE BALLS & HOMES ///////
 
   _startBallCreation() {
-    this.intervalCreationBall = setInterval(function() {
+    this.intervalIDCreationBall = setInterval(function() {
       this._generateBalls();
-    }.bind(this), 2000);
-    // clearInterval(this.intervalCreationBall)
+    }.bind(this), this.ballCreationTimer);
+    // clearInterval(this.intervalIDCreationBall)
   }
 
   _generateBalls() {
@@ -162,7 +164,7 @@ class Game {
   }
 
   pauseGame() {
-    clearInterval(this.intervalCreationBall);
+    clearInterval(this.intervalIDCreationBall);
     this.balls.forEach(function (ball) {
       ball.pauseBall();
     });
@@ -258,6 +260,7 @@ class Game {
          this._checkSameColor(ball, home);
          this.fecundedBalls.push(this.balls[index]);
          console.log(`You got ${this.zygotes} zygotes`)
+         console.log(`You got ${this.fecundedBalls.length} zygotes`)
          this.balls.splice(index, 1)
          return true
        }
@@ -270,6 +273,9 @@ class Game {
       console.log(`Sir, the ball went to the CORRECT Home`)
       item1.fecundedBall(item1.colorOriginal);
       this.zygotes += 1;
+      if (this.zygotes <= 20) {
+        this._levelUp();
+      }
       return this._addZygotesDOM();
       // return this.zygotes += 1;
     } else {
@@ -302,6 +308,15 @@ class Game {
       }
     }.bind(this))
   }
+
+   ////// ADDED DIFFICULTY ///////
+
+   _levelUp() {
+    clearInterval(this.intervalIDCreationBall);
+    this.ballCreationTimer = this.ballCreationTimer * 0.95;
+    this._startBallCreation();
+    console.log(this.ballCreationTimer);
+   }
   
    ////// UPDATE GAME REQUEST ///////
 
@@ -315,7 +330,7 @@ class Game {
     this._drawMyName();
     this._checkBallHomecollision();
     this._checkBallLeftCanvas();
-    this._assignControlsToKeys ()
+    this._assignControlsToKeys ();
     // this._sayLocation();
     this.intervalGame = window.requestAnimationFrame(this._update.bind(this));
   }
