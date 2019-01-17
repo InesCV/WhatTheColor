@@ -15,7 +15,7 @@ class Game {
     this.ballRadius = this.height/23;
     this.gamePaused = false;
     this.marginExit = 20;
-    this.carefulDistance = this.height * 0.1;
+    this.carefulDistance = this.height * 0.2;
     this.ballCreationTimer = 2000;
     // this.ballCreationTimer = this._levelUp();
     // this.level = 1;
@@ -204,6 +204,7 @@ class Game {
     }.bind(this))
     // this.ctx.stroke();
   }
+
 
   _drawFecundedBalls() {
     this.fecundedBalls.forEach(function(ball) {
