@@ -6,12 +6,20 @@ class Ball {
     this.ctx = options.ctx;
     this.width = options.width;
     this.height = options.height;
-    this.position = options.position;
+    // this.position = options.position;
+    this.position = {
+      x: 200,
+      y: 500
+    }
     this.marginExit = options.marginExit;
     this.direction = {
-      x: this.getDirection(this.position.x, this.width),
-      y: this.getDirection(this.position.y, this.height)
+      x: 1,
+      y: 0
     }
+    // this.direction = {
+    //   x: this.getDirection(this.position.x, this.width),
+    //   y: this.getDirection(this.position.y, this.height)
+    // }
     this.color = options.color;
     this.colorOriginal = options.color;
     this.moving = true;
@@ -19,6 +27,7 @@ class Ball {
     this.speed = 8;
     this.carefulColor = 0;
     this.moveBall(this.speed);
+    this.createTail();
 
      // Add event listener for 'Click' events
     this.elem.addEventListener('click', function (event) {
@@ -80,6 +89,7 @@ class Ball {
     }
   }
 
+
   moveBall(speed) {
     this.moving = true;
     this.ballMovement = setInterval(function () {
@@ -125,18 +135,46 @@ class Ball {
     this.moveBall(this.changeDirectionSpeed);
   }
 
-  // dangerColor () {
-  //   setInterval()
-  //   this.dangerColors = ['#FF0000', ball.colorOriginal]
-  //     if (ball.position.y ) {
-  //       ball.carefulColor += 1;
-  //       console.log('white');
-  //       ball.color = this.carefulColors[ball.carefulColor]
-  //     } else if (ball.carefulColor === 1) {
-  //       ball.carefulColor -= 1;
-  //       console.log('red');
-  //       ball.color = this.carefulColors[ball.carefulColor]
-  //     }
+  createTail() {
+    this.newTail = new Tail({
+      width: this.width, 
+      height: this.height, 
+      canvas: this.canvas,
+      ctx: this.ctx,
+      radius: this.ballRadius,
+      color: this.color,
+      ballX: this.position.x, 
+      ballY: this.position.y,
+      radius: this.radius
+    })
+  }
+
+  // _createTail() {
+  //   this.tail = new Image();
+  //   this.tail.src = 'images/blueSprite.png';
+  //   this.spriteWidth = 2100;
+  //   this.spriteHeight = 5040;
+  //   this.rows = 12;
+  //   this.cols = 5;
+  //   this.widthFrame = this.spriteWidth/this.cols;
+  //   this.heightFrame = this.spriteHeight/this.rows;
+  //   this.currentFrame = 0;
+  //   this.frameCount = 5;
+  //   this.spriteX = 0;
+  //   this.spriteY = 0;
+  //   this.canvasX = this.position.x - 210;
+  //   this.canvasY = this.position.y - 210;
+  // }
+
+  // _updateFrame(){
+  //   this.ctx.clearRect(this.spriteX, this.spriteY, this.widthFrame, this.heightFrame);
+  //   this.currentFrame = ++this.currentFrame % this.frameCount;
+  //   this.canvasX = this.currentFrame * this.widthFrame;
+  // }
+
+  // _drawTail() {
+  //   this._updateFrame();
+  //   this.ctx.drawImage(this.tail, this.canvasX, this.canvasY, this.widthFrame, this.heightFrame, this.spriteX, this.spriteY, this.widthFrame, this.heightFrame);
   // }
 
   // _consoleLogPosition() {

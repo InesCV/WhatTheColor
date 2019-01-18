@@ -106,7 +106,7 @@ class Game {
       radius: this.ballRadius,
       marginExit: this.marginExit,
       color: this.getRandomColor(),
-      position: this.getRandomPosition()
+      // position: this.getRandomPosition()
       // ballToHome: this.ballToHome
     }));
   }
@@ -201,10 +201,17 @@ class Game {
       this.ctx.arc(ball.position.x,ball.position.y,ball.radius,0,2*Math.PI);
       this.ctx.fillStyle = ball.color;
       this.ctx.fill();
+      // ball.newTail.drawTail();
     }.bind(this))
     // this.ctx.stroke();
   }
 
+  drawTail() {
+    this.balls.forEach(function(ball) {
+      ball.newTail.drawTail();
+    }.bind(this))
+    // this.ctx.stroke();
+  }
 
   _drawFecundedBalls() {
     this.fecundedBalls.forEach(function(ball) {
@@ -326,7 +333,7 @@ class Game {
     this._clear();
     this._drawBoard();
     this._drawBalls();
-    // this._drawTail();
+    this.drawTail();
     this._drawFecundedBalls();
     this._drawHomes();
     this._drawMyName();
