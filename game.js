@@ -16,9 +16,7 @@ class Game {
     this.gamePaused = false;
     this.marginExit = 20;
     this.carefulDistance = this.height * 0.2;
-    this.ballCreationTimer = 2000;
-    // this.ballCreationTimer = this._levelUp();
-    // this.level = 1;
+    this.ballCreationTimer = 3000;
     this._generateBalls();
     this._generateHomes();
     this._startBallCreation();
@@ -93,7 +91,6 @@ class Game {
     this.intervalIDCreationBall = setInterval(function() {
       this._generateBalls();
     }.bind(this), this.ballCreationTimer);
-    // clearInterval(this.intervalIDCreationBall)
   }
 
   _generateBalls() {
@@ -192,7 +189,6 @@ class Game {
   
   _drawBoard() {
     this.ctx.fillStyle = "#FBFFF8";
-    // this.ctx.fillRect(0,0, this.ball.position.x, this.ball.position.y);
   }
 
   _drawBalls() {
@@ -251,7 +247,6 @@ class Game {
   }
 
   _clear() {
-    // console.log(`the canvas width is ${this.width} and height is ${height}`)
     this.ctx.clearRect(0, 0, this.width, this.height);
   }
 
@@ -265,11 +260,8 @@ class Game {
        this.h = Math.sqrt(Math.pow(this.a,2) + Math.pow(this.b,2));
        // console.log(`home radius is ${home.radius} and ball radius ${ball.radius}`);
        if (home.radius + ball.radius >= this.h) {
-         console.log(`Sir, a ball went to a home`)
          this._checkSameColor(ball, home);
          this.fecundedBalls.push(this.balls[index]);
-         console.log(`You got ${this.zygotes} zygotes`)
-         console.log(`You got ${this.fecundedBalls.length} zygotes`)
          this.balls.splice(index, 1)
          return true
        }
@@ -279,7 +271,6 @@ class Game {
 
   _checkSameColor(item1, item2) {
     if (item1.colorOriginal === item2.color) {
-      console.log(`Sir, the ball went to the CORRECT Home`)
       item1.fecundedBall(item1.colorOriginal);
       this.zygotes += 1;
       if (this.zygotes <= 20) {
@@ -288,7 +279,6 @@ class Game {
       return this._addZygotesDOM();
       // return this.zygotes += 1;
     } else {
-      console.log(`MAYDAY MAYDAY WROOOOOONG BALLLL!`)
       item1.fecundedBall('#FF0000');
       item1.color = '#FF0000';
       item2.color = '#FF0000';
@@ -313,7 +303,6 @@ class Game {
       } else if ((ball.direction.x === 1 && ball.position.x > (canvas.width - this.carefulDistance)) || (ball.direction.x === -1 && ball.position.x < (0 + this.carefulDistance)) || (ball.direction.y === 1 && ball.position.y > (canvas.height - this.carefulDistance)) || (ball.direction.y === -1 && ball.position.y < (0 + this.carefulDistance))) {
         console.log('CAREFUL!!!!!!!!');
         ball.color = '#FF0000';
-        // ball.dangerColor()
       }
     }.bind(this))
   }
@@ -324,7 +313,7 @@ class Game {
     clearInterval(this.intervalIDCreationBall);
     this.ballCreationTimer = this.ballCreationTimer * 0.95;
     this._startBallCreation();
-    console.log(this.ballCreationTimer);
+    // console.log(this.ballCreationTimer);
    }
   
    ////// UPDATE GAME REQUEST ///////

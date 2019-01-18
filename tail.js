@@ -26,9 +26,9 @@ class Tail {
     // this._drawInterval();
   }
 
-  // checkBallPosition() {
-
-  // }
+  checkBallPosition() {
+    this.ballX = this.Ball.position.x;
+  }
 
   _updateFrame(){
     // this.ctx.clearRect(this.spriteX, this.spriteY, this.widthFrame, this.heightFrame);
@@ -37,7 +37,7 @@ class Tail {
   }
 
   drawTail() {
-    // this._updateFrame();
+    this._updateFrame();
     this.ctx.drawImage(this.tail, this.canvasX, this.canvasY,  this.canvasFrameSize, this.canvasFrameSize, this.spriteX, this.spriteY, this.widthFrame, this.heightFrame);
     // console.log()
   }
