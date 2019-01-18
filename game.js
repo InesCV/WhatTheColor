@@ -1,25 +1,25 @@
 class Game {
   constructor(options){ 
-    this.width = options.width;
-    this.height = options.height;
-    this.ctx = options.ctx;
-    this.canvas = options.canvas;
-    this.balls = [];
-    this.fecundedBalls = [];
-    this.homes = [];
-    this.zygotes = 0;
-    this.possibleColors = options.possibleColors;
-    this.wrongColor = '#FF0000';
-    this.possiblePositions = options.possiblePositions;
-    this.homeRadius = this.height/3.5;
-    this.ballRadius = this.height/23;
-    this.gamePaused = false;
-    this.marginExit = 20;
-    this.carefulDistance = this.height * 0.2;
-    this.ballCreationTimer = 3000;
-    this._generateBalls();
+    this.width = options.width; // Width of the canvas according to the screen
+    this.height = options.height; // Height of the canvas according to the screen
+    this.ctx = options.ctx; // Inheritance of the context
+    this.canvas = options.canvas; // Inheritance of the canvas itself
+    this.balls = []; // Arrays of moving balls in the screen
+    this.fecundedBalls = []; // Array of balls that already reached a home
+    this.homes = []; // Array of homes
+    this.zygotes = 0; // Number of balls that collisioned with a home
+    this.possibleColors = options.possibleColors; // Possible ball and home colors
+    this.wrongColor = '#FF0000'; // Color used to warn you are about or already lost the game
+    this.possiblePositions = options.possiblePositions; // Possible home positions
+    this.homeRadius = this.height/3.5; // Radius of the home
+    this.ballRadius = this.height/23; // Radius of the ball
+    this.gamePaused = false; // Boolean to know if the game is paused
+    this.marginExit = 20; // Margin outside of the canvas where the ball will appear
+    this.carefulDistance = this.height * 0.2; // Warning distance when ball is about to leave the canvas
+    this.ballCreationTimer = 3000; // Interval time for the creation of balls
+    this._generateBalls(); 
     this._generateHomes();
-    this._startBallCreation();
+    // this._startBallCreation();
   }
 
   startGame() {
@@ -202,11 +202,11 @@ class Game {
     // this.ctx.stroke();
   }
 
-  drawTail() {
+  callDrawTail() {
     this.balls.forEach(function(ball) {
-      ball.newTail.drawTail();
+      ball.newTail.updateFrame();
+      ball.newTail.drawTail(ball.position.x, ball.position.y);
     }.bind(this))
-    // this.ctx.stroke();
   }
 
   _drawFecundedBalls() {
@@ -322,7 +322,7 @@ class Game {
     this._clear();
     this._drawBoard();
     this._drawBalls();
-    this.drawTail();
+    this.callDrawTail();
     this._drawFecundedBalls();
     this._drawHomes();
     this._drawMyName();
