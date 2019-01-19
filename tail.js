@@ -4,8 +4,9 @@ class Tail {
     this.radius = options.radius;
     this.width = options.width;
     this.height = options.height;
+    this.direction = options.direction;
     this.tail = new Image();
-    this.tail.src = 'images/blueSprite.png';
+    this.tail.src = 'images/svgTryout2.svg';
     this.spriteWidth = 2100;
     this.spriteHeight = 5040;
     this.rows = 12;
@@ -19,37 +20,43 @@ class Tail {
     this.spriteY = 0;
     this.ballX = options.ballX;
     this.ballY = options.ballY;
-    // this.canvasX = this.width/2; // Position X in the canvas where it should start drawing Tail frame
-    // this.canvasY = this.height/2; // Position Y in the canvas where it should start drawing Tail frame
     this.canvasX = this.ballX - (this.radius*7); // Position X in the canvas where it should start drawing Tail frame
     this.canvasY = this.ballY - (this.radius*7); // Position Y in the canvas where it should start drawing Tail frame
-    // this._drawInterval();
+    this.slowRequestAnimation = 0; //updates until frame change
   }
 
-  checkBallPosition() {
-    this.ballX = this.Ball.position.x;
-  }
+  fromDegreesToRadians (degrees) {
+    return degrees * Math.PI / 180;
+  }  
 
   updateFrame(){
-    // this.ctx.clearRect(this.spriteX, this.spriteY, this.widthFrame, this.heightFrame);
-    this.currentFrame = ++this.currentFrame % this.frameCount;
-    this.spriteX = this.currentFrame * this.widthFrame;
+    if (this.slowRequestAnimation < 4) {
+      this.slowRequestAnimation += 1;
+    } else {
+      this.slowRequestAnimation = 0;
+      this.currentFrame = ++this.currentFrame % this.frameCount;
+      this.spriteX = this.currentFrame * this.widthFrame;
+      // this.spriteY = tailDirection();
+    }
   }
 
+  // tailDirection() {
+  //   // Poner aquí de cada grado que parte del sprite se debería imprimir
+  // }
+
   drawTail(newX, newY) {
-    // this.updateFrame();
     this.ballX = newX;
     this.ballY = newY;
     this.canvasX = this.ballX - (this.radius*7); // Position X in the canvas where it should start drawing Tail frame
     this.canvasY = this.ballY - (this.radius*7); // Position Y in the canvas where it should start drawing Tail frame
     this.ctx.drawImage(this.tail, this.spriteX, this.spriteY, this.widthFrame, this.heightFrame, this.canvasX, this.canvasY, this.canvasFrameSize, this.canvasFrameSize);
-    console.log(this.canvasX)
+    // console.log(this.canvasX)
     // console.log(this.ballY)
   }
 
-  _drawInterval() {
-    this.intervalIDTail = setInterval(function() {
-      this._drawTail
-    }, 500);
-  }
+  // _drawInterval() {
+  //   this.intervalIDTail = setInterval(function() {
+  //     this._drawTail
+  //   }, 500);
+  // }
 }

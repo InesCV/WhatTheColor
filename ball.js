@@ -6,26 +6,26 @@ class Ball {
     this.ctx = options.ctx;
     this.width = options.width;
     this.height = options.height;
-    // this.position = options.position;
-    this.position = {
-      x: 200,
-      y: 500
-    }
-    this.marginExit = options.marginExit;
-    this.direction = {
-      x: 1,
-      y: 0
-    }
-    // this.direction = {
-    //   x: this.getDirection(this.position.x, this.width),
-    //   y: this.getDirection(this.position.y, this.height)
+    this.position = options.position;
+    // this.position = {
+    //   x: 200,
+    //   y: 500
     // }
+    this.marginExit = options.marginExit;
+    // this.direction = {
+    //   x: 1,
+    //   y: 0
+    // }
+    this.direction = {
+      x: this.getDirection(this.position.x, this.width),
+      y: this.getDirection(this.position.y, this.height)
+    }
     this.color = options.color;
     this.colorOriginal = options.color;
     this.moving = true;
     this.radius = options.radius;
-    // this.speed = 8;
-    this.speed = 20;
+    this.speed = 8;
+    // this.speed = 20;
     this.carefulColor = 0;
     this.moveBall(this.speed);
     this.createTail();
@@ -90,14 +90,12 @@ class Ball {
     }
   }
 
-
   moveBall(speed) {
     this.moving = true;
     this.ballMovement = setInterval(function () {
       this.position.x += (this.direction.x);
       this.position.y += (this.direction.y)
     }.bind(this), speed);
-
   }
 
   pauseBall() {
@@ -146,7 +144,8 @@ class Ball {
       color: this.color,
       ballX: this.position.x, 
       ballY: this.position.y,
-      radius: this.radius
+      radius: this.radius,
+      direction: this.direction
     })
   }
 

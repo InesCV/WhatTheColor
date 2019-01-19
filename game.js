@@ -17,30 +17,32 @@ class Game {
     this.marginExit = 20; // Margin outside of the canvas where the ball will appear
     this.carefulDistance = this.height * 0.2; // Warning distance when ball is about to leave the canvas
     this.ballCreationTimer = 3000; // Interval time for the creation of balls
-    this._generateBalls(); 
-    this._generateHomes();
-    // this._startBallCreation();
+    this.intervalGame = undefined;
+    this._generateBalls(); // Create the first ball
+    this._generateHomes(); // Create the three Homes
+    this._startBallCreation(); // Call an interval that creates more balls
   }
 
   startGame() {
     this._update();
   }
 
-  restartGame () {
-    this.balls = [];
-    this.fecundedBalls = [];
-    this.homes = [];
-    this.zygotes = 0;
-    this.ballCreationTimer = 2000;
-    this._addZygotesDOM();
-    clearInterval(this.intervalIDCreationBall);
-    this._generateBalls();
-    this._generateHomes();
-    this._startBallCreation();
-    this._update();
-  }
+  // restartGame () {
+  //   this.balls = [];
+  //   this.fecundedBalls = [];
+  //   this.homes = [];
+  //   this.zygotes = 0;
+  //   this.ballCreationTimer = 2000;
+  //   this._addZygotesDOM();
+  //   clearInterval(this.intervalIDCreationBall);
+  //   clearInterval(this.intervalGame);
+  //   this._generateBalls();
+  //   this._generateHomes();
+  //   this._startBallCreation();
+  //   this._update();
+  // }
 
-    ////// GAME OPERATIONS ///////
+  //====================== GAME OPERATIONS =======================
   
   getRandomNumber(max, min) {
     return Math.random() * (max - min) + min;
@@ -54,7 +56,7 @@ class Game {
     return this.possibleColors[this.getRandomIntegerNumber(3,0)]
   };
 
-    ////// RANDOM BALL EXIT ///////
+  //===================== RANDOM BALL EXIT ======================
 
   getRandomPosition() {
     this.exitAxis = this.getRandomIntegerNumber(2,0);
@@ -85,7 +87,7 @@ class Game {
     return this.binaryExit
   }
 
-  ////// GENERATE BALLS & HOMES ///////
+  //================= GENERATE BALLS & HOMES ====================
 
   _startBallCreation() {
     this.intervalIDCreationBall = setInterval(function() {
@@ -103,7 +105,7 @@ class Game {
       radius: this.ballRadius,
       marginExit: this.marginExit,
       color: this.getRandomColor(),
-      // position: this.getRandomPosition()
+      position: this.getRandomPosition()
       // ballToHome: this.ballToHome
     }));
   }
@@ -136,7 +138,7 @@ class Game {
     }
   }
 
-    ////// GAME MECHANICS ///////
+  //======================== GAME MECHANICS =====================
 
   _assignControlsToKeys () {
     document.onkeydown = (e) => {
@@ -184,7 +186,7 @@ class Game {
     }, 500)
   }
  
-   ////// DRAW STUFF ///////
+  //======================== DRAW CANVAS ========================
 
   
   _drawBoard() {
@@ -229,28 +231,18 @@ class Game {
     // this.ctx.stroke();
   }
 
-  // _drawTail() {
-  //   this.balls.forEach(function(ball) {
-  //     this.ctx.beginPath();
-  //     this.ctx.arc(ball.position.x + ball.radius,ball.position.y + ball.radius,ball.radius,0.5,Math.PI);
-  //     this.ctx.fillStyle = ball.color;
-  //     ctx.stroke();
-  //     this.ctx.fill();
-  //   }.bind(this))
-  // }
-
   _drawMyName() {
     this.ctx.font = "1em Quicksand";
     this.ctx.fillStyle = "#7800FF"
     this.ctx.textAlign = "center";
-    this.ctx.fillText("IronHack Game made by © Ines Castelltort", canvas.width/2, canvas.height - 10);
+    this.ctx.fillText("IronHack Game made by © Ines CV", canvas.width/2, canvas.height - 10);
   }
 
   _clear() {
     this.ctx.clearRect(0, 0, this.width, this.height);
   }
 
-   ////// COLLISIONS ///////
+ //==================== COLLISIONS & GAME OVER ====================
 
   _checkBallHomecollision() {
     this.balls.forEach(function (ball, index) {
@@ -307,7 +299,7 @@ class Game {
     }.bind(this))
   }
 
-   ////// ADDED DIFFICULTY ///////
+  //======================= ADDED DIFFICULTY ======================
 
    _levelUp() {
     clearInterval(this.intervalIDCreationBall);
@@ -316,13 +308,13 @@ class Game {
     // console.log(this.ballCreationTimer);
    }
   
-   ////// UPDATE GAME REQUEST ///////
+  //====================== UPDATE GAME REQUEST ====================
 
   _update() {
     this._clear();
     this._drawBoard();
-    this._drawBalls();
     this.callDrawTail();
+    this._drawBalls();
     this._drawFecundedBalls();
     this._drawHomes();
     this._drawMyName();
