@@ -206,7 +206,7 @@ class Game {
 
   callDrawTail() {
     this.balls.forEach(function(ball) {
-      ball.newTail.updateFrame();
+      ball.newTail.updateFrameX();
       ball.newTail.drawTail(ball.position.x, ball.position.y);
     }.bind(this))
   }
