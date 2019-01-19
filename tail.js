@@ -5,17 +5,18 @@ class Tail {
     this.width = options.width;
     this.height = options.height;
     this.direction = options.direction;
+    this.color = options.color;
     this.tail = new Image();
-    this.tail.src = 'images/blueSprite.png';
-    this.spriteWidth = 2100;
+    this.tail.src = this.spriteSource(this.color);
+    this.spriteWidth = 3360;
     this.spriteHeight = 5040;
     this.rows = 12;
-    this.cols = 5;
+    this.cols = 8;
     this.widthFrame = this.spriteWidth/this.cols;
     this.heightFrame = this.spriteHeight/this.rows;
     this.canvasFrameSize = this.radius*14;
     this.currentFrame = 0;
-    this.frameCount = 5;
+    this.frameCount = 8;
     this.spriteX = 0;
     this.spriteY = this.tailDirection(this.direction.x, this.direction.y);
     this.ballX = options.ballX;
@@ -23,6 +24,18 @@ class Tail {
     this.canvasX = this.ballX - (this.radius*7); // Position X in the canvas where it should start drawing Tail frame
     this.canvasY = this.ballY - (this.radius*7); // Position Y in the canvas where it should start drawing Tail frame
     this.slowRequestAnimation = 0; //updates until frame change
+  }
+
+  spriteSource(color) {
+    if (color === '#19FFFC') {
+      return 'images/blueSprite.png';
+    } else if (color === '#7800FF') {
+      return 'images/purpleSprite.png';
+    } else if (color === '#19FF2E') {
+      return 'images/greenSprite.png';
+    } else if (color === '#FF0000') {
+      return 'images/redSprite.png';
+    }
   }
 
   fromDegreesToRadians (degrees) {
