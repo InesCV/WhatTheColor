@@ -21,6 +21,7 @@ class Game {
     this._generateBalls(); // Create the first ball
     this._generateHomes(); // Create the three Homes
     this._startBallCreation(); // Call an interval that creates more balls
+    this._addZygotesDOM() // Update DOM about the number of zygotes archieved
   }
 
   startGame() {
@@ -179,6 +180,7 @@ class Game {
     this.balls.forEach(function (ball) {
       ball.pauseBall();
     });
+    window.cancelAnimationFrame(this.intervalGame)
   }
 
   playGame() {
@@ -186,6 +188,7 @@ class Game {
     this.balls.forEach(function (ball) {
       ball.moveBall(ball.speed);
     });
+    this.intervalGame = window.requestAnimationFrame(this._update.bind(this))
   }
 
   _gameOverWait(item) {

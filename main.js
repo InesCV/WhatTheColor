@@ -43,7 +43,7 @@ document.onload = function() {
         // canvas.style = 'display: none';
         playScreen.style = 'display: none';
         gameOver.style = 'display: block';
-        game.restartOldGame();
+        game.pauseGame();
         let result = document.getElementById('result');
         result.innerHTML = game.zygotes;
         let startAgain = document.getElementById('startagain');
