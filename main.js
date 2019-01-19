@@ -43,6 +43,7 @@ document.onload = function() {
         // canvas.style = 'display: none';
         playScreen.style = 'display: none';
         gameOver.style = 'display: block';
+        game.restartOldGame();
         let result = document.getElementById('result');
         result.innerHTML = game.zygotes;
         let startAgain = document.getElementById('startagain');
@@ -50,7 +51,7 @@ document.onload = function() {
           gameOver.style = 'display: none';
           playScreen.style = 'display: block';
           // newGame();
-          // game.restartGame();
+          // game.restartOldGame();
         })
       }
     }

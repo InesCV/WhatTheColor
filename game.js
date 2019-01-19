@@ -27,6 +27,17 @@ class Game {
     this._update();
   }
 
+  restartOldGame () {
+    this.balls = [];
+    this.fecundedBalls = [];
+    this.homes = [];
+    this.zygotes = 0;
+    this.ballCreationTimer = 0;
+    this._addZygotesDOM();
+    clearInterval(this.intervalIDCreationBall);
+    clearInterval(this.intervalGame);
+  }
+
   // restartGame () {
   //   this.balls = [];
   //   this.fecundedBalls = [];
