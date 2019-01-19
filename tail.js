@@ -47,180 +47,80 @@ class Tail {
 
   //=============== SIN IS HEIGHT AND COS IS WIDTH ================
   tailDirection(directionX, directionY) {
-    if (directionX > Math.cos(this.fromDegreesToRadians(345)) && directionY > Math.sin(this.fromDegreesToRadians(345))) {
+    if (directionX <= 0 && directionY >= 0) {
+      return this.firstQuarter(directionX, directionY);
+    } else if (directionX <= 0 && directionY <= 0) {
+      return this.secondQuarter(directionX, directionY);
+    } else if (directionX >= 0 && directionY <= 0) {
+      return this.thirdQuarter(directionX, directionY);
+    } else if (directionX >= 0 && directionY >= 0) {
+      return this.forthQuarter(directionX, directionY);
+    } 
+  }
+
+  firstQuarter(directionX, directionY) {
+    if (directionX < Math.cos(this.fromDegreesToRadians(195)) && directionY > Math.sin(this.fromDegreesToRadians(195))) {
+      console.log(`The ball direction is 3 QUARTER is going to x:${directionX} & y: ${directionY}`)
+      return this.spriteY = 3 * this.widthFrame;
+    } else if (directionX < Math.cos(this.fromDegreesToRadians(225)) && directionY > Math.sin(this.fromDegreesToRadians(225))) {
+      console.log(`The ball direction is 2 QUARTER is going to x:${directionX} & y: ${directionY}`)
+      return this.spriteY = 2 * this.widthFrame;
+    } else if (directionX < Math.cos(this.fromDegreesToRadians(255)) && directionY > Math.sin(this.fromDegreesToRadians(255))) {
+      console.log(`The ball direction is 1 QUARTER is going to x:${directionX} & y: ${directionY}`)
+      return this.spriteY = 1 * this.widthFrame;
+    } else if (directionX < Math.cos(this.fromDegreesToRadians(270)) && directionY > Math.sin(this.fromDegreesToRadians(270))) {
       console.log(`The ball direction is 0 QUARTER is going to x:${directionX} & y: ${directionY}`)
-      return this.spriteY = 9 * this.widthFrame;
-    } else if (directionX > Math.cos(this.fromDegreesToRadians(315)) && directionY > Math.sin(this.fromDegreesToRadians(315))) {
-      console.log(`The ball direction is 11 QUARTER is going to x:${directionX} & y: ${directionY}`)
-      return this.spriteY = 8 * this.widthFrame;
-    } else if (directionX > Math.cos(this.fromDegreesToRadians(285)) && directionY > Math.sin(this.fromDegreesToRadians(285))) {
-      console.log(`The ball direction is 10 QUARTER is going to x:${directionX} & y: ${directionY}`)
-      return this.spriteY = 7 * this.widthFrame;
-    } else if (directionX >= Math.cos(this.fromDegreesToRadians(270)) && directionY >= Math.sin(this.fromDegreesToRadians(270))) {
-      console.log(`The ball direction is 9 QUARTER is going to x:${directionX} & y: ${directionY}`)
-      return this.spriteY = 6 * this.widthFrame;
-    } else if (directionX > Math.cos(this.fromDegreesToRadians(255)) && directionY < Math.sin(this.fromDegreesToRadians(255))) {
-      console.log(`The ball direction is 9 QUARTER is going to x:${directionX} & y: ${directionY}`)
-      return this.spriteY = 6 * this.widthFrame;
-    } else if (directionX > Math.cos(this.fromDegreesToRadians(225)) && directionY < Math.sin(this.fromDegreesToRadians(225))) {
-      console.log(`The ball direction is 8 QUARTER is going to x:${directionX} & y: ${directionY}`)
-      return this.spriteY = 5 * this.widthFrame;
-    } else if (directionX > Math.cos(this.fromDegreesToRadians(195)) && directionY < Math.sin(this.fromDegreesToRadians(195))) {
-      console.log(`The ball direction is 7 QUARTER is going to x:${directionX} & y: ${directionY}`)
-      return this.spriteY = 4 * this.widthFrame;
-    } else if (directionX >= Math.cos(this.fromDegreesToRadians(180)) && directionY <= Math.sin(this.fromDegreesToRadians(180))) {
+      return this.spriteY = 0 * this.widthFrame;
+    } 
+  }
+
+  secondQuarter(directionX, directionY) {
+    if (directionX < Math.cos(this.fromDegreesToRadians(105)) && directionY < Math.sin(this.fromDegreesToRadians(105))) {
       console.log(`The ball direction is 6 QUARTER is going to x:${directionX} & y: ${directionY}`)
-      return this.spriteY = 3 * this.widthFrame;
-    } else if (directionX < Math.cos(this.fromDegreesToRadians(165)) && directionY < Math.sin(this.fromDegreesToRadians(165))) {
-      console.log(`The ball direction is 6 QUARTER is going to x:${directionX} & y: ${directionY}`)
-      return this.spriteY = 3 * this.widthFrame;
+      return this.spriteY = 6 * this.widthFrame;
     } else if (directionX < Math.cos(this.fromDegreesToRadians(135)) && directionY < Math.sin(this.fromDegreesToRadians(135))) {
       console.log(`The ball direction is 5 QUARTER is going to x:${directionX} & y: ${directionY}`)
-      return this.spriteY = 2 * this.widthFrame;
-    } else if (directionX < Math.cos(this.fromDegreesToRadians(105)) && directionY < Math.sin(this.fromDegreesToRadians(105))) {
+      return this.spriteY = 5 * this.widthFrame;
+    } else if (directionX < Math.cos(this.fromDegreesToRadians(165)) && directionY < Math.sin(this.fromDegreesToRadians(165))) {
       console.log(`The ball direction is 4 QUARTER is going to x:${directionX} & y: ${directionY}`)
-      return this.spriteY = 1 * this.widthFrame;
-    } else if (directionX <= Math.cos(this.fromDegreesToRadians(90)) && directionY <= Math.sin(this.fromDegreesToRadians(90))) {
+      return this.spriteY = 4 * this.widthFrame;
+    } else if (directionX < Math.cos(this.fromDegreesToRadians(180)) && directionY < Math.sin(this.fromDegreesToRadians(180))) {
       console.log(`The ball direction is 3 QUARTER is going to x:${directionX} & y: ${directionY}`)
-      return this.spriteY = 0 * this.widthFrame;
-    } else if (directionX < Math.cos(this.fromDegreesToRadians(75)) && directionY > Math.sin(this.fromDegreesToRadians(75))) {
-      console.log(`The ball direction is 3 QUARTER is going to x:${directionX} & y: ${directionY}`)
-      return this.spriteY = 0 * this.widthFrame;
-    } else if (directionX < Math.cos(this.fromDegreesToRadians(45)) && directionY > Math.sin(this.fromDegreesToRadians(45))) {
-      console.log(`The ball direction is 2 QUARTER is going to x:${directionX} & y: ${directionY}`)
-      return this.spriteY = 11 * this.widthFrame;
-    } else if (directionX < Math.cos(this.fromDegreesToRadians(15)) && directionY > Math.sin(this.fromDegreesToRadians(15))) {
-      console.log(`The ball direction is 1 QUARTER is going to x:${directionX} & y: ${directionY}`)
-      return this.spriteY = 10 * this.widthFrame;
-    } else if (directionX <= Math.cos(this.fromDegreesToRadians(0)) && directionY >= Math.sin(this.fromDegreesToRadians(0))) {
-      return this.spriteY = 9 * this.widthFrame;
+      return this.spriteY = 3 * this.widthFrame;
     }
   }
 
-  //=============== COS IS HEIGHT AND SIN IS WIDTH ================
-  //  tailDirection(directionX, directionY) {
-  //   if (directionX > Math.sin(this.fromDegreesToRadians(345)) && directionY > Math.cos(this.fromDegreesToRadians(345))) {
-  //     console.log(`The ball direction is 0 QUARTER is going to x:${directionX} & y: ${directionY}`)
-  //     return this.spriteY = 0 * this.widthFrame;
-  //   } else if (directionX > Math.sin(this.fromDegreesToRadians(315)) && directionY > Math.cos(this.fromDegreesToRadians(315))) {
-  //     console.log(`The ball direction is 11 QUARTER is going to x:${directionX} & y: ${directionY}`)
-  //     return this.spriteY = 11 * this.widthFrame;
-  //   } else if (directionX > Math.sin(this.fromDegreesToRadians(285)) && directionY > Math.cos(this.fromDegreesToRadians(285))) {
-  //     console.log(`The ball direction is 10 QUARTER is going to x:${directionX} & y: ${directionY}`)
-  //     return this.spriteY = 10 * this.widthFrame;
-  //   } else if (directionX >= Math.sin(this.fromDegreesToRadians(270)) && directionY >= Math.cos(this.fromDegreesToRadians(270))) {
-  //     console.log(`The ball direction is 9 QUARTER is going to x:${directionX} & y: ${directionY}`)
-  //     return this.spriteY = 9 * this.widthFrame;
-  //   } else if (directionX > Math.sin(this.fromDegreesToRadians(255)) && directionY < Math.cos(this.fromDegreesToRadians(255))) {
-  //     console.log(`The ball direction is 9 QUARTER is going to x:${directionX} & y: ${directionY}`)
-  //     return this.spriteY = 9 * this.widthFrame;
-  //   } else if (directionX > Math.sin(this.fromDegreesToRadians(225)) && directionY < Math.cos(this.fromDegreesToRadians(225))) {
-  //     console.log(`The ball direction is 8 QUARTER is going to x:${directionX} & y: ${directionY}`)
-  //     return this.spriteY = 8 * this.widthFrame;
-  //   } else if (directionX > Math.sin(this.fromDegreesToRadians(195)) && directionY < Math.cos(this.fromDegreesToRadians(195))) {
-  //     console.log(`The ball direction is 7 QUARTER is going to x:${directionX} & y: ${directionY}`)
-  //     return this.spriteY = 7 * this.widthFrame;
-  //   } else if (directionX >= Math.sin(this.fromDegreesToRadians(180)) && directionY <= Math.cos(this.fromDegreesToRadians(180))) {
-  //     console.log(`The ball direction is 6 QUARTER is going to x:${directionX} & y: ${directionY}`)
-  //     return this.spriteY = 6 * this.widthFrame;
-  //   } else if (directionX < Math.sin(this.fromDegreesToRadians(165)) && directionY < Math.cos(this.fromDegreesToRadians(165))) {
-  //     console.log(`The ball direction is 6 QUARTER is going to x:${directionX} & y: ${directionY}`)
-  //     return this.spriteY = 6 * this.widthFrame;
-  //   } else if (directionX < Math.sin(this.fromDegreesToRadians(135)) && directionY < Math.cos(this.fromDegreesToRadians(135))) {
-  //     console.log(`The ball direction is 5 QUARTER is going to x:${directionX} & y: ${directionY}`)
-  //     return this.spriteY = 5 * this.widthFrame;
-  //   } else if (directionX < Math.sin(this.fromDegreesToRadians(105)) && directionY < Math.cos(this.fromDegreesToRadians(105))) {
-  //     console.log(`The ball direction is 4 QUARTER is going to x:${directionX} & y: ${directionY}`)
-  //     return this.spriteY = 4 * this.widthFrame;
-  //   } else if (directionX <= Math.sin(this.fromDegreesToRadians(90)) && directionY <= Math.cos(this.fromDegreesToRadians(90))) {
-  //     console.log(`The ball direction is 3 QUARTER is going to x:${directionX} & y: ${directionY}`)
-  //     return this.spriteY = 3 * this.widthFrame;
-  //   } else if (directionX < Math.sin(this.fromDegreesToRadians(75)) && directionY > Math.cos(this.fromDegreesToRadians(75))) {
-  //     console.log(`The ball direction is 3 QUARTER is going to x:${directionX} & y: ${directionY}`)
-  //     return this.spriteY = 3 * this.widthFrame;
-  //   } else if (directionX < Math.sin(this.fromDegreesToRadians(45)) && directionY > Math.cos(this.fromDegreesToRadians(45))) {
-  //     console.log(`The ball direction is 2 QUARTER is going to x:${directionX} & y: ${directionY}`)
-  //     return this.spriteY = 2 * this.widthFrame;
-  //   } else if (directionX < Math.sin(this.fromDegreesToRadians(45)) && directionY > Math.cos(this.fromDegreesToRadians(45))) {
-  //     console.log(`The ball direction is 1 QUARTER is going to x:${directionX} & y: ${directionY}`)
-  //     return this.spriteY = 1 * this.widthFrame;
-  //   } else if (directionX <= Math.sin(this.fromDegreesToRadians(0)) && directionY >= Math.cos(this.fromDegreesToRadians(0))) {
-  //     return this.spriteY = 0 * this.widthFrame;
-  //   }
-  // }
+  thirdQuarter(directionX, directionY) {
+    if (directionX > Math.cos(this.fromDegreesToRadians(15)) && directionY < Math.sin(this.fromDegreesToRadians(15))) {
+      console.log(`The ball direction is 9 QUARTER is going to x:${directionX} & y: ${directionY}`)
+      return this.spriteY = 9 * this.widthFrame;
+    } else if (directionX > Math.cos(this.fromDegreesToRadians(45)) && directionY < Math.sin(this.fromDegreesToRadians(45))) {
+      console.log(`The ball direction is 8 QUARTER is going to x:${directionX} & y: ${directionY}`)
+      return this.spriteY = 8 * this.widthFrame;
+    } else if (directionX > Math.cos(this.fromDegreesToRadians(75)) && directionY < Math.sin(this.fromDegreesToRadians(75))) {
+      console.log(`The ball direction is 7 QUARTER is going to x:${directionX} & y: ${directionY}`)
+      return this.spriteY = 7 * this.widthFrame;
+    } else if (directionX > Math.cos(this.fromDegreesToRadians(90)) && directionY < Math.sin(this.fromDegreesToRadians(90))) {
+      console.log(`The ball direction is 6 QUARTER is going to x:${directionX} & y: ${directionY}`)
+      return this.spriteY = 6 * this.widthFrame;
+    }
+  }
 
-
-  // tailDirection(directionX, directionY) {
-  //   this
-  //   if (directionX > Math.cos(this.fromDegreesToRadians(345)) && directionY > Math.sin(this.fromDegreesToRadians(345))) {
-  //     console.log(`The ball direction is 0 QUARTER is going to x:${directionX} & y: ${directionY}`)
-  //     return this.spriteY = 0 * this.widthFrame;
-  //   } else if (directionX > Math.cos(this.fromDegreesToRadians(315)) && directionY > Math.sin(this.fromDegreesToRadians(315))) {
-  //     console.log(`The ball direction is 11 QUARTER is going to x:${directionX} & y: ${directionY}`)
-  //     return this.spriteY = 11 * this.widthFrame;
-  //   } else if (directionX > Math.cos(this.fromDegreesToRadians(285)) && directionY > Math.sin(this.fromDegreesToRadians(285))) {
-  //     console.log(`The ball direction is 10 QUARTER is going to x:${directionX} & y: ${directionY}`)
-  //     return this.spriteY = 10 * this.widthFrame;
-  //   } else if (directionX >= Math.cos(this.fromDegreesToRadians(270)) && directionY >= Math.sin(this.fromDegreesToRadians(270))) {
-  //     console.log(`The ball direction is 9 QUARTER is going to x:${directionX} & y: ${directionY}`)
-  //     return this.spriteY = 9 * this.widthFrame;
-  //   } else if (directionX > Math.cos(this.fromDegreesToRadians(255)) && directionY < Math.sin(this.fromDegreesToRadians(255))) {
-  //     console.log(`The ball direction is 9 QUARTER is going to x:${directionX} & y: ${directionY}`)
-  //     return this.spriteY = 9 * this.widthFrame;
-  //   } else if (directionX > Math.cos(this.fromDegreesToRadians(225)) && directionY < Math.sin(this.fromDegreesToRadians(225))) {
-  //     console.log(`The ball direction is 8 QUARTER is going to x:${directionX} & y: ${directionY}`)
-  //     return this.spriteY = 8 * this.widthFrame;
-  //   } else if (directionX > Math.cos(this.fromDegreesToRadians(195)) && directionY < Math.sin(this.fromDegreesToRadians(195))) {
-  //     console.log(`The ball direction is 7 QUARTER is going to x:${directionX} & y: ${directionY}`)
-  //     return this.spriteY = 7 * this.widthFrame;
-  //   } else if (directionX >= Math.cos(this.fromDegreesToRadians(180)) && directionY <= Math.sin(this.fromDegreesToRadians(180))) {
-  //     console.log(`The ball direction is 6 QUARTER is going to x:${directionX} & y: ${directionY}`)
-  //     return this.spriteY = 6 * this.widthFrame;
-  //   } else if (directionX < Math.cos(this.fromDegreesToRadians(165)) && directionY < Math.sin(this.fromDegreesToRadians(165))) {
-  //     console.log(`The ball direction is 6 QUARTER is going to x:${directionX} & y: ${directionY}`)
-  //     return this.spriteY = 6 * this.widthFrame;
-  //   } else if (directionX < Math.cos(this.fromDegreesToRadians(135)) && directionY < Math.sin(this.fromDegreesToRadians(135))) {
-  //     console.log(`The ball direction is 5 QUARTER is going to x:${directionX} & y: ${directionY}`)
-  //     return this.spriteY = 5 * this.widthFrame;
-  //   } else if (directionX < Math.cos(this.fromDegreesToRadians(105)) && directionY < Math.sin(this.fromDegreesToRadians(105))) {
-  //     console.log(`The ball direction is 4 QUARTER is going to x:${directionX} & y: ${directionY}`)
-  //     return this.spriteY = 4 * this.widthFrame;
-  //   } else if (directionX <= Math.cos(this.fromDegreesToRadians(90)) && directionY <= Math.sin(this.fromDegreesToRadians(90))) {
-  //     console.log(`The ball direction is 3 QUARTER is going to x:${directionX} & y: ${directionY}`)
-  //     return this.spriteY = 3 * this.widthFrame;
-  //   } else if (directionX < Math.cos(this.fromDegreesToRadians(75)) && directionY > Math.sin(this.fromDegreesToRadians(75))) {
-  //     console.log(`The ball direction is 3 QUARTER is going to x:${directionX} & y: ${directionY}`)
-  //     return this.spriteY = 3 * this.widthFrame;
-  //   } else if (directionX < Math.cos(this.fromDegreesToRadians(45)) && directionY > Math.sin(this.fromDegreesToRadians(45))) {
-  //     console.log(`The ball direction is 2 QUARTER is going to x:${directionX} & y: ${directionY}`)
-  //     return this.spriteY = 2 * this.widthFrame;
-  //   } else if (directionX < Math.cos(this.fromDegreesToRadians(45)) && directionY > Math.sin(this.fromDegreesToRadians(45))) {
-  //     console.log(`The ball direction is 1 QUARTER is going to x:${directionX} & y: ${directionY}`)
-  //     return this.spriteY = 1 * this.widthFrame;
-  //   } else {
-  //     return this.spriteY = 0 * this.widthFrame;
-  //   }
-  // }
-
-  // tailDirection(directionX, directionY) {
-  //   // Poner aquí de cada grado que parte del sprite se debería imprimir
-  //   if (directionX < 0 && directionY > 0) {
-  //     console.log(`The ball direction is FIRST QUARTER is going to x:${directionX} & y: ${directionY}`)
-  //     return this.spriteY = 1 * this.widthFrame;
-  //   } else if (directionX < 0 && directionY < 0) {
-  //     console.log(`The ball direction is SECOND QUARTER is going to x:${directionX} & y: ${directionY}`)
-  //     return this.spriteY = 4 * this.widthFrame;
-  //   } else if (directionX > 0 && directionY < 0) {
-  //     console.log(`The ball direction is THIRD QUARTER is going to x:${directionX} & y: ${directionY}`)
-  //     return this.spriteY = 7 * this.widthFrame;
-  //   } else if (directionX > 0 && directionY > 0) {
-  //     console.log(`The ball direction is FORTH QUARTER is going to x:${directionX} & y: ${directionY}`)
-  //     return this.spriteY = 10 * this.widthFrame;
-  //   } else {
-  //     console.log(`The ball direction is ANY OTHER QUARTER is going to x:${directionX} & y: ${directionY}`)
-  //     return this.spriteY = 0 * this.widthFrame;
-  //   }
-  // }
+  forthQuarter(directionX, directionY) {
+    if (directionX < Math.cos(this.fromDegreesToRadians(285)) && directionY > Math.sin(this.fromDegreesToRadians(285))) {
+      console.log(`The ball direction is 0 QUARTER is going to x:${directionX} & y: ${directionY}`)
+      return this.spriteY = 0 * this.widthFrame;
+    } else if (directionX < Math.cos(this.fromDegreesToRadians(315)) && directionY > Math.sin(this.fromDegreesToRadians(315))) {
+      console.log(`The ball direction is 11 QUARTER is going to x:${directionX} & y: ${directionY}`)
+      return this.spriteY = 11 * this.widthFrame;
+    } else if (directionX < Math.cos(this.fromDegreesToRadians(345)) && directionY > Math.sin(this.fromDegreesToRadians(345))) {
+      console.log(`The ball direction is 10 QUARTER is going to x:${directionX} & y: ${directionY}`)
+      return this.spriteY = 10 * this.widthFrame;
+    } else if (directionX < Math.cos(this.fromDegreesToRadians(360)) && directionY > Math.sin(this.fromDegreesToRadians(360))) {
+      console.log(`The ball direction is 9 QUARTER is going to x:${directionX} & y: ${directionY}`)
+      return this.spriteY = 9 * this.widthFrame;
+    }
+  }
 
   drawTail(newX, newY) {
     this.ballX = newX;
@@ -228,12 +128,6 @@ class Tail {
     this.canvasX = this.ballX - (this.radius*7); // Position X in the canvas where it should start drawing Tail frame
     this.canvasY = this.ballY - (this.radius*7); // Position Y in the canvas where it should start drawing Tail frame
     this.ctx.drawImage(this.tail, this.spriteX, this.spriteY, this.widthFrame, this.heightFrame, this.canvasX, this.canvasY, this.canvasFrameSize, this.canvasFrameSize);
-    // console.log(this.ballY)
+    console.log(this.spriteY)
   }
-
-  // _drawInterval() {
-  //   this.intervalIDTail = setInterval(function() {
-  //     this._drawTail
-  //   }, 500);
-  // }
 }
