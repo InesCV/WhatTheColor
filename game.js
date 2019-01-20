@@ -213,15 +213,15 @@ class Game {
       this.ctx.arc(ball.position.x,ball.position.y,ball.radius,0,2*Math.PI);
       this.ctx.fillStyle = ball.color;
       this.ctx.fill();
-      // ball.newTail.drawTail();
+      // ball.tail.drawTail();
     }.bind(this))
     // this.ctx.stroke();
   }
 
   callDrawTail() {
     this.balls.forEach(function(ball) {
-      ball.newTail.updateFrameX();
-      ball.newTail.drawTail(ball.position.x, ball.position.y);
+      ball.tail.updateFrameX();
+      ball.tail.drawTail(ball.position.x, ball.position.y);
     }.bind(this))
   }
 
@@ -303,12 +303,15 @@ class Game {
       if ((ball.direction.x === 1 && ball.position.x > (canvas.width + this.marginExit)) || (ball.direction.x === -1 && ball.position.x < (0 - this.marginExit)) || (ball.direction.y === 1 && ball.position.y > (canvas.height + this.marginExit)) || (ball.direction.y === -1 && ball.position.y < (0 - this.marginExit))) {
         console.log('GAME OVER');
         ball.color = '#FF0000';
+        ball.tail.spriteSource('#FF0000');
         this.balls.splice(index, 1);
         ball.pauseBall();
         return this._gameOverWait(this.onGameOver)
       } else if ((ball.direction.x === 1 && ball.position.x > (canvas.width - this.carefulDistance)) || (ball.direction.x === -1 && ball.position.x < (0 + this.carefulDistance)) || (ball.direction.y === 1 && ball.position.y > (canvas.height - this.carefulDistance)) || (ball.direction.y === -1 && ball.position.y < (0 + this.carefulDistance))) {
         console.log('CAREFUL!!!!!!!!');
         ball.color = '#FF0000';
+        ball.tail.spriteSource('#FF0000');
+        console.log(ball.tail.spriteSource('FF0000'))
       }
     }.bind(this))
   }

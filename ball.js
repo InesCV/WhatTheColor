@@ -59,30 +59,6 @@ class Ball {
     }
   }
 
-  // getDirection() {
-  //   if (this.position.x == this.low) {
-  //     return this.direction = {
-  //       x: 1,
-  //       y: 0
-  //     }
-  //   } else if (this.position.x  == this.largeX) {
-  //     return this.direction = {
-  //       x: -1,
-  //       y: 0
-  //     }
-  //   } else if (this.position.y == this.low) {
-  //     return this.direction = {
-  //       x: 0,
-  //       y: 1
-  //     }
-  //   } else if (this.position.y == this.largeY) {
-  //     return this.direction = {
-  //       x: 0,
-  //       y: -1
-  //     }
-  //   }
-  // }
-
   clickedBall(a,b) {
     this.h = Math.sqrt(Math.pow(a,2) + Math.pow(b,2))
     if (this.h <= this.radius + 10) {
@@ -135,7 +111,7 @@ class Ball {
   }
 
   createTail() {
-    this.newTail = new Tail({
+    this.tail = new Tail({
       width: this.width, 
       height: this.height, 
       canvas: this.canvas,
@@ -148,34 +124,6 @@ class Ball {
       direction: this.direction
     })
   }
-
-  // _createTail() {
-  //   this.tail = new Image();
-  //   this.tail.src = 'images/blueSprite.png';
-  //   this.spriteWidth = 2100;
-  //   this.spriteHeight = 5040;
-  //   this.rows = 12;
-  //   this.cols = 5;
-  //   this.widthFrame = this.spriteWidth/this.cols;
-  //   this.heightFrame = this.spriteHeight/this.rows;
-  //   this.currentFrame = 0;
-  //   this.frameCount = 5;
-  //   this.spriteX = 0;
-  //   this.spriteY = 0;
-  //   this.canvasX = this.position.x - 210;
-  //   this.canvasY = this.position.y - 210;
-  // }
-
-  // _updateFrame(){
-  //   this.ctx.clearRect(this.spriteX, this.spriteY, this.widthFrame, this.heightFrame);
-  //   this.currentFrame = ++this.currentFrame % this.frameCount;
-  //   this.canvasX = this.currentFrame * this.widthFrame;
-  // }
-
-  // _drawTail() {
-  //   this._updateFrame();
-  //   this.ctx.drawImage(this.tail, this.canvasX, this.canvasY, this.widthFrame, this.heightFrame, this.spriteX, this.spriteY, this.widthFrame, this.heightFrame);
-  // }
 
   // _consoleLogPosition() {
   //   setInterval(function() {
