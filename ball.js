@@ -30,15 +30,14 @@ class Ball {
     this.moveBall(this.speed);
     this.createTail();
 
-     // Add event listener for 'Click' events
+     // Add event listener for 'Click' events over balls
     this.elem.addEventListener('click', function (event) {
       this.x = event.pageX - this.elemLeft;
       this.y = event.pageY - this.elemTop;
-      // console.log (`BALL: I clicked exactly x:${this.x} y:${this.y}`)
       this.a = this.position.x - this.x;
       this.b = this.position.y - this.y;
 
-      // Check if the ball is clicked
+      // Act over a clicked ball
       if (this.clickedBall(this.a, this.b)) {
         if (this.moving === false) {
           this.moveBall(this.speed);
@@ -49,6 +48,7 @@ class Ball {
     }.bind(this));
   }
 
+  // Get random direction for the ball
   getDirection(position, maxSize) {
     if (position < 0) {
       return 1
@@ -59,6 +59,7 @@ class Ball {
     }
   }
 
+  // Check if the ball is clicked 
   clickedBall(a,b) {
     this.h = Math.sqrt(Math.pow(a,2) + Math.pow(b,2))
     if (this.h <= this.radius + 10) {
@@ -81,10 +82,9 @@ class Ball {
 
   fecundedBall(color) {
     this.pauseBall();
-    this.direction.x = 0;
-    this.direction.y = 0;
+    // this.direction.x = 0;
+    // this.direction.y = 0;
     this.color = color
-    // console.log(`ball is moving? ${this.moving}`)
     clearInterval(this.ballMovement);
   }
 

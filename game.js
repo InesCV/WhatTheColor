@@ -16,7 +16,7 @@ class Game {
     this.gamePaused = false; // Boolean to know if the game is paused
     this.marginExit = 20; // Margin outside of the canvas where the ball will appear
     this.carefulDistance = this.height * 0.2; // Warning distance when ball is about to leave the canvas
-    this.ballCreationTimer = 3000; // Interval time for the creation of balls
+    this.ballCreationTimer = 2000; // Interval time for the creation of balls
     this.intervalGame = undefined;
     this._generateBalls(); // Create the first ball
     this._generateHomes(); // Create the three Homes
@@ -283,7 +283,6 @@ class Game {
         this._levelUp();
       }
       return this._addZygotesDOM();
-      // return this.zygotes += 1;
     } else {
       item1.fecundedBall('#FF0000');
       item1.color = '#FF0000';
@@ -302,16 +301,13 @@ class Game {
     this.balls.forEach(function (ball, index) {
       if ((ball.direction.x === 1 && ball.position.x > (canvas.width + this.marginExit)) || (ball.direction.x === -1 && ball.position.x < (0 - this.marginExit)) || (ball.direction.y === 1 && ball.position.y > (canvas.height + this.marginExit)) || (ball.direction.y === -1 && ball.position.y < (0 - this.marginExit))) {
         console.log('GAME OVER');
-        ball.color = '#FF0000';
-        ball.tail.spriteSource('#FF0000');
         this.balls.splice(index, 1);
         ball.pauseBall();
         return this._gameOverWait(this.onGameOver)
       } else if ((ball.direction.x === 1 && ball.position.x > (canvas.width - this.carefulDistance)) || (ball.direction.x === -1 && ball.position.x < (0 + this.carefulDistance)) || (ball.direction.y === 1 && ball.position.y > (canvas.height - this.carefulDistance)) || (ball.direction.y === -1 && ball.position.y < (0 + this.carefulDistance))) {
         console.log('CAREFUL!!!!!!!!');
         ball.color = '#FF0000';
-        ball.tail.spriteSource('#FF0000');
-        console.log(ball.tail.spriteSource('FF0000'))
+        ball.tail.tailImage.src = 'images/redSprite.png';
       }
     }.bind(this))
   }
