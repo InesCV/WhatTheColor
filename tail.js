@@ -16,9 +16,8 @@ class Tail {
     this.heightFrame = this.spriteHeight/this.rows;
     this.canvasFrameSize = this.radius*14;
     this.currentFrame = 0;
-    this.frameCount = 8;
     this.spriteX = 0;
-    this.spriteY = this.tailDirection(this.direction.x, this.direction.y);
+    this.spriteY = this.tailDirection(this.direction.x, this.direction.y); // Calls a function that assigns the direction of the tail
     this.ballX = options.ballX;
     this.ballY = options.ballY;
     this.canvasX = this.ballX - (this.radius*7); // Position X in the canvas where it should start drawing Tail frame
@@ -26,6 +25,7 @@ class Tail {
     this.slowRequestAnimation = 0; //updates until frame change
   }
 
+  // Assign color of the Tail
   spriteSource(color) {
     if (color === '#19FFFC') {
       return 'images/blueSprite.png';
@@ -33,8 +33,6 @@ class Tail {
       return 'images/purpleSprite.png';
     } else if (color === '#19FF2E') {
       return 'images/greenSprite.png';
-    } else if (color === '#FF0000') {
-      return 'images/redSprite.png';
     }
   }
 
@@ -42,39 +40,39 @@ class Tail {
     return degrees * Math.PI / 180;
   }  
 
+  // Movement of the ball frames in the same angle
   updateFrameX(){
     if (this.slowRequestAnimation < 3) {
       this.slowRequestAnimation += 1;
     } else {
       this.slowRequestAnimation = 0;
-      this.currentFrame = ++this.currentFrame % this.frameCount;
+      this.currentFrame = ++this.currentFrame % this.cols;
       this.spriteX = this.currentFrame * this.widthFrame;
-      // console.log(this.spriteX)
-      // this.spriteY = this.tailDirection(directionX, directionY);
     }
   }
-
+  
+  // Choose angle of the tail realtive to ball direction
   updateFrameY(directionX, directionY){
     this.spriteY = this.tailDirection(directionX, directionY);
   }
 
   //=============== SIN IS HEIGHT AND COS IS WIDTH ================
   tailDirection(directionX, directionY) {
-    if (directionX === 0 && directionY === 1) {
+    if (directionX === 0 && directionY === 1) { // Initial tail for ball going down
       return this.spriteY = 0 * this.widthFrame;
-    } else if (directionX === 0 && directionY === -1) {
+    } else if (directionX === 0 && directionY === -1) { // Initial tail for ball going up
       return this.spriteY = 6 * this.widthFrame;
-    } else if (directionX === 1 && directionY === 0) {
+    } else if (directionX === 1 && directionY === 0) { // Initial tail for ball going right
       return this.spriteY = 9 * this.widthFrame;
-    } else if (directionX === -1 && directionY === 0) {
+    } else if (directionX === -1 && directionY === 0) { // Initial tail for ball going left
       return this.spriteY = 3 * this.widthFrame;
-    } else if (directionX < 0 && directionY >= 0) {
+    } else if (directionX < 0 && directionY >= 0) { // Tail moves from 0º to 90º
       return this.firstQuarter(directionX, directionY);
-    } else if (directionX <= 0 && directionY <= 0) {
+    } else if (directionX <= 0 && directionY <= 0) { // Tail moves from 90º to 180º
       return this.secondQuarter(directionX, directionY);
-    } else if (directionX >= 0 && directionY <= 0) {
+    } else if (directionX >= 0 && directionY <= 0) { // Tail moves from 180º to 270ª
       return this.thirdQuarter(directionX, directionY);
-    } else if (directionX >= 0 && directionY >= 0) {
+    } else if (directionX >= 0 && directionY >= 0) { // Tail moves from 270º to 360º
       return this.forthQuarter(directionX, directionY);
     } 
   }
@@ -128,10 +126,8 @@ class Tail {
   }
 
   drawTail(newX, newY) {
-    this.ballX = newX;
-    this.ballY = newY;
-    this.canvasX = this.ballX - (this.radius*7); // Position X in the canvas where it should start drawing Tail frame
-    this.canvasY = this.ballY - (this.radius*7); // Position Y in the canvas where it should start drawing Tail frame
+    this.canvasX = newX - (this.radius*7); // Position X in the canvas where it should start drawing Tail frame
+    this.canvasY = newY - (this.radius*7); // Position Y in the canvas where it should start drawing Tail frame
     this.ctx.drawImage(this.tailImage, this.spriteX, this.spriteY, this.widthFrame, this.heightFrame, this.canvasX, this.canvasY, this.canvasFrameSize, this.canvasFrameSize);
   }
 }

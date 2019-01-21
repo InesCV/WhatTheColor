@@ -7,15 +7,7 @@ class Ball {
     this.width = options.width;
     this.height = options.height;
     this.position = options.position;
-    // this.position = {
-    //   x: 200,
-    //   y: 500
-    // }
     this.marginExit = options.marginExit;
-    // this.direction = {
-    //   x: 1,
-    //   y: 0
-    // }
     this.direction = {
       x: this.getDirection(this.position.x, this.width),
       y: this.getDirection(this.position.y, this.height)
@@ -25,7 +17,6 @@ class Ball {
     this.moving = true;
     this.radius = options.radius;
     this.speed = 8;
-    // this.speed = 20;
     this.carefulColor = 0;
     this.moveBall(this.speed);
     this.createTail();
@@ -91,14 +82,13 @@ class Ball {
   changeDirection(homeX, homeY) {
     this.moving = true;
     this.color = this.colorOriginal;
+
     // Calculate the new direction
     this.ballToHomeX = homeX - this.position.x;
     this.ballToHomeY = homeY - this.position.y;
     this.ballToHomeH = Math.sqrt(Math.pow(this.ballToHomeX,2) + Math.pow(this.ballToHomeY,2));
-    // console.log(`Sir, the ball should be moving to direction: ${this.ballToHomeX} y:${this.ballToHomeY} route should be equal to hipotenusa:${this.ballToHomeH}`);
     this.direction.x = this.ballToHomeX/this.ballToHomeH;
     this.direction.y = this.ballToHomeY/this.ballToHomeH;
-    // console.log(`direction.x= ${this.direction.x} direction.y= ${this.direction.y}`)
     this.ballToHome = {
       x: homeX - this.position.x,
       y: homeY - this.position.y,
