@@ -6,6 +6,7 @@ class Game {
     this.canvas = options.canvas; // Inheritance of the canvas itself
     this.balls = []; // Arrays of moving balls in the screen
     this.fecundedBalls = []; // Array of balls that already reached a home
+    this.enemyBalls = []; //  Array of balls that can't touch you
     this.homes = []; // Array of homes
     this.zygotes = 0; // Number of balls that collisioned with a home
     this.possibleColors = options.possibleColors; // Possible ball and home colors
@@ -87,6 +88,16 @@ class Game {
     }
   }
 
+  // getPositionRange(heightOrWidth) {
+  //   this.minExitPoint = this.homeRadius + 50;
+  //   this.maxExitPoint = heightOrWidth - this.homeRadius -50;
+  //   if (this.enemyBalls.length > 0) {
+  //     this._avoidEnemyPosition();
+  //   } else {
+  //     return this.getRandomNumber(this.minExitPoint, this.maxExitPoint)
+  //   }
+  // }
+
   getPositionRange(heightOrWidth) {
     this.minExitPoint = this.homeRadius + 50;
     this.maxExitPoint = heightOrWidth - this.homeRadius -50;
@@ -98,6 +109,10 @@ class Game {
     this.binaryExit = this.possibleBinaryExit[this.getRandomIntegerNumber(2,0)];
     return this.binaryExit
   }
+
+  // _avoidEnemyPosition() {
+
+  // }
 
   //================= GENERATE BALLS & HOMES ====================
 
@@ -118,7 +133,20 @@ class Game {
       marginExit: this.marginExit,
       color: this.getRandomColor(),
       position: this.getRandomPosition()
-      // ballToHome: this.ballToHome
+    }));
+  }
+
+  _generateEnemyBalls() {
+    this.enemyBalls.push(new Ball({
+      width: this.width, 
+      height: this.height, 
+      canvas: this.canvas,
+      ctx: this.ctx,
+      homes: this.homes,
+      radius: this.ballRadius,
+      marginExit: this.marginExit,
+      color: '#621348',
+      position: this.getRandomPosition()
     }));
   }
 
@@ -213,13 +241,21 @@ class Game {
       this.ctx.arc(ball.position.x,ball.position.y,ball.radius,0,2*Math.PI);
       this.ctx.fillStyle = ball.color;
       this.ctx.fill();
-      // ball.tail.drawTail();
     }.bind(this))
-    // this.ctx.stroke();
   }
 
   callDrawTail() {
     this.balls.forEach(function(ball) {
+      ball.tail.updateFrameX();
+      ball.tail.drawTail(ball.position.x, ball.position.y);
+    }.bind(this))
+    // if (this.enemyBalls.length > 0) {
+    //   this.enemyTail();
+    // }
+  }
+
+  enemyTail() {
+    this.enemyBalls.forEach(function(ball) {
       ball.tail.updateFrameX();
       ball.tail.drawTail(ball.position.x, ball.position.y);
     }.bind(this))
@@ -232,7 +268,15 @@ class Game {
       this.ctx.fillStyle = ball.color;
       this.ctx.fill();
     }.bind(this))
-    // this.ctx.stroke();
+  }
+
+  _drawEnemyBalls() {
+    this.enemyBalls.forEach(function(ball) {
+      this.ctx.beginPath();
+      this.ctx.arc(ball.position.x,ball.position.y,ball.radius,0,2*Math.PI);
+      this.ctx.fillStyle = ball.color;
+      this.ctx.fill();
+    }.bind(this))
   }
 
   _drawHomes() {
@@ -242,7 +286,6 @@ class Game {
       this.ctx.fillStyle = home.color;
       this.ctx.fill();
     }.bind(this))    
-    // this.ctx.stroke();
   }
 
   _drawMyName() {
@@ -256,7 +299,7 @@ class Game {
     this.ctx.clearRect(0, 0, this.width, this.height);
   }
 
- //==================== COLLISIONS & GAME OVER ====================
+ //==================== GAME CHECK, COLLISIONS & GAME OVER ====================
 
   _checkBallHomecollision() {
     this.balls.forEach(function (ball, index) {
@@ -274,6 +317,23 @@ class Game {
      }.bind(this))
    }.bind(this))
  }
+
+ _checkBallEnemycollision() {
+  this.balls.forEach(function (ball, index) {
+   this.enemyBalls.forEach(function (enemy) {
+     this.a = enemy.position.x - ball.position.x;
+     this.b = enemy.position.y - ball.position.y;
+     this.h = Math.sqrt(Math.pow(this.a,2) + Math.pow(this.b,2));
+     // console.log(`enemy radius is ${enemy.radius} and ball radius ${ball.radius}`);
+     if (enemy.radius + ball.radius >= this.h) {
+       this._checkSameColor(ball, enemy);
+       this.fecundedBalls.push(this.balls[index]);
+       this.balls.splice(index, 1)
+       return true
+     }
+   }.bind(this))
+ }.bind(this))
+}
 
  _fecundedBallHome() {
   this.fecundedBalls.forEach(function (ball, index) {
@@ -297,6 +357,9 @@ class Game {
       this.zygotes += 1;
       if (this.zygotes <= 20) {
         this._levelUp();
+      }
+      if (this.zygotes % 5 === 0) {
+        this._generateEnemyBalls();
       }
       return this._addZygotesDOM();
     } else {
@@ -328,6 +391,15 @@ class Game {
     }.bind(this))
   }
 
+  isThereEnemyBall() {
+    if (this.enemyBalls.length > 0) {
+      this.enemyTail();
+      this._drawEnemyBalls();
+      this._checkBallEnemycollision();
+      // this._checkEnemyLeftCanvas();
+    }
+  }
+
   //======================= ADDED DIFFICULTY ======================
 
    _levelUp() {
@@ -345,6 +417,7 @@ class Game {
     this.callDrawTail();
     this._drawBalls();
     this._drawFecundedBalls();
+    this.isThereEnemyBall();
     this._drawHomes();
     this._drawMyName();
     this._checkBallHomecollision();

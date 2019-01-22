@@ -33,7 +33,9 @@ class Tail {
       return 'images/purpleSprite.png';
     } else if (color === '#19FF2E') {
       return 'images/greenSprite.png';
-    }
+    } else if (color === '#621348') {
+      return 'images/enemySprite.png';
+    } 
   }
 
   fromDegreesToRadians (degrees) {
