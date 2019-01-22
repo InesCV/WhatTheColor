@@ -275,6 +275,22 @@ class Game {
    }.bind(this))
  }
 
+ _fecundedBallHome() {
+  this.fecundedBalls.forEach(function (ball, index) {
+   this.homes.forEach(function (home) {
+     this.a = home.position.x - ball.position.x;
+     this.b = home.position.y - ball.position.y;
+     this.h = Math.sqrt(Math.pow(this.a,2) + Math.pow(this.b,2));
+     // console.log(`home radius is ${home.radius} and ball radius ${ball.radius}`);
+     if (this.h <= home.radius - ball.radius) {
+       this.fecundedBalls.splice(index, 1)
+       console.log('eliminate fecunded ball')
+       return true
+     }
+   }.bind(this))
+ }.bind(this))
+}
+
   _checkSameColor(item1, item2) {
     if (item1.colorOriginal === item2.color) {
       item1.fecundedBall(item1.colorOriginal);
@@ -332,6 +348,7 @@ class Game {
     this._drawHomes();
     this._drawMyName();
     this._checkBallHomecollision();
+    this._fecundedBallHome()
     this._checkBallLeftCanvas();
     this._assignControlsToKeys ();
     // this._sayLocation();

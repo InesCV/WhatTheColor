@@ -73,10 +73,9 @@ class Ball {
 
   fecundedBall(color) {
     this.pauseBall();
-    // this.direction.x = 0;
-    // this.direction.y = 0;
-    this.color = color
-    clearInterval(this.ballMovement);
+    this.speed = 40;
+    this.moveBall(this.speed);
+    console.log("Fecunded ball entering");
   }
 
   changeDirection(homeX, homeY) {
