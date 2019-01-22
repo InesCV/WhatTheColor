@@ -111,6 +111,7 @@ class Game {
   }
 
   // _avoidEnemyPosition() {
+  //   this.randomPosition = this.getRandomNumber(this.minExitPoint, this.maxExitPoint)
 
   // }
 
@@ -249,9 +250,6 @@ class Game {
       ball.tail.updateFrameX();
       ball.tail.drawTail(ball.position.x, ball.position.y);
     }.bind(this))
-    // if (this.enemyBalls.length > 0) {
-    //   this.enemyTail();
-    // }
   }
 
   enemyTail() {
@@ -391,12 +389,21 @@ class Game {
     }.bind(this))
   }
 
+  _checkEnemyLeftCanvas() {
+    this.enemyBalls.forEach(function (ball, index) {
+      if ((ball.direction.x === 1 && ball.position.x > (canvas.width + this.marginExit)) || (ball.direction.x === -1 && ball.position.x < (0 - this.marginExit)) || (ball.direction.y === 1 && ball.position.y > (canvas.height + this.marginExit)) || (ball.direction.y === -1 && ball.position.y < (0 - this.marginExit))) {
+        console.log('Enemy left the canvas');
+        this.enemyBalls.splice(index, 1);
+      }
+    }.bind(this))
+  }
+
   isThereEnemyBall() {
     if (this.enemyBalls.length > 0) {
       this.enemyTail();
       this._drawEnemyBalls();
       this._checkBallEnemycollision();
-      // this._checkEnemyLeftCanvas();
+      this._checkEnemyLeftCanvas();
     }
   }
 
