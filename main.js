@@ -47,16 +47,16 @@ document.onload = function() {
         let result = document.getElementById('result');
         result.innerHTML = game.zygotes;
         let gameOverQuote = document.getElementById('gameOverQuote');
-        if (game.zygotes > 35) {
+        if (game.zygotes >= 30) {
           gameOverQuote.innerHTML = "You've colored a lot in your life, right?";
-        } else if (game.zygotes >= 30) {
-          gameOverQuote.innerHTML = "You are a MotherColorer my friend";
         } else if (game.zygotes >= 20) {
+          gameOverQuote.innerHTML = "You are a MotherColorer my friend";
+        } else if (game.zygotes >= 10) {
           gameOverQuote.innerHTML = "Not bad for being a virgin";
-        } else if (game.zygotes < 5) {
-          gameOverQuote.innerHTML = "That was a bit... Premature";
-        } else if (game.zygotes <= 10) {
+        } else if (game.zygotes > 5) {
           gameOverQuote.innerHTML = "Maybe some viagra? That wasn't enough";
+        } else if (game.zygotes <= 5) {
+          gameOverQuote.innerHTML = "That was a bit... Premature";
         }
         let startAgain = document.getElementById('startagain');
         startAgain.addEventListener("click", function () {
