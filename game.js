@@ -204,6 +204,7 @@ class Game {
           }
           break;
         case 8: //Delete
+          this._clearBalls();
           console.log('If (zygots are more than X) this.balls = [] again');
           break;
       }
@@ -239,6 +240,12 @@ class Game {
       // console.log('waiting a second')
       item();
     }, 500)
+  }
+
+  _clearBalls() {
+    this.balls.splice(0, this.balls.length);
+    this.zygotes -= 5;
+    this._addZygotesDOM ()
   }
  
   //======================== DRAW CANVAS ========================

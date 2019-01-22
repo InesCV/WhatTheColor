@@ -53,10 +53,10 @@ document.onload = function() {
           gameOverQuote.innerHTML = "You are a MotherColorer my friend";
         } else if (game.zygotes >= 20) {
           gameOverQuote.innerHTML = "Not bad for being a virgin";
-        } else if (game.zygotes >= 10) {
-          gameOverQuote.innerHTML = "Maybe some viagra? That wasn't enough";
         } else if (game.zygotes < 5) {
           gameOverQuote.innerHTML = "That was a bit... Premature";
+        } else if (game.zygotes <= 10) {
+          gameOverQuote.innerHTML = "Maybe some viagra? That wasn't enough";
         }
         let startAgain = document.getElementById('startagain');
         startAgain.addEventListener("click", function () {
