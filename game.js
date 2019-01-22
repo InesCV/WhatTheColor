@@ -111,8 +111,14 @@ class Game {
   }
 
   // _avoidEnemyPosition() {
-  //   this.randomPosition = this.getRandomNumber(this.minExitPoint, this.maxExitPoint)
-
+  //   this.randomPosition = this.getRandomNumber(this.minExitPoint, this.maxExitPoint);
+  //   this.enemyBalls.forEach(function (enemy) {
+  //     if enem
+  //     if (this.randomPosition <= enemy.position.x - enemy.radius && this.randomPosition >= enemy.position.x + enemy.radius) {
+  //       console.log('iban a salir por el mismo sitio')
+  //     }
+  //   return this.randomPosition;
+  //   }.bind(this))
   // }
 
   //================= GENERATE BALLS & HOMES ====================
@@ -209,12 +215,18 @@ class Game {
     this.balls.forEach(function (ball) {
       ball.pauseBall();
     });
+    this.enemyBalls.forEach(function (ball) {
+      ball.pauseBall();
+    });
     window.cancelAnimationFrame(this.intervalGame)
   }
 
   playGame() {
     this._startBallCreation();
     this.balls.forEach(function (ball) {
+      ball.moveBall(ball.speed);
+    });
+    this.enemyBalls.forEach(function (ball) {
       ball.moveBall(ball.speed);
     });
     this.intervalGame = window.requestAnimationFrame(this._update.bind(this))
@@ -323,11 +335,13 @@ class Game {
      this.b = enemy.position.y - ball.position.y;
      this.h = Math.sqrt(Math.pow(this.a,2) + Math.pow(this.b,2));
      // console.log(`enemy radius is ${enemy.radius} and ball radius ${ball.radius}`);
-     if (enemy.radius + ball.radius >= this.h) {
-       this._checkSameColor(ball, enemy);
-       this.fecundedBalls.push(this.balls[index]);
-       this.balls.splice(index, 1)
-       return true
+     if (enemy.radius + ball.radius >= this.h && ball.ballEnemyCrash === false) {
+      ball.direction.x = (-ball.direction.x);
+      ball.direction.y = (-ball.direction.y);
+      // ball.color = this.getRandomColor();
+      // ball.tail.spriteSource(ball.color);
+      ball.tail.updateFrameY(ball.direction.x, ball.direction.y);
+      ball.ballEnemyCrash = true;
      }
    }.bind(this))
  }.bind(this))
@@ -342,7 +356,6 @@ class Game {
      // console.log(`home radius is ${home.radius} and ball radius ${ball.radius}`);
      if (this.h <= home.radius - ball.radius) {
        this.fecundedBalls.splice(index, 1)
-       console.log('eliminate fecunded ball')
        return true
      }
    }.bind(this))

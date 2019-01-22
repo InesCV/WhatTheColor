@@ -76,13 +76,13 @@ h2 {
 h3 {
   text-align: center;
   font-size: 2em;
-  margin: 0.25em auto 1em;
+  margin: 0.25em auto 0.5em;
 }
 
 h4 {
   text-align: center;
   font-size: 1.5em;
-  margin: 0.3em auto 1em;
+  margin: 0.25em;
   color: #7800FF;
 }
 
@@ -90,13 +90,20 @@ h5 {
   font-size: 0.55em;
 }
 
-p {
+h6 {
   text-align: center;
   font-size: 1.5em;
   position: fixed;
   top: 70px;
   left: 80px;
   font-weight: bold;
+}
+
+p {
+  text-align: center;
+  font-size: 1em;
+  margin: 0.3em auto 1em;
+  color: #7800FF;
 }
 
 .container {

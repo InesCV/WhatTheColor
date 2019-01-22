@@ -18,6 +18,7 @@ class Ball {
     this.radius = options.radius;
     this.speed = 8;
     this.carefulColor = 0;
+    this.ballEnemyCrash = false;
     this.moveBall(this.speed);
     this.createTail();
 
@@ -53,7 +54,7 @@ class Ball {
   // Check if the ball is clicked 
   clickedBall(a,b) {
     this.h = Math.sqrt(Math.pow(a,2) + Math.pow(b,2))
-    if (this.h <= this.radius + 10) {
+    if (this.h <= this.radius + this.radius/3) {
       return true
     }
   }
@@ -80,8 +81,10 @@ class Ball {
 
   changeDirection(homeX, homeY) {
     this.moving = true;
-    this.color = this.colorOriginal;
-
+    if (this.color === '#FF0000') {
+      this.color = this.colorOriginal;
+    }
+    
     // Calculate the new direction
     this.ballToHomeX = homeX - this.position.x;
     this.ballToHomeY = homeY - this.position.y;
