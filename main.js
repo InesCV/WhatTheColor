@@ -1,6 +1,32 @@
 document.onload = function() {
   let startScreen = document.getElementById('startScreen');
   let startGame = document.getElementById('startGame');
+
+  // let blueSrprite = new Image();
+  // blueSrprite.src = 'images/blueSprite.png';
+  // let purpleSrprite = new Image();
+  // purpleSrprite.src = 'images/purpleSprite.png';
+  // let greenSrprite = new Image();
+  // greenSrprite.src = 'images/greenSrprite.png';
+  // let enemySrprite = new Image();
+  // enemySrprite.src = 'images/enemySrprite.png';
+  // let redSrprite = new Image();
+  // redSrprite.src = 'images/redSrprite.png';
+  
+  // let tailImages = new Array()
+  // function preload() {
+  //   for (i = 0; i < preload.arguments.length; i++) {
+  //     tailImages[i] = new Image()
+  //     tailImages[i].src = preload.arguments[i]
+  //   }
+  // }
+  // preload(
+  //   'images/blueSprite.png',
+  //   'images/purpleSprite.png',
+  //   'images/greenSprite.png',
+  //   'images/enemySprite.png',
+  //   'images/enemySprite.png'
+  // )   
   startGame.addEventListener("click", function() {
     startScreen.style = 'display: none';
     const canvas = document.getElementById('canvas');

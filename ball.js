@@ -19,6 +19,7 @@ class Ball {
     this.speed = 8;
     this.carefulColor = 0;
     this.ballEnemyCrash = false;
+    this.inDangerZone = false;
     this.moveBall(this.speed);
     this.createTail();
 

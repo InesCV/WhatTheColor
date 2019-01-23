@@ -15,7 +15,7 @@ class Game {
     this.homeRadius = this.height/3.5; // Radius of the home
     this.ballRadius = this.height/23; // Radius of the ball
     this.gamePaused = false; // Boolean to know if the game is paused
-    this.marginExit = 20; // Margin outside of the canvas where the ball will appear
+    this.marginExit = this.ballRadius*2; // Margin outside of the canvas where the ball will appear
     this.carefulDistance = this.height * 0.2; // Warning distance when ball is about to leave the canvas
     this.ballCreationTimer = 2000; // Interval time for the creation of balls
     this.intervalGame = undefined;
@@ -24,7 +24,7 @@ class Game {
     this._startBallCreation(); // Call an interval that creates more balls
     this._addZygotesDOM() // Update DOM about the number of zygotes archieved
   }
-
+  
   startGame() {
     this._update();
   }
@@ -250,11 +250,6 @@ class Game {
  
   //======================== DRAW CANVAS ========================
 
-  
-  _drawBoard() {
-    this.ctx.fillStyle = "#FBFFF8";
-  }
-
   _drawBalls() {
     this.balls.forEach(function(ball) {
       this.ctx.beginPath();
@@ -396,17 +391,24 @@ class Game {
 
   _checkBallLeftCanvas() {
     this.balls.forEach(function (ball, index) {
-      if ((ball.direction.x === 1 && ball.position.x > (canvas.width + this.marginExit)) || (ball.direction.x === -1 && ball.position.x < (0 - this.marginExit)) || (ball.direction.y === 1 && ball.position.y > (canvas.height + this.marginExit)) || (ball.direction.y === -1 && ball.position.y < (0 - this.marginExit))) {
+      if ((ball.direction.x > 0 && ball.position.x > (canvas.width + this.marginExit)) || (ball.direction.x < 0 && ball.position.x < (0 - this.marginExit)) || (ball.direction.y > 0 && ball.position.y > (canvas.height + this.marginExit)) || (ball.direction.y < 0 && ball.position.y < (0 - this.marginExit))) {
         console.log('GAME OVER');
         this.balls.splice(index, 1);
         ball.pauseBall();
         return this._gameOverWait(this.onGameOver)
       } else if ((ball.direction.x === 1 && ball.position.x > (canvas.width - this.carefulDistance)) || (ball.direction.x === -1 && ball.position.x < (0 + this.carefulDistance)) || (ball.direction.y === 1 && ball.position.y > (canvas.height - this.carefulDistance)) || (ball.direction.y === -1 && ball.position.y < (0 + this.carefulDistance))) {
-        console.log('CAREFUL!!!!!!!!');
-        ball.color = '#FF0000';
-        ball.tail.tailImage.src = 'images/redSprite.png';
+          if (ball.inDangerZone === false) {
+            this._dangerZone(ball);
+            ball.inDangerZone = true;
+          }
       }
     }.bind(this))
+  }
+
+  _dangerZone(ball) {
+    console.log('CAREFUL!!!!!!!!');
+    ball.color = '#FF0000';
+    ball.tail.tailImage.src = 'images/redSprite.png';
   }
 
   _checkEnemyLeftCanvas() {
@@ -440,7 +442,6 @@ class Game {
 
   _update() {
     this._clear();
-    this._drawBoard();
     this.callDrawTail();
     this._drawBalls();
     this._drawFecundedBalls();
@@ -451,7 +452,6 @@ class Game {
     this._fecundedBallHome()
     this._checkBallLeftCanvas();
     this._assignControlsToKeys ();
-    // this._sayLocation();
     this.intervalGame = window.requestAnimationFrame(this._update.bind(this));
   }
 }
