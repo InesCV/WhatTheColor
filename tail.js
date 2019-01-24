@@ -8,7 +8,6 @@ class Tail {
     this.color = options.color;
     this.tailImage = new Image();
     this.tailImage.src = 'images/spriteMasterAllColors.svg';
-    // this.tailImage.src = this.spriteSource(this.color);
     this.spriteWidth = 2184;
     this.spriteHeight = 16380;
     this.rows = 60;
@@ -30,46 +29,27 @@ class Tail {
   // Assign color of the Tail
   spriteYcolor(color) {
     if (color === '#19FFFC') {
-      console.log('color blue')
-      return 0;
+      return 0; // From 0 to 11 lines are the blue tail
     } else if (color === '#7800FF') {
-      console.log('color purple')
-      return 12;
+      return 12; // From 12 to 23 lines are the purple tail
     } else if (color === '#19FF2E') {
-      console.log('color green')
-      return 24;
+      return 24; // From 24 to 35 lines are the green tail
     } else if (color === '#FF0000') {
-      console.log('color red')
-      return 36;
+      return 36; // From 36 to 47 lines are the red tail
     } else if (color === '#621348') {
-      console.log('color enemy')
-      return 48;
+      return 48; // From 48 to 59 lines are the enemy tail
     } 
   }
-  
-  // Assign color of the Tail
-  // spriteSource(color) {
-  //   if (color === '#19FFFC') {
-  //     return 'images/blueSprite.png';
-  //   } else if (color === '#7800FF') {
-  //     return 'images/purpleSprite.png';
-  //   } else if (color === '#19FF2E') {
-  //     return 'images/greenSprite.png';
-  //   } else if (color === '#FF0000') {
-  //     return 'images/enemySprite.png';
-  //   } else if (color === '#621348') {
-  //     return 'images/enemySprite.png';
-  //   } 
-  // }
 
+  // Transform degrees to radians
   fromDegreesToRadians (degrees) {
     return degrees * Math.PI / 180;
   }  
 
-  // Movement of the ball frames in the same angle
+  // Tail movement frames (same color & angle) every 4 Request Animation Frame
   updateFrameX(){
     if (this.slowRequestAnimation < 3) {
-      this.slowRequestAnimation += 1;
+      this.slowRequestAnimation += 1; 
     } else {
       this.slowRequestAnimation = 0;
       this.currentFrame = ++this.currentFrame % this.cols;
@@ -77,7 +57,7 @@ class Tail {
     }
   }
   
-  // Choose angle of the tail realtive to ball direction
+  // Choose angle & color of the tail realtive to ball direction
   updateFrameY(frameY, directionX, directionY){
     this.spriteY = this.tailDirection(frameY, directionX, directionY);
   }

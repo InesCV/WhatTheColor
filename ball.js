@@ -77,7 +77,6 @@ class Ball {
     this.pauseBall();
     this.speed = 40;
     this.moveBall(this.speed);
-    console.log("Fecunded ball entering");
   }
 
   changeDirection(homeX, homeY) {

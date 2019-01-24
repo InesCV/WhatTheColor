@@ -205,7 +205,7 @@ class Game {
           break;
         case 8: //Delete
           this._clearBalls();
-          console.log('If (zygots are more than X) this.balls = [] again');
+          console.log('You lost 5 zygots to clear the screen');
           break;
       }
     };
@@ -319,7 +319,6 @@ class Game {
        this.a = home.position.x - ball.position.x;
        this.b = home.position.y - ball.position.y;
        this.h = Math.sqrt(Math.pow(this.a,2) + Math.pow(this.b,2));
-       // console.log(`home radius is ${home.radius} and ball radius ${ball.radius}`);
        if (home.radius + ball.radius >= this.h) {
          this._checkSameColor(ball, home);
          this.fecundedBalls.push(this.balls[index]);
@@ -336,12 +335,9 @@ class Game {
      this.a = enemy.position.x - ball.position.x;
      this.b = enemy.position.y - ball.position.y;
      this.h = Math.sqrt(Math.pow(this.a,2) + Math.pow(this.b,2));
-     // console.log(`enemy radius is ${enemy.radius} and ball radius ${ball.radius}`);
      if (enemy.radius + ball.radius >= this.h && ball.ballEnemyCrash === false) {
       ball.direction.x = (-ball.direction.x);
       ball.direction.y = (-ball.direction.y);
-      // ball.color = this.getRandomColor();
-      // ball.tail.spriteSource(ball.color);
       ball.tail.updateFrameY(ball.tail.spriteYcolor(ball.color), ball.direction.x, ball.direction.y);   
       ball.ballEnemyCrash = true;
      }
@@ -355,7 +351,6 @@ class Game {
      this.a = home.position.x - ball.position.x;
      this.b = home.position.y - ball.position.y;
      this.h = Math.sqrt(Math.pow(this.a,2) + Math.pow(this.b,2));
-     // console.log(`home radius is ${home.radius} and ball radius ${ball.radius}`);
      if (this.h <= home.radius - ball.radius) {
        this.fecundedBalls.splice(index, 1)
        return true
@@ -414,7 +409,6 @@ class Game {
   _checkEnemyLeftCanvas() {
     this.enemyBalls.forEach(function (ball, index) {
       if ((ball.direction.x === 1 && ball.position.x > (canvas.width + this.marginExit)) || (ball.direction.x === -1 && ball.position.x < (0 - this.marginExit)) || (ball.direction.y === 1 && ball.position.y > (canvas.height + this.marginExit)) || (ball.direction.y === -1 && ball.position.y < (0 - this.marginExit))) {
-        console.log('Enemy left the canvas');
         this.enemyBalls.splice(index, 1);
       }
     }.bind(this))
@@ -435,7 +429,6 @@ class Game {
     clearInterval(this.intervalIDCreationBall);
     this.ballCreationTimer = this.ballCreationTimer * 0.95;
     this._startBallCreation();
-    // console.log(this.ballCreationTimer);
    }
   
   //====================== UPDATE GAME REQUEST ====================
