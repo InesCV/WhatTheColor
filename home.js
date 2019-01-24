@@ -21,8 +21,8 @@ class Home {
         this.balls.forEach(function(ball) {
           if (ball.moving === false) {
             ball.changeDirection(this.position.x, this.position.y);
-            ball.tail.updateFrameY(ball.direction.x, ball.direction.y);   
-            ball.tail.tailImage.src = ball.tail.spriteSource(ball.colorOriginal);
+            ball.tail.updateFrameY(ball.tail.spriteYcolor(ball.color), ball.direction.x, ball.direction.y);   
+            // ball.tail.tailImage.src = ball.tail.spriteSource(ball.colorOriginal);
            }
         }.bind(this))
       }}.bind(this));

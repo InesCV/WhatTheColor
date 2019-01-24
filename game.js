@@ -342,7 +342,7 @@ class Game {
       ball.direction.y = (-ball.direction.y);
       // ball.color = this.getRandomColor();
       // ball.tail.spriteSource(ball.color);
-      ball.tail.updateFrameY(ball.direction.x, ball.direction.y);
+      ball.tail.updateFrameY(ball.tail.spriteYcolor(ball.color), ball.direction.x, ball.direction.y);   
       ball.ballEnemyCrash = true;
      }
    }.bind(this))
@@ -408,7 +408,7 @@ class Game {
   _dangerZone(ball) {
     console.log('CAREFUL!!!!!!!!');
     ball.color = '#FF0000';
-    ball.tail.tailImage.src = 'images/redSprite.png';
+    ball.tail.updateFrameY(ball.tail.spriteYcolor(ball.color), ball.direction.x, ball.direction.y);   
   }
 
   _checkEnemyLeftCanvas() {
