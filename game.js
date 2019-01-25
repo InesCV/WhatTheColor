@@ -6,7 +6,7 @@ class Game {
     this.canvas = options.canvas; // Inheritance of the canvas itself
     this.songs = ["music/Let's get it on.mp3","music/Sexual.mp3","music/You can Leave Your Hat.mp3", "music/Too Funky.mp3", "music/Pony.mp3"];
     this.gameOverAudios = ["music/already 3.aac", "music/repeat.aac", "music/experience.aac"]
-    this.orgasms = ["music/orgasm1.aac", "music/orgasm2.aac", , "music/orgasmo21.aac", "music/orgasmo22.aac"]
+    this.orgasms = ["music/orgasmo21.aac", "music/orgasmo22.aac", "music/orgasmo23.aac", "music/orgasmo24.aac"]
     this.balls = []; // Arrays of moving balls in the screen
     this.fecundedBalls = []; // Array of balls that already reached a home
     this.enemyBalls = []; //  Array of balls that can't touch you
