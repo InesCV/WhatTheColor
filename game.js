@@ -6,7 +6,7 @@ class Game {
     this.canvas = options.canvas; // Inheritance of the canvas itself
     this.songs = ["music/Let's get it on.mp3","music/Sexual.mp3","music/You can Leave Your Hat.mp3", "music/Too Funky.mp3", "music/Pony.mp3"];
     this.gameOverAudios = ["music/already 3.aac", "music/repeat.aac", "music/experience.aac"]
-    this.orgasms = ["music/orgasm1.aac", "music/orgasm2.aac"]
+    this.orgasms = ["music/orgasm1.aac", "music/orgasm2.aac", , "music/orgasmo21.aac", "music/orgasmo22.aac"]
     this.balls = []; // Arrays of moving balls in the screen
     this.fecundedBalls = []; // Array of balls that already reached a home
     this.enemyBalls = []; //  Array of balls that can't touch you
@@ -65,7 +65,7 @@ class Game {
   //   this._update();
   // }
 
-  //====================== GAME OPERATIONS =======================
+  //====================== GAME SOUNDS =======================
 
   getMusic(musicList) {
     this.number = this.getRandomIntegerNumber(0,musicList.length);
@@ -73,11 +73,11 @@ class Game {
   }
 
   getGameOverSound() {
-    if (this.zygotes <= 10) {
+    if (this.zygotes <= 8) {
       return this.gameOverAudios[0]
-    } else if (this.zygotes <= 30) {
+    } else if (this.zygotes < 30) {
       return this.gameOverAudios[1]
-    } else if (this.zygotes > 30) {
+    } else if (this.zygotes >= 30) {
       return this.gameOverAudios[2]
     }
   }
@@ -130,6 +130,7 @@ class Game {
     this.maxExitPoint = heightOrWidth - this.homeRadius -50;
     return this.getRandomNumber(this.minExitPoint, this.maxExitPoint)
   }
+  
 
   getPositionBinary(heightOrWidth) {
     this.possibleBinaryExit = [- this.marginExit, heightOrWidth + this.marginExit];
@@ -137,14 +138,18 @@ class Game {
     return this.binaryExit
   }
 
-  // _avoidEnemyPosition() {
+  // _avoidEnemyPosition(heightOrWidth) {
+  //   this.minExitPoint = this.homeRadius + 50;
+  //   this.maxExitPoint = heightOrWidth - this.homeRadius -50;
   //   this.randomPosition = this.getRandomNumber(this.minExitPoint, this.maxExitPoint);
   //   this.enemyBalls.forEach(function (enemy) {
-  //     if enem
-  //     if (this.randomPosition <= enemy.position.x - enemy.radius && this.randomPosition >= enemy.position.x + enemy.radius) {
+  //     if (this.randomPosition >= enemy.position.x - enemy.radius && this.randomPosition <= enemy.position.x + enemy.radius) {
   //       console.log('iban a salir por el mismo sitio')
+  //       return this.randomPosition;
+  //     } else {
+  //       console.log('No salen por el mismo sitio')
+  //       return this.randomPosition;
   //     }
-  //   return this.randomPosition;
   //   }.bind(this))
   // }
 
