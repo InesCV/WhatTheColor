@@ -4,6 +4,9 @@ class Game {
     this.height = options.height; // Height of the canvas according to the screen
     this.ctx = options.ctx; // Inheritance of the context
     this.canvas = options.canvas; // Inheritance of the canvas itself
+    this.songs = ["music/Let's get it on.mp3","music/Sexual.mp3","music/You can Leave Your Hat.mp3", "music/Too Funky.mp3", "music/Pony.mp3"];
+    this.gameOverAudios = ["music/already 3.aac", "music/repeat.aac", "music/experience.aac"]
+    this.orgasms = ["music/orgasm1.aac", "music/orgasm2.aac"]
     this.balls = []; // Arrays of moving balls in the screen
     this.fecundedBalls = []; // Array of balls that already reached a home
     this.enemyBalls = []; //  Array of balls that can't touch you
@@ -19,6 +22,12 @@ class Game {
     this.carefulDistance = this.height * 0.2; // Warning distance when ball is about to leave the canvas
     this.ballCreationTimer = 2000; // Interval time for the creation of balls
     this.intervalGame = undefined;
+    this.music = new Audio();  //Background music 
+    this.music.src = this.getMusic(this.songs);
+    this.gameOverAudio = new Audio(); // Game over sound 
+    this.enemyBounce = new Audio(); // Sound When ball touches enemyBall
+    this.enemyBounce.src = "music/rebote.aac";
+    this.orgasm = new Audio(); // Sound every 5 balls get home
     this._generateBalls(); // Create the first ball
     this._generateHomes(); // Create the three Homes
     this._startBallCreation(); // Call an interval that creates more balls
@@ -27,6 +36,7 @@ class Game {
   
   startGame() {
     this._update();
+    this.music.play()
   }
 
   restartOldGame () {
@@ -54,6 +64,23 @@ class Game {
   //   this._startBallCreation();
   //   this._update();
   // }
+
+  //====================== GAME OPERATIONS =======================
+
+  getMusic(musicList) {
+    this.number = this.getRandomIntegerNumber(0,musicList.length);
+    return musicList[this.number]
+  }
+
+  getGameOverSound() {
+    if (this.zygotes <= 10) {
+      return this.gameOverAudios[0]
+    } else if (this.zygotes <= 30) {
+      return this.gameOverAudios[1]
+    } else if (this.zygotes > 30) {
+      return this.gameOverAudios[2]
+    }
+  }
 
   //====================== GAME OPERATIONS =======================
   
@@ -236,6 +263,9 @@ class Game {
   _gameOverWait(item) {
     window.cancelAnimationFrame(this.intervalGame);
     this.pauseGame();
+    this.music.pause()
+    this.gameOverAudio.src = this.getGameOverSound();
+    this.gameOverAudio.play()
     this.waitingSecond = setTimeout(function() {
       // console.log('waiting a second')
       item();
@@ -336,11 +366,12 @@ class Game {
      this.b = enemy.position.y - ball.position.y;
      this.h = Math.sqrt(Math.pow(this.a,2) + Math.pow(this.b,2));
      if (enemy.radius + ball.radius >= this.h && ball.ballEnemyCrash === false) {
-      ball.direction.x = (-ball.direction.x);
-      ball.direction.y = (-ball.direction.y);
-      ball.tail.updateFrameY(ball.tail.spriteYcolor(ball.color), ball.direction.x, ball.direction.y);   
-      ball.ballEnemyCrash = true;
-     }
+       this.enemyBounce.play();
+       ball.direction.x = (-ball.direction.x);
+       ball.direction.y = (-ball.direction.y);
+       ball.tail.updateFrameY(ball.tail.spriteYcolor(ball.color), ball.direction.x, ball.direction.y);   
+       ball.ballEnemyCrash = true;
+      }
    }.bind(this))
  }.bind(this))
 }
@@ -367,6 +398,8 @@ class Game {
         this._levelUp();
       }
       if (this.zygotes % 5 === 0) {
+        this.orgasm.src = this.getMusic(this.orgasms)
+        this.orgasm.play();
         this._generateEnemyBalls();
       }
       return this._addZygotesDOM();
