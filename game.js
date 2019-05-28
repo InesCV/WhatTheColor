@@ -175,19 +175,19 @@ class Game {
     }));
   }
 
-  _generateEnemyBalls() {
-    this.enemyBalls.push(new Ball({
-      width: this.width, 
-      height: this.height, 
-      canvas: this.canvas,
-      ctx: this.ctx,
-      homes: this.homes,
-      radius: this.ballRadius,
-      marginExit: this.marginExit,
-      color: '#621348',
-      position: this.getRandomPosition()
-    }));
-  }
+  // _generateEnemyBalls() {
+  //   this.enemyBalls.push(new Ball({
+  //     width: this.width, 
+  //     height: this.height, 
+  //     canvas: this.canvas,
+  //     ctx: this.ctx,
+  //     homes: this.homes,
+  //     radius: this.ballRadius,
+  //     marginExit: this.marginExit,
+  //     color: '#621348',
+  //     position: this.getRandomPosition()
+  //   }));
+  // }
 
   // IN CASE WE WANT RANDOM HOME POSITIONS AND COLORS
   // _generateHomes() {
@@ -402,11 +402,11 @@ class Game {
       if (this.zygotes <= 20) {
         this._levelUp();
       }
-      if (this.zygotes % 5 === 0) {
-        this.orgasm.src = this.getMusic(this.orgasms)
-        this.orgasm.play();
-        this._generateEnemyBalls();
-      }
+      // if (this.zygotes % 5 === 0) {
+      //   this.orgasm.src = this.getMusic(this.orgasms)
+      //   this.orgasm.play();
+      //   this._generateEnemyBalls();
+      // }
       return this._addZygotesDOM();
     } else {
       item1.fecundedBall('#FF0000');
