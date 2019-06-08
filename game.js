@@ -34,12 +34,12 @@ class Game {
     this._addZygotesDOM() // Update DOM about the number of zygotes archieved
   }
   
-  startGame() {
+  startGame = () => {
     this._update();
     this.music.play()
   }
 
-  restartOldGame () {
+  restartOldGame = () => {
     this.balls = [];
     this.fecundedBalls = [];
     this.homes = [];
@@ -50,7 +50,7 @@ class Game {
     clearInterval(this.intervalGame);
   }
 
-  // restartGame () {
+  // restartGame = () => {
   //   this.balls = [];
   //   this.fecundedBalls = [];
   //   this.homes = [];
@@ -67,12 +67,12 @@ class Game {
 
   //====================== GAME SOUNDS =======================
 
-  getMusic(musicList) {
+  getMusic = (musicList) => {
     this.number = this.getRandomIntegerNumber(0,musicList.length);
     return musicList[this.number]
   }
 
-  getGameOverSound() {
+  getGameOverSound = () => {
     if (this.zygotes <= 8) {
       return this.gameOverAudios[0]
     } else if (this.zygotes < 30) {
@@ -84,21 +84,21 @@ class Game {
 
   //====================== GAME OPERATIONS =======================
   
-  getRandomNumber(max, min) {
+  getRandomNumber = (max, min) => {
     return Math.random() * (max - min) + min;
   };
 
-  getRandomIntegerNumber(max, min) {
+  getRandomIntegerNumber = (max, min) => {
     return Math.floor(Math.random() * (max - min) + min);
   };
   
-  getRandomColor() {
+  getRandomColor = () => {
     return this.possibleColors[this.getRandomIntegerNumber(3,0)]
   };
 
   //===================== RANDOM BALL EXIT ======================
 
-  getRandomPosition() {
+  getRandomPosition = () => {
     this.exitAxis = this.getRandomIntegerNumber(2,0);
     if (this.exitAxis === 0) {
       // Cuando la vola sale de uno de los ejes Y
@@ -125,14 +125,14 @@ class Game {
   //   }
   // }
 
-  getPositionRange(heightOrWidth) {
+  getPositionRange = (heightOrWidth) => {
     this.minExitPoint = this.homeRadius + 50;
     this.maxExitPoint = heightOrWidth - this.homeRadius -50;
     return this.getRandomNumber(this.minExitPoint, this.maxExitPoint)
   }
   
 
-  getPositionBinary(heightOrWidth) {
+  getPositionBinary = (heightOrWidth) => {
     this.possibleBinaryExit = [- this.marginExit, heightOrWidth + this.marginExit];
     this.binaryExit = this.possibleBinaryExit[this.getRandomIntegerNumber(2,0)];
     return this.binaryExit
@@ -155,13 +155,13 @@ class Game {
 
   //================= GENERATE BALLS & HOMES ====================
 
-  _startBallCreation() {
+  _startBallCreation = () => {
     this.intervalIDCreationBall = setInterval(function() {
       this._generateBalls();
     }.bind(this), this.ballCreationTimer);
   }
 
-  _generateBalls() {
+  _generateBalls = () => {
     this.balls.push(new Ball({
       width: this.width, 
       height: this.height, 
@@ -175,7 +175,7 @@ class Game {
     }));
   }
 
-  _generateEnemyBalls() {
+  _generateEnemyBalls = () => {
     this.enemyBalls.push(new Ball({
       width: this.width, 
       height: this.height, 
@@ -202,7 +202,7 @@ class Game {
   //     }));
   // }
 
-  _generateHomes() {
+  _generateHomes = () => {
     for (let i = 0; i < 3; i++) {
       this.homes.push(new Home({
         width: this.width, 
@@ -219,7 +219,7 @@ class Game {
 
   //======================== GAME MECHANICS =====================
 
-  _assignControlsToKeys () {
+  _assignControlsToKeys = () => {
     document.onkeydown = (e) => {
       switch (e.keyCode) {
         case 13: //Enter
@@ -243,7 +243,7 @@ class Game {
     };
   }
 
-  pauseGame() {
+  pauseGame = () => {
     clearInterval(this.intervalIDCreationBall);
     this.balls.forEach(function (ball) {
       ball.pauseBall();
@@ -254,7 +254,7 @@ class Game {
     window.cancelAnimationFrame(this.intervalGame)
   }
 
-  playGame() {
+  playGame = () => {
     this._startBallCreation();
     this.balls.forEach(function (ball) {
       ball.moveBall(ball.speed);
@@ -265,7 +265,7 @@ class Game {
     this.intervalGame = window.requestAnimationFrame(this._update.bind(this))
   }
 
-  _gameOverWait(item) {
+  _gameOverWait = (item) => {
     window.cancelAnimationFrame(this.intervalGame);
     this.pauseGame();
     this.music.pause()
@@ -277,7 +277,7 @@ class Game {
     }, 500)
   }
 
-  _clearBalls() {
+  _clearBalls = () => {
     this.balls.splice(0, this.balls.length);
     this.zygotes -= 5;
     this._addZygotesDOM ()
@@ -285,7 +285,7 @@ class Game {
  
   //======================== DRAW CANVAS ========================
 
-  _drawBalls() {
+  _drawBalls = () => {
     this.balls.forEach(function(ball) {
       this.ctx.beginPath();
       this.ctx.arc(ball.position.x,ball.position.y,ball.radius,0,2*Math.PI);
@@ -294,21 +294,21 @@ class Game {
     }.bind(this))
   }
 
-  callDrawTail() {
+  callDrawTail = () => {
     this.balls.forEach(function(ball) {
       ball.tail.updateFrameX();
       ball.tail.drawTail(ball.position.x, ball.position.y);
     }.bind(this))
   }
 
-  enemyTail() {
+  enemyTail = () => {
     this.enemyBalls.forEach(function(ball) {
       ball.tail.updateFrameX();
       ball.tail.drawTail(ball.position.x, ball.position.y);
     }.bind(this))
   }
 
-  _drawFecundedBalls() {
+  _drawFecundedBalls = () => {
     this.fecundedBalls.forEach(function(ball) {
       this.ctx.beginPath();
       this.ctx.arc(ball.position.x,ball.position.y,ball.radius,0,2*Math.PI);
@@ -317,7 +317,7 @@ class Game {
     }.bind(this))
   }
 
-  _drawEnemyBalls() {
+  _drawEnemyBalls = () => {
     this.enemyBalls.forEach(function(ball) {
       this.ctx.beginPath();
       this.ctx.arc(ball.position.x,ball.position.y,ball.radius,0,2*Math.PI);
@@ -326,7 +326,7 @@ class Game {
     }.bind(this))
   }
 
-  _drawHomes() {
+  _drawHomes = () => {
     this.homes.forEach(function(home){
       this.ctx.beginPath();
       this.ctx.arc(home.position.x,home.position.y,home.radius,0,2*Math.PI);
@@ -335,20 +335,20 @@ class Game {
     }.bind(this))    
   }
 
-  _drawMyName() {
+  _drawMyName = () => {
     this.ctx.font = "1em Quicksand";
     this.ctx.fillStyle = "#7800FF"
     this.ctx.textAlign = "center";
     this.ctx.fillText("IronHack Game made by © Ines CV", canvas.width/2, canvas.height - 10);
   }
 
-  _clear() {
+  _clear = () => {
     this.ctx.clearRect(0, 0, this.width, this.height);
   }
 
  //==================== GAME CHECK, COLLISIONS & GAME OVER ====================
 
-  _checkBallHomecollision() {
+  _checkBallHomecollision = () => {
     this.balls.forEach(function (ball, index) {
      this.homes.forEach(function (home) {
        this.a = home.position.x - ball.position.x;
@@ -364,7 +364,7 @@ class Game {
    }.bind(this))
  }
 
- _checkBallEnemycollision() {
+ _checkBallEnemycollision = () => {
   this.balls.forEach(function (ball, index) {
    this.enemyBalls.forEach(function (enemy) {
      this.a = enemy.position.x - ball.position.x;
@@ -381,7 +381,7 @@ class Game {
  }.bind(this))
 }
 
- _fecundedBallHome() {
+ _fecundedBallHome = () => {
   this.fecundedBalls.forEach(function (ball, index) {
    this.homes.forEach(function (home) {
      this.a = home.position.x - ball.position.x;
@@ -395,7 +395,7 @@ class Game {
  }.bind(this))
 }
 
-  _checkSameColor(item1, item2) {
+  _checkSameColor = (item1, item2) => {
     if (item1.colorOriginal === item2.color) {
       item1.fecundedBall(item1.colorOriginal);
       this.zygotes += 1;
@@ -416,13 +416,13 @@ class Game {
     }
   }
 
-  _addZygotesDOM () {
+  _addZygotesDOM = () => {
     let zygotesScreen = document.getElementById('zygots'); 
     zygotesScreen.innerHTML = this.zygotes;
     return zygotesScreen;
   }
 
-  _checkBallLeftCanvas() {
+  _checkBallLeftCanvas = () => {
     this.balls.forEach(function (ball, index) {
       if ((ball.direction.x > 0 && ball.position.x > (canvas.width + this.marginExit)) || (ball.direction.x < 0 && ball.position.x < (0 - this.marginExit)) || (ball.direction.y > 0 && ball.position.y > (canvas.height + this.marginExit)) || (ball.direction.y < 0 && ball.position.y < (0 - this.marginExit))) {
         console.log('GAME OVER');
@@ -438,13 +438,13 @@ class Game {
     }.bind(this))
   }
 
-  _dangerZone(ball) {
+  _dangerZone = (ball) => {
     console.log('CAREFUL!!!!!!!!');
     ball.color = '#FF0000';
     ball.tail.updateFrameY(ball.tail.spriteYcolor(ball.color), ball.direction.x, ball.direction.y);   
   }
 
-  _checkEnemyLeftCanvas() {
+  _checkEnemyLeftCanvas = () => {
     this.enemyBalls.forEach(function (ball, index) {
       if ((ball.direction.x === 1 && ball.position.x > (canvas.width + this.marginExit)) || (ball.direction.x === -1 && ball.position.x < (0 - this.marginExit)) || (ball.direction.y === 1 && ball.position.y > (canvas.height + this.marginExit)) || (ball.direction.y === -1 && ball.position.y < (0 - this.marginExit))) {
         this.enemyBalls.splice(index, 1);
@@ -452,7 +452,7 @@ class Game {
     }.bind(this))
   }
 
-  isThereEnemyBall() {
+  isThereEnemyBall = () => {
     if (this.enemyBalls.length > 0) {
       this.enemyTail();
       this._drawEnemyBalls();
@@ -463,7 +463,7 @@ class Game {
 
   //======================= ADDED DIFFICULTY ======================
 
-   _levelUp() {
+   _levelUp = () => {
     clearInterval(this.intervalIDCreationBall);
     this.ballCreationTimer = this.ballCreationTimer * 0.95;
     this._startBallCreation();
@@ -471,7 +471,7 @@ class Game {
   
   //====================== UPDATE GAME REQUEST ====================
 
-  _update() {
+  _update = () => {
     this._clear();
     this.callDrawTail();
     this._drawBalls();
