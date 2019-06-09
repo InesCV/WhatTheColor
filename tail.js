@@ -28,17 +28,20 @@ class Tail {
   
   // Assign color of the Tail
   spriteYcolor(color) {
-    if (color === '#19FFFC') {
-      return 0; // From 0 to 11 lines are the blue tail
-    } else if (color === '#7800FF') {
-      return 12; // From 12 to 23 lines are the purple tail
-    } else if (color === '#19FF2E') {
-      return 24; // From 24 to 35 lines are the green tail
-    } else if (color === '#FF0000') {
-      return 36; // From 36 to 47 lines are the red tail
-    } else if (color === '#621348') {
-      return 48; // From 48 to 59 lines are the enemy tail
-    } 
+    switch (color) {
+      case '#19FFFC':
+        return 0; // From 0 to 11 lines are the blue tail
+      case '#7800FF':
+        return 12; // From 12 to 23 lines are the purple tail
+      case '#19FF2E':
+        return 24; // From 24 to 35 lines are the green tail
+      case '#FF0000':
+        return 36; // From 36 to 47 lines are the red tail
+      case '#621348':
+        return 48; // From 48 to 59 lines are the enemy tail
+      default:
+        break;
+    }
   }
 
   // Transform degrees to radians
