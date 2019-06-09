@@ -4,7 +4,7 @@ class Game {
     this.height = options.height; // Height of the canvas according to the screen
     this.ctx = options.ctx; // Inheritance of the context
     this.canvas = options.canvas; // Inheritance of the canvas itself
-    this.songs = ["music/Let's get it on.mp3","music/Sexual.mp3","music/You can Leave Your Hat.mp3", "music/Too Funky.mp3", "music/Pony.mp3"];
+    this.songs = ["music/Let's get it on.mp3","music/Sexual.mp3","music/You can Leave Your Hat.mp3", "music/Pony.mp3"];
     this.gameOverAudios = ["music/already 3.aac", "music/repeat.aac", "music/experience.aac"]
     this.orgasms = ["music/orgasmo21.aac", "music/orgasmo22.aac", "music/orgasmo23.aac", "music/orgasmo24.aac"]
     this.balls = []; // Arrays of moving balls in the screen
@@ -32,6 +32,7 @@ class Game {
     this._generateHomes(); // Create the three Homes
     this._startBallCreation(); // Call an interval that creates more balls
     this._addZygotesDOM() // Update DOM about the number of zygotes archieved
+    this._assignControlsToKeys();
   }
   
   startGame = () => {
@@ -287,24 +288,12 @@ class Game {
 
   _drawBalls = () => {
     this.balls.forEach(function(ball) {
+      ball.tail.updateFrameX(); // Move tail
+      ball.tail.drawTail(ball.position.x, ball.position.y); // Draw tail
       this.ctx.beginPath();
       this.ctx.arc(ball.position.x,ball.position.y,ball.radius,0,2*Math.PI);
       this.ctx.fillStyle = ball.color;
       this.ctx.fill();
-    }.bind(this))
-  }
-
-  callDrawTail = () => {
-    this.balls.forEach(function(ball) {
-      ball.tail.updateFrameX();
-      ball.tail.drawTail(ball.position.x, ball.position.y);
-    }.bind(this))
-  }
-
-  enemyTail = () => {
-    this.enemyBalls.forEach(function(ball) {
-      ball.tail.updateFrameX();
-      ball.tail.drawTail(ball.position.x, ball.position.y);
     }.bind(this))
   }
 
@@ -319,6 +308,8 @@ class Game {
 
   _drawEnemyBalls = () => {
     this.enemyBalls.forEach(function(ball) {
+      ball.tail.updateFrameX(); // Move enemy tail
+      ball.tail.drawTail(ball.position.x, ball.position.y); // Draw enemy tail
       this.ctx.beginPath();
       this.ctx.arc(ball.position.x,ball.position.y,ball.radius,0,2*Math.PI);
       this.ctx.fillStyle = ball.color;
@@ -339,7 +330,7 @@ class Game {
     this.ctx.font = "1em Quicksand";
     this.ctx.fillStyle = "#7800FF"
     this.ctx.textAlign = "center";
-    this.ctx.fillText("IronHack Game made by © Ines CV", canvas.width/2, canvas.height - 10);
+    this.ctx.fillText("Game made by © Ines CV", canvas.width/2, canvas.height - 10);
   }
 
   _clear = () => {
@@ -455,7 +446,6 @@ class Game {
 
   isThereEnemyBall = () => {
     if (this.enemyBalls.length > 0) {
-      this.enemyTail();
       this._drawEnemyBalls();
       this._checkBallEnemycollision();
       this._checkEnemyLeftCanvas();
@@ -474,7 +464,6 @@ class Game {
 
   _update = () => {
     this._clear();
-    this.callDrawTail();
     this._drawBalls();
     this._drawFecundedBalls();
     this.isThereEnemyBall();
@@ -483,7 +472,6 @@ class Game {
     this._checkBallHomecollision();
     this._fecundedBallHome()
     this._checkBallLeftCanvas();
-    this._assignControlsToKeys ();
     this.intervalGame = window.requestAnimationFrame(this._update.bind(this));
   }
 }
