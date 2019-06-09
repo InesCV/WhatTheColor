@@ -11,7 +11,7 @@ class Game {
     this.fecundedBalls = []; // Array of balls that already reached a home
     this.enemyBalls = []; //  Array of balls that can't touch you
     this.homes = []; // Array of homes
-    this.zygotes = 0; // Number of balls that collisioned with a home
+    this.zygotes = 0; // Number of balls that collided with a home
     this.possibleColors = options.possibleColors; // Possible ball and home colors
     this.wrongColor = '#FF0000'; // Color used to warn you are about or already lost the game
     this.possiblePositions = options.possiblePositions; // Possible home positions
@@ -138,7 +138,7 @@ class Game {
     return this.binaryExit
   }
 
-  // _avoidEnemyPosition(heightOrWidth) {
+  // _avoidEnemyPosition = (heightOrWidth) => {
   //   this.minExitPoint = this.homeRadius + 50;
   //   this.maxExitPoint = heightOrWidth - this.homeRadius -50;
   //   this.randomPosition = this.getRandomNumber(this.minExitPoint, this.maxExitPoint);
@@ -403,8 +403,9 @@ class Game {
         this._levelUp();
       }
       if (this.zygotes % 5 === 0) {
-        this.orgasm.src = this.getMusic(this.orgasms)
-        this.orgasm.play();
+        // Orgasm sounds every time an enemy bal appears
+        // this.orgasm.src = this.getMusic(this.orgasms)
+        // this.orgasm.play();
         this._generateEnemyBalls();
       }
       return this._addZygotesDOM();
