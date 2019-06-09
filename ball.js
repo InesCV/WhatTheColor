@@ -84,18 +84,12 @@ class Ball {
     if (this.color === '#FF0000') {
       this.color = this.colorOriginal;
     }
-    
     // Calculate the new direction
     this.ballToHomeX = homeX - this.position.x;
     this.ballToHomeY = homeY - this.position.y;
     this.ballToHomeH = Math.sqrt(Math.pow(this.ballToHomeX,2) + Math.pow(this.ballToHomeY,2));
     this.direction.x = this.ballToHomeX/this.ballToHomeH;
     this.direction.y = this.ballToHomeY/this.ballToHomeH;
-    this.ballToHome = {
-      x: homeX - this.position.x,
-      y: homeY - this.position.y,
-      h: Math.sqrt(Math.pow(this.x,2) + Math.pow(this.y,2))
-    };
     // Make the ball go home faster
     this.changeDirectionSpeed = this.speed / 3;
     // Move to that position
@@ -116,10 +110,4 @@ class Ball {
       direction: this.direction
     })
   }
-
-  // _consoleLogPosition() {
-  //   setInterval(function() {
-  //     console.log(`The ball is in x:${this.position.x} y:${this.position.y}`);
-  //   }.bind(this), 5000);
-  // }
 }
