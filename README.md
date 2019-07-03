@@ -2,56 +2,14 @@
 Game made in IronHack to test my skills on JavaScript.
 
 ## Description
-The main idea is to direct the small moving objects (from now on Main Ball) into the corresponding fixed big objects (from now on Homes) before they disappear of the canvas. 
+It's a fecundation oriented game, the main idea is to guide sperms (from now on Main Ball) into their corresponding ovules (from now on Homes) before they disappear of the canvas. 
 
 In __the game__ screen of the canvas you will find a Home in three of the corners and Balls will be randomly entering in the gaming zone. 
+
 __The player__ must click on every ball and then it’s home in order to show them where to go. 
-__The game is over__ once a Main ball cross the canvas or have reached the wrong home.
 
-* * *
-
-## MVP
-
-### The Game
-  * Will start when you press play
-  * Game Over will be once a ball leaves the canvas or touches the wrong home
-  * Points will be added when a Ball gets into the right Home
-  
-### The Main Ball
-  * Must appear randomly
-  * Must have one of the colors of the Home
-  * Must have an selector click event waiting for a second selector click event to change direction
-  * Will disappear once it touches one of the homes or leaves the canvas
-  * Must turn red if it is abbout to disappear
-
-### The Home
-  * There has to be a Home in 3 corners.
-  * Must have one color each
-  * Must turn red if it touches a ball of the wrong color
-
-
-* * *
-
-## Backlog  
-
-### The Game
-  * If you reach a certain amount of points, you will get the ability to clear the canvas once
-
-### The Main Ball
-  * If the Main Ball touches another Main Ball it will switch color
-  
-### The Enemy Ball
-  * Enemy Balls will appear too after the player reaches certain points
-  * The Enemy Balls will inherit some of the Main Ball properies. They will be different as they:
-    * Might be able to colide with Main Balls, removing the Main Ball as well as a life.
-    * Won't be able to be directed
-
-### The Home
-  * Will grow every time gets a ball of it's colur
-
-
-## The ultimate Backlog
-  * The Game theme will be related to the reproductive sistem, Main Balls will be Sperm and Homes, Ovules. 
+__The game is over__ once a Main ball crosses the entire canvas or reaches the wrong home. 
+Every __5 zyogots__ an __Enemy ball__ will appear with a magenta color, if the Main ball collides with it will bounce back.
   
 * * *
 
@@ -83,19 +41,18 @@ Definition of the different states and their transition (transition functions). 
 When the page is uploaded
   * **Title**
   * **Play button**
-  * _Will include a Story (for better storytelling)_
+  <!-- * _Will include a Story (for better storytelling)_ -->
 
 ### Game Screen: 
 When Play Button is clicked
-  * **Canvas of the Game**
-  * _Should addapt the canvas to your screen_
-
+  * **Canvas of the Game, responsive for every kinf of screen**
+  
 ### Game Over Screen: 
 When there are no lifes left
   * **Play again button**
   * **Points will be shown**
   * **Go to start screen button**
-  * _Will show the Highest scores_
+  <!-- * _Will show the Highest scores_ -->
 
 * * *
 
